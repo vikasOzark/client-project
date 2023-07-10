@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from rest_framework import status
 
 
 @dataclass
@@ -16,5 +17,12 @@ class ResponseFormat:
             "data" : self.data
         }
 
-    
+
+def response_format(ok:bool, status_code:status, message:str = "", data:dict = {}):
+    return {
+            "ok" : ok,
+            "status_code" : status_code,
+            "message" : message,
+            "data" : data
+        }
 
