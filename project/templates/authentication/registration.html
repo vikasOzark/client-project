@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="first_name" placeholder="first_name">
+            <input type="text" name="last_name" placeholder="last_name">
+            <input type="username" name="username" placeholder="username">
+            <input type="text" name="phone_number" placeholder="phone">
+            <input type="text" name="confirm_number" placeholder="confirm_number">
+            <input type="password" name="password" placeholder="password">
+            <input type="password" name="password2" placeholder="password2">
+            <!-- <input type="email" name="email" placeholder="email" id=""> -->
+            <button>register</button>
+        </form>
+        {{message}}
+    </div>
+</body>
+</html>
