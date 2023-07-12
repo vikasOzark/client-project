@@ -13,6 +13,10 @@ class RegisterUser(generic.TemplateView):
 
     def post(self, request):
         form_data = request.POST
+        print(form_data)
+        if (models.UserProfileDetail.objects.filter(phone_number=form_data.get("phone_number"))):
+            messages.error(request, "Phone number is already exists!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
         
         if (User.objects.filter(username=form_data.get("username"))):
             messages.error(request, "Username is already exists!")
@@ -35,7 +39,7 @@ class RegisterUser(generic.TemplateView):
             password=form_data.get("password"),
             first_name=form_data.get("first_name"),
             last_name=form_data.get("last_name" ,""),
-            active=False,
+            is_active=False,
         )
         if new_user:
             user_profile = models.UserProfileDetail.objects.create(
@@ -75,17 +79,14 @@ class Login(generic.TemplateView):
             username=form_data.get("username"),
             password=form_data.get("password")
         )
+        print(user)
         
         if user:
-            if user.is_active:
-                login(request, user)
-                messages.success(request, "Successfully logged in .")
-                return redirect("home")
-            else:
-                messages.success(request, "Your account is not active !")
-                return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
+            login(request, user)
+            messages.success(request, "Successfully logged in .")
+            return redirect("home")
         else:
-            messages.error(request, "Username or ID is not Matched !")
+            messages.error(request, "Username or ID is not Matched, or account is not active.")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
 
 
