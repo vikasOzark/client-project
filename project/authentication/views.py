@@ -3,9 +3,10 @@ from django.views import generic
 from utils import response_format
 from . import models
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from rest_framework import status
+
 
 class RegisterUser(generic.TemplateView):
     template_name = "authentication/registration.html"
@@ -33,7 +34,8 @@ class RegisterUser(generic.TemplateView):
             username=form_data.get("username"),
             password=form_data.get("password"),
             first_name=form_data.get("first_name"),
-            last_name=form_data.get("last_name" ,"")
+            last_name=form_data.get("last_name" ,""),
+            active=False,
         )
         if new_user:
             user_profile = models.UserProfileDetail.objects.create(
@@ -53,13 +55,11 @@ class RegisterUser(generic.TemplateView):
         )
 
         if is_user:
-            login(request, is_user)
-
-            messages.success(request, "Successfully logged in. ")
-            return
+            messages.success(request, "Successfully created the account. ")
+            return redirect("login")
         
         messages.error(request, "Something went wrong, Please try again!")
-        return render(request, self.template_name, response_format(False, 201, "Successfully Login User."))
+        return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
     
 
 class Login(generic.TemplateView):
@@ -67,22 +67,28 @@ class Login(generic.TemplateView):
     
     def post(self, request):
         form_data = request.POST
-        print(form_data)
         if(request.user.is_authenticated):
-            print('======================')
-            return 
+            return redirect("home")
         
         user = authenticate(
             request, 
             username=form_data.get("username"),
             password=form_data.get("password")
         )
+        
         if user:
-            login(request, user)
-            messages.success(request, "Successfully logged in .")
-            return render(request, self.template_name)
+            if user.is_active:
+                login(request, user)
+                messages.success(request, "Successfully logged in .")
+                return redirect("home")
+            else:
+                messages.success(request, "Your account is not active !")
+                return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
         else:
             messages.error(request, "Username or ID is not Matched !")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
-        
-        # return render(request, self.template_name)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")
