@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import generic
-from utils import response_format
 from . import models
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from rest_framework import status
+from main import models as main_model
 
 
 class RegisterUser(generic.TemplateView):
@@ -13,7 +13,7 @@ class RegisterUser(generic.TemplateView):
 
     def post(self, request):
         form_data = request.POST
-        print(form_data)
+        
         if (models.UserProfileDetail.objects.filter(phone_number=form_data.get("phone_number"))):
             messages.error(request, "Phone number is already exists!")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
@@ -41,24 +41,17 @@ class RegisterUser(generic.TemplateView):
             last_name=form_data.get("last_name" ,""),
             is_active=False,
         )
-        if new_user:
-            user_profile = models.UserProfileDetail.objects.create(
-                user = new_user, 
-                phone_number=form_data.get("phone_number"))
-            user_profile.save()
-            new_user.save()
+        new_user.save()
 
         if new_user:
-            user_profile = models.UserProfileDetail.objects.create(
-                user = new_user, 
+            models.UserProfileDetail.objects.create(
+                user = new_user,
                 phone_number=form_data.get("phone_number"))
-            user_profile.save()
-        is_user = authenticate(
-            request, username=form_data.get("username"),
-            password=form_data.get("password")
-        )
-
-        if is_user:
+            
+            main_model.Wallet.objects.create(
+                user = new_user
+            ).save()
+            
             messages.success(request, "Successfully created the account. ")
             return redirect("login")
         
@@ -71,7 +64,7 @@ class Login(generic.TemplateView):
     
     def post(self, request):
         form_data = request.POST
-        if(request.user.is_authenticated):
+        if request.user.is_authenticated:
             return redirect("home")
         
         user = authenticate(
@@ -79,7 +72,6 @@ class Login(generic.TemplateView):
             username=form_data.get("username"),
             password=form_data.get("password")
         )
-        print(user)
         
         if user:
             login(request, user)
@@ -88,7 +80,6 @@ class Login(generic.TemplateView):
         else:
             messages.error(request, "Username or ID is not Matched, or account is not active.")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
-
 
 def logout_view(request):
     logout(request)

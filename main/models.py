@@ -2,10 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-PAYMENT_TYPE = (
-    ('DEPOSITE' , 'DEPOSITE'),
-    ('WITHDRAWAL', 'WITHDRAWAL')
-)
 
 class Payments(models.Model):
     DEPOSITE = "DP"
@@ -29,12 +25,13 @@ class Payments(models.Model):
     payment_channel = models.CharField(max_length=10, choices=PAYMENT_CHANNEL)
     is_settled = models.BooleanField(default=False)
     selected_bank = models.ForeignKey("BankDetail", on_delete=models.CASCADE, null=True, blank=True)
+    payment_upi_id = models.CharField(max_length=30, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Wallet(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True, db_index=True)
-    amount = models.CharField(max_length=10, null=False, blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,  db_index=True)
+    amount = models.IntegerField(default=0, null=False, blank=False)
     last_updated = models.DateTimeField(auto_now_add=True)
     
 class BankDetail(models.Model):

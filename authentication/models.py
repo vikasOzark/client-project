@@ -7,4 +7,4 @@ class UserProfileDetail(models.Model):
     phone_number = models.CharField(max_length=15, db_index=True)
 
     def __str__(self) -> str:
-        return f"{self.user.username}"
+        return f"{self.user.username} |  {self.phone_number }"
