@@ -1,31 +1,149 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{%static 'main/image/logo.svg'%}">
+    <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/login/login.css' %}">
+    <script type="module" src="{% static 'main/js/tailwind.js' %}"></script>
+    <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
 </head>
+
 <body>
-    <div class="">
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" name="first_name" placeholder="first_name">
-            <input type="text" name="last_name" placeholder="last_name">
-            <input type="username" name="username" placeholder="username">
-            <input type="text" name="phone_number" placeholder="phone">
-            <input type="text" name="confirm_number" placeholder="confirm_number">
-            <input type="password" name="password" placeholder="password">
-            <input type="password" name="password2" placeholder="password2">
-            <!-- <input type="email" name="email" placeholder="email" id=""> -->
-            <button>register</button>
-        </form>
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
+    <section class="gradient-form px-12 h-screen flex items-center justify-center bg-neutral-200">
+        <div class="flex flex-wrap w-full">
+            <div class="px-4 lg:rounded-bl-lg  lg:rounded-tl-lg bg-white md:px-0 sm:w-full lg:w-7/12">
+                <div class="p-10">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="text-left flex">
+                        <h1 class="flex-auto tracking-wide text-3xl mb-4 text-slate-500">Register</h1>
+                    </div>
+                    <form>
+                        {% csrf_token %}
+                        <div class="flex w-full gap-3">
+                            <div class="mb-6 w-6/12">
+                                <label class="text-sm text-slate-500 block mb-2 font-medium tracking-wide">Full Name
+                                    <span class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-red-700 border-r border-red-700 px-3">
+                                        <i class="icon-user"></i>
+                                    </span>
+                                    <input 
+                                        type="text"
+                                        name="first_name"
+                                        class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
+                                        placeholder="Full Name" />
+                                </div>
+                            </div>
+                            <div class="mb-6 w-6/12">
+                                <label class="text-sm text-slate-500 block mb-2 font-medium tracking-wide">Username
+                                    <span class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-red-700 border-r border-red-700 px-3">
+                                        <i class="icon-user"></i>
+                                    </span>
+                                    <input 
+                                        type="text"
+                                        name="username"
+                                        class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
+                                        placeholder="Username" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex w-full gap-3">
+                            <div class="mb-6 w-6/12">
+                                <label class="text-sm text-slate-500 block mb-2 font-medium tracking-wide">Mobile <span
+                                        class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-red-700 border-r border-red-700 px-3">
+                                        <i class="icon-phone"></i>
+                                    </span>
+                                    <input 
+                                        type="text"
+                                        name="phone_number"
+                                        class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
+                                        placeholder="Mobile" />
+                                </div>
+                            </div>
+                            <div class="mb-6 w-6/12">
+                                <label class="text-sm text-slate-500 block mb-2 font-medium tracking-wide">Confirm
+                                    Mobile <span class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-red-700 border-r border-red-700 px-3">
+                                        <i class="icon-phone"></i>
+                                    </span>
+                                    <input 
+                                        type="text"
+                                        name="confirm_number"
+                                        class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
+                                        placeholder="Confirm Mobile" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex w-full gap-3">
+                            <div class="mb-6 w-6/12">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Password
+                                    <span class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-red-700 border-r border-red-700 px-3">
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                    <input 
+                                        type="password"
+                                        name="password"
+                                        class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
+                                        placeholder="Password" />
+                                </div>
+                            </div>
+                            <div class="mb-6 w-6/12">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Confirm
+                                    Password <span class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-red-700 border-r border-red-700 px-3">
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                    <input 
+                                        type="password"
+                                        name="password2"
+                                        class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
+                                        placeholder="Confirm Password" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Submit button -->
+                        <div class="flex items-center justify-between mt-10">
+                            <span class="text-slate-500 font-medium text-sm">Go back? <a class="ml-2 text-blue-500"
+                                    href="login.html">Login</a></span>
+                            <button type="submit"
+                                class="border-2 font-medium tracking-wide text-cyan-50 bg-red-600 rounded flex items-center gap-3 border-red-700 py-2 px-3">
+                                <span>Register</span>
+                                <i class="icon-direction"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Right column container with background and description-->
+            <div class="flex sm:w-full sm:order-first lg:order-2 lg:w-5/12 items-center justify-center lg:rounded-br-lg lg:rounded-tr-lg "
+                style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">
+                <div class="text-center">
+                    <img class="w-20 sepia invert mb-5 m-auto" src="{% static 'main/image/logo.svg' %}" />
+                    <h4 class="mb-6 text-4xl text-white font-light">Welcome Back!</h4>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
