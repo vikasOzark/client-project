@@ -99,14 +99,20 @@ class BankData(generic.CreateView):
             return redirect("login")
 
 
-class AmountDeposite(generic.TemplateView):
-    template_name = "main/deposite.html"
+class AmountDeposit(generic.TemplateView):
+    template_name = "main/deposit.html"
 
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         code = str(uuid4())
+        deposit_data = main_models.Payments.objects(
+            user = self.request.user,
+            payment_type = main_models.DEPOSIT
+        )
+        
         context = super().get_context_data(**kwargs)
         context["payment_ref_code"] = code[:8]
+        context["deposit_data"] = deposit_data
         return context
 
     def post(self, request):
@@ -121,17 +127,24 @@ class AmountDeposite(generic.TemplateView):
                 amount = amount,
                 payment_channel = payment_channel,
                 payment_ref = payment_ref_code,
-                payment_type = main_models.DEPOSITE,
+                payment_type = main_models.DEPOSIT,
                 payment_status = main_models.PENDING,
             )
         payment_create.save()
-        return redirect("home")
+        
+        print(payment_create)
+        if payment_create:
+            messages.success(request, "Successfully depositd, we will notify you shortly.")
+            return redirect("home")
+
+        messages.error(request, "Successfully depositd, we will notify you shortly.")
+        return self.get(request)
     
     @method_decorator(login_required(login_url="login"))
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated and \
             self.request.user.is_active:
-           return super(AmountDeposite, self).dispatch(*args, **kwargs)
+           return super(AmountDeposit, self).dispatch(*args, **kwargs)
        
         if not self.request.user.is_active:
             messages(self.request, "Your account is not active.")
