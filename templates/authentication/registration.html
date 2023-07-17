@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment |  Register</title>
+    <title>Investment | Register</title>
     <link rel="icon" type="image/png" sizes="32x32" href="{%static 'main/image/logo.svg'%}">
     <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/login/login.css' %}">
@@ -22,14 +22,14 @@
                         <h1 class="flex-auto tracking-wide text-3xl mb-4 text-slate-500">Register</h1>
                     </div>
                     {% if messages %}
-                        <div class="flex items-center mb-4 text-yellow-600 ">
-                        {% for message in messages %}
-                        <i class="icon-info"></i>
+                    {% for message in messages %}
+                    <div class="flex items-center mb-4 text-{{message.tags}}">
+                        <i class="icon-{{message.tags}}"></i>
                         <div class="ml-3 text-sm font-medium">
                             {{ message }}
                         </div>
-                        {% endfor %}
-                        </div>
+                    </div>
+                    {% endfor %}
                     {% endif %}
                     <form>
                         {% csrf_token %}
@@ -41,9 +41,7 @@
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
                                         <i class="icon-add-user"></i>
                                     </span>
-                                    <input 
-                                        type="text"
-                                        name="first_name"
+                                    <input type="text" name="first_name"
                                         class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
                                         placeholder="Full Name" />
                                 </div>
@@ -55,9 +53,7 @@
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
                                         <i class="icon-user"></i>
                                     </span>
-                                    <input 
-                                        type="text"
-                                        name="username"
+                                    <input type="text" name="username"
                                         class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
                                         placeholder="Username" />
                                 </div>
@@ -71,9 +67,7 @@
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
                                         <i class="icon-phone"></i>
                                     </span>
-                                    <input 
-                                        type="text"
-                                        name="phone_number"
+                                    <input type="text" name="phone_number"
                                         class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
                                         placeholder="Mobile" />
                                 </div>
@@ -85,9 +79,7 @@
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
                                         <i class="icon-phone"></i>
                                     </span>
-                                    <input 
-                                        type="text"
-                                        name="confirm_number"
+                                    <input type="text" name="confirm_number"
                                         class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
                                         placeholder="Confirm Mobile" />
                                 </div>
@@ -102,9 +94,7 @@
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
                                         <i class="icon-lock"></i>
                                     </span>
-                                    <input 
-                                        type="password"
-                                        name="password"
+                                    <input type="password" name="password"
                                         class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
                                         placeholder="Password" />
                                 </div>
@@ -116,9 +106,7 @@
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
                                         <i class="icon-lock"></i>
                                     </span>
-                                    <input 
-                                        type="password"
-                                        name="password2"
+                                    <input type="password" name="password2"
                                         class="border-2 pl-12 h-12 border-red-700 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2"
                                         placeholder="Confirm Password" />
                                 </div>

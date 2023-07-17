@@ -22,14 +22,14 @@
                 <h1 class="flex-auto tracking-wide text-3xl mb-4 text-slate-500">Login</h1>
               </div>
               {% if messages %}
-                <div class="flex items-center mb-4 text-yellow-600 ">
-                  {% for message in messages %}
-                  <i class="icon-info"></i>
-                  <div class="ml-3 text-sm font-medium">
-                    {{ message }}
+                {% for message in messages %}
+                  <div class="flex items-center mb-4 text-{{message.tags}}">
+                    <i class="icon-{{message.tags}}"></i>
+                    <div class="ml-3 text-sm font-medium">
+                      {{ message }}
+                    </div>
                   </div>
                   {% endfor %}
-                </div>
               {% endif %}
               <form method="POST">
                 {% csrf_token %}

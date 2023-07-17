@@ -25,6 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-success:before {
+  content: "\e90b";
+}
+.icon-error:before {
+  content: "\e90c";
+}
+.icon-warning1:before {
+  content: "\e90f";
+}
 .icon-phone:before {
   content: "\e90a";
 }
