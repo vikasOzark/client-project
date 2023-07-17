@@ -89,4 +89,5 @@ class Login(generic.TemplateView):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, "Logged out successfuly!")
     return redirect("login")
