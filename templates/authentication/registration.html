@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Investment |  Register</title>
     <link rel="icon" type="image/png" sizes="32x32" href="{%static 'main/image/logo.svg'%}">
     <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/login/login.css' %}">
@@ -18,16 +18,19 @@
         <div class="flex flex-wrap w-full">
             <div class="px-4 lg:rounded-bl-lg  lg:rounded-tl-lg bg-white md:px-0 sm:w-full lg:w-7/12">
                 <div class="p-10">
-                    {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                            {% endfor %}
-                    </ul>
-                    {% endif %}
                     <div class="text-left flex">
                         <h1 class="flex-auto tracking-wide text-3xl mb-4 text-slate-500">Register</h1>
                     </div>
+                    {% if messages %}
+                        <div class="flex items-center mb-4 text-yellow-600 ">
+                        {% for message in messages %}
+                        <i class="icon-info"></i>
+                        <div class="ml-3 text-sm font-medium">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
                     <form>
                         {% csrf_token %}
                         <div class="flex w-full gap-3">
@@ -36,7 +39,7 @@
                                     <span class="text-red-500">*</span></label>
                                 <div class="relative flex items-center">
                                     <span class="absolute text-red-700 border-r border-red-700 px-3">
-                                        <i class="icon-user"></i>
+                                        <i class="icon-add-user"></i>
                                     </span>
                                     <input 
                                         type="text"
@@ -124,11 +127,11 @@
                         <!-- Submit button -->
                         <div class="flex items-center justify-between mt-10">
                             <span class="text-slate-500 font-medium text-sm">Go back? <a class="ml-2 text-blue-500"
-                                    href="login.html">Login</a></span>
+                                    href="{% url 'login' %}">Login</a></span>
                             <button type="submit"
                                 class="border-2 font-medium tracking-wide text-cyan-50 bg-red-600 rounded flex items-center gap-3 border-red-700 py-2 px-3">
                                 <span>Register</span>
-                                <i class="icon-direction"></i>
+                                <i class="icon-add-user"></i>
                             </button>
                         </div>
                     </form>

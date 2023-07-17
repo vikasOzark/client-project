@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-phone:before {
+  content: "\e90a";
+}
 .icon-wallet:before {
   content: "\e901";
 }
@@ -169,9 +172,6 @@
 .icon-triangle-up:before {
   content: "\e953";
 }
-.icon-upload-to-cloud:before {
-  content: "\e955";
-}
 .icon-upload:before {
   content: "\e956";
 }
@@ -181,20 +181,8 @@
 .icon-adjust:before {
   content: "\e959";
 }
-.icon-awareness-ribbon:before {
-  content: "\e967";
-}
-.icon-back-in-time:before {
-  content: "\e968";
-}
 .icon-back:before {
   content: "\e969";
-}
-.icon-bar-graph:before {
-  content: "\e96a";
-}
-.icon-battery:before {
-  content: "\e96b";
 }
 .icon-beamed-note:before {
   content: "\e96c";
@@ -280,9 +268,6 @@
 .icon-light-bulb:before {
   content: "\e9cb";
 }
-.icon-light-down:before {
-  content: "\e9cc";
-}
 .icon-light-up:before {
   content: "\e9cd";
 }
@@ -313,17 +298,11 @@
 .icon-mail:before {
   content: "\e9da";
 }
-.icon-megaphone:before {
-  content: "\e9df";
-}
 .icon-menu:before {
   content: "\e9e0";
 }
 .icon-message:before {
   content: "\e9e1";
-}
-.icon-mic:before {
-  content: "\e9e2";
 }
 .icon-minus:before {
   content: "\e9e3";
@@ -337,17 +316,11 @@
 .icon-new:before {
   content: "\e9eb";
 }
-.icon-news:before {
-  content: "\e9ec";
-}
 .icon-note:before {
   content: "\e9ed";
 }
 .icon-notification:before {
   content: "\e9ee";
-}
-.icon-palette:before {
-  content: "\e9f1";
 }
 .icon-paper-plane:before {
   content: "\e9f2";
@@ -397,9 +370,6 @@
 .icon-swap:before {
   content: "\ea20";
 }
-.icon-tag:before {
-  content: "\ea24";
-}
 .icon-text-document-inverted:before {
   content: "\ea25";
 }
@@ -412,20 +382,8 @@
 .icon-thumbs-up:before {
   content: "\ea2a";
 }
-.icon-ticket:before {
-  content: "\ea2c";
-}
-.icon-time-slot:before {
-  content: "\ea2d";
-}
-.icon-tools:before {
-  content: "\ea2e";
-}
 .icon-typing:before {
   content: "\ea33";
-}
-.icon-untag:before {
-  content: "\ea35";
 }
 .icon-user:before {
   content: "\ea36";
