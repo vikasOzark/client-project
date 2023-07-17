@@ -18,30 +18,24 @@
 
 <body class="">
     <section class="">
-        <nav class="border-b after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  relative w-full border-gray-400"
+        <nav class="fixed border-b after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  w-full border-gray-400"
             style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
             <div class="mx-auto relative z-50">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="flex items-center justify-between w-full">
-                        <div class="w-60 pl-8 border-r border-gray-400 py-4">
+                        <div class="md:w-60 lg:w-60 pl-8 lg:border-r md:border-r border-gray-400 py-4">
                             <a href="#" class="flex items-center gap-2">
-                                <img class="w-7 invert" src="{% static 'main/image/logo.svg' %}" alt="">
+                                <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
                         </div>
                         <div class="flex-1 flex items-center pl-3">
-                            <h1 class="text-2xl text-white font-light tracking-wide">Welcome Back, admin</h1>
+                            <h1 class="lg:text-2xl md:text-2xl hidden md:flex text-white font-light tracking-wide">Welcome Back, {{request.user}}</h1>
                         </div>
                         <div class="flex px-4 gap-4">
                             <button
-                                class="shadow-md text-white w-7 h-7 flex items-center justify-center border rounded"><i
-                                    class="icon-resize-full-screen"></i></button>
-                            <button
-                                class="shadow-md text-white w-7 h-7 flex items-center justify-center border rounded"><i
-                                    class="icon-light-up"></i></button>
-                            <button
-                                class="shadow-md text-white w-7 h-7 flex items-center justify-center border rounded"><i
-                                    class="icon-bell"></i></button>
+                                class=" text-white gap-2 w-7 h-7 flex items-center justify-center "><i
+                                    class="icon-wallet"></i>{{user_data.amount}}</button>
                         </div>
                         <div class="flex items-center border-l pl-4 pr-8 gap-3">
                             <a class="flex items-center focus:outline-none">
@@ -59,14 +53,13 @@
                 </div>
             </div>
         </nav>
-        <div class="flex">
-            <aside
-                class="bg-gray-100 shadow-xl border-r border-gray-400 flex flex-col w-60 h-screen px-4 py-5 pt-8 overflow-y-auto ">
+        <div class="flex ">
+            <aside class="bg-gray-100 pt-20 shadow-xl border-r hidden  border-gray-400 lg:flex md:flex flex-col w-60 h-screen px-4 overflow-y-auto ">
                 <div class="flex flex-col justify-between flex-1">
                     <nav class="-mx-3 space-y-2 ">
                         <div class="space-y-1 ">
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="{% url "home" %}">
                                 <i class="icon-dashboard"></i>
                                 <span class="mx-2 text-sm font-medium">Dashboard</span>
                             </a>
@@ -75,32 +68,32 @@
                         <div class="space-y-1 ">
                             <label class="px-3 text-sm text-gray-700 tracking-wide uppercase dark:text-gray-400">Account
                                 Settings</label>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="{% url 'add_bank' %}">
                                 <i class="icon-museum"></i>
                                 <span class="mx-2 text-sm font-medium">Bank Account</span>
                             </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="{% url 'deposite' %}">
                                 <i class="icon-wallet"></i>
                                 <span class="mx-2 text-sm font-medium">Deposit</span>
                             </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="{% url 'withdrawl' %}">
                                 <i class="icon-withdrawal"></i>
                                 <span class="mx-2 text-sm font-medium">Withdraw</span>
                             </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="#">
                                 <i class="icon-edit"></i>
                                 <span class="mx-2 text-sm font-medium">Record</span>
                             </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="#">
                                 <i class="icon-order"></i>
                                 <span class="mx-2 text-sm font-medium">Order Hall</span>
                             </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="#">
                                 <i class="icon-report"></i>
                                 <span class="mx-2 text-sm font-medium">Message & Report</span>
@@ -109,17 +102,17 @@
 
                         <div class="space-y-3 ">
                             <label
-                                class="px-3 text-sm tracking-wide text-gray-700 uppercase dark:text-gray-400">Setting</label>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
+                                class="px-3 text-sm tracking-wide text-gray-700 uppercase dark:text-gray-400">More Actions</label>
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="{% url 'logout' %}">
                                 <i class="icon-profile-setting"></i>
-                                <span class="mx-2 text-sm font-medium">Profile Settings</span>
+                                <span class="mx-2 text-sm font-medium">Logout</span>
                             </a>
                         </div>
                     </nav>
                 </div>
             </aside>
-            <main class="p-8 flex-1 space-y-6">
+            <main class="p-8  md:pt-24 lg:pt-24 flex-1 space-y-4">
                 <nav class="flex gap-4 bg-slate-200 py-2 px-5 rounded shadow-lg" aria-label="Breadcrumb">
                     <ol class=" inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center gap-3">
