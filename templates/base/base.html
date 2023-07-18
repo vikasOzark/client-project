@@ -15,6 +15,8 @@
     <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
     <script type="module" src="{% static 'main/js/alert.js' %}"></script>
     <script type="module" src="{% static 'main/js/loading.js' %}"></script>
+    {% block script %}
+    {% endblock script %}
 </head>
 
 <body class="" id="onLoadAnimation">
@@ -60,9 +62,9 @@
             </div>
         </nav>
         <div class="flex ">
-            <aside class="bg-gray-100 pt-20 shadow-xl border-r hidden  border-gray-400 lg:flex md:flex flex-col w-60 h-screen px-4 overflow-y-auto ">
+            <aside class="bg-gray-100 fixed pt-20 shadow-xl border-r hidden  border-gray-400 lg:flex md:flex flex-col w-60 min-h-screen  px-4 overflow-y-auto ">
                 <div class="flex flex-col justify-between flex-1">
-                    <nav class="-mx-3 space-y-2 ">
+                    <nav class="-mx-3 space-y-1 ">
                         <div class="space-y-1 ">
                             <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="{% url 'home' %}">
@@ -71,7 +73,7 @@
                             </a>
 
                         </div>
-                        <div class="space-y-1 ">
+                        <div class="space-y-[2px] ">
                             <label class="px-3 text-sm text-gray-700 tracking-wide uppercase dark:text-gray-400">Account
                                 Settings</label>
                             <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
@@ -106,24 +108,39 @@
                             </a>
                         </div>
 
-                        <div class="space-y-3 ">
+                        <div class="space-y-[2px] ">
                             <label
                                 class="px-3 text-sm tracking-wide text-gray-700 uppercase dark:text-gray-400">More Actions</label>
                             <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                 href="">
                                 <i class="icon-profile-setting"></i>
-                                <span class="mx-2 text-sm font-medium">Profile Settings</span>
+                                <span class="mx-2 text-sm font-medium">About</span>
+                            </a>
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="">
+                                <i class="icon-profile-setting"></i>
+                                <span class="mx-2 text-sm font-medium">Notice</span>
+                            </a>
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="">
+                                <i class="icon-profile-setting"></i>
+                                <span class="mx-2 text-sm font-medium">About Investment Income</span>
+                            </a>
+                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                href="">
+                                <i class="icon-profile-setting"></i>
+                                <span class="mx-2 text-sm font-medium">Company Qualification</span>
                             </a>
                         </div>
                     </nav>
                 </div>
             </aside>
-            <main class="p-8 relative  md:pt-24 lg:pt-24 flex-1">
+            <main class="p-8 ml-60 relative  md:pt-24 lg:pt-24 flex-1">
                 {% block message %}
                     
                 {% endblock message%}
                 <section class="space-y-7">
-                    <nav class="flex gap-4 bg-slate-200 py-2 px-5 rounded shadow-lg" aria-label="Breadcrumb">
+                    <nav class="flex gap-4 bg-slate-200 py-2 px-5 rounded border border-gray-400" aria-label="Breadcrumb">
                         <ol class=" inline-flex items-center space-x-1 md:space-x-3">
                             <li class="inline-flex items-center gap-3">
                                 <a href="#"
@@ -149,6 +166,9 @@
 
                 </section>
             </main>
+        </div>
+        <div class="flex w-full p-3 justify-end">
+            <span class="block font-medium text-sm tracking-wide text-gray-500">Copyright © 2012 - 2023 <strong>Investment</strong>. All rights reserved.</span>
         </div>
     </section>
 </body>

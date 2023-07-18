@@ -47,3 +47,44 @@ a:not([href]):not([class]):hover {
 .bg-gred{
     background-image: linear-gradient(#ee7724, #d8363a, #dd3675, #b44593)
 }
+
+.bg-dep{
+    background-image: url('../image/is.svg');
+    background-position:100%;
+    background-size: 100%;
+    z-index: 1;
+}
+.bg-dep::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #000;
+    opacity:0.3 ;
+    z-index: -1;
+}
+
+
+.carousel {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+  
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all ease-in-out .5s;
+}
+  
+.slide > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
