@@ -2,6 +2,7 @@ from main import models
 from django import forms
 
 class AddBank(forms.ModelForm):
+    confirm_account = forms.CharField()
     class Meta:
         model = models.BankDetail
         fields = ["account_holder_name","bank_name","ifsc_code","branch","account_number",]
@@ -11,7 +12,8 @@ class AddBank(forms.ModelForm):
             "bank_name" : forms.TextInput(attrs={"class" : css}),
             "ifsc_code" : forms.TextInput(attrs={"class" : css}),
             "branch" : forms.TextInput(attrs={"class" : css}),
-            "account_number" : forms.TextInput(attrs={"class" : css}),
+            "account_number" : forms.NumberInput(attrs={"class" : css}),
+            "confirm_account" : forms.NumberInput(attrs={"class" : css})
             }
  
 class PaymentRequestForm(forms.ModelForm):

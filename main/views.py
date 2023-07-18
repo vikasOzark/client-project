@@ -72,6 +72,7 @@ class BankData(generic.CreateView):
     model = main_models.BankDetail
     template_name = "main/add_bank_form.html"
     form_class = forms.AddBank
+    success_url = "/"
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -80,7 +81,7 @@ class BankData(generic.CreateView):
 	
     def form_valid(self, form):
         form_data = form.cleaned_data
-
+        print("acount : ", form_data)
         if form_data.get("account_number") != form_data.get("confirm_account"):
             messages.error(self.request, "Account Number is not mathed !")
             return self.get(self.request)
@@ -99,14 +100,22 @@ class BankData(generic.CreateView):
             return redirect("login")
 
 
-class AmountDeposite(generic.TemplateView):
-    template_name = "main/deposite.html"
+class AmountDeposit(generic.TemplateView):
+    template_name = "main/deposit.html"
 
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         code = str(uuid4())
+        deposit_data = main_models.Payments.objects.filter(
+            user = self.request.user,
+            payment_type = main_models.DEPOSIT
+        )
+        wallet = main_models.Wallet.objects.get(user = self.request.user)
+
         context = super().get_context_data(**kwargs)
         context["payment_ref_code"] = code[:8]
+        context["deposit_data"] = deposit_data
+        context["wallet"] = wallet
         return context
 
     def post(self, request):
@@ -121,23 +130,44 @@ class AmountDeposite(generic.TemplateView):
                 amount = amount,
                 payment_channel = payment_channel,
                 payment_ref = payment_ref_code,
-                payment_type = main_models.DEPOSITE,
+                payment_type = main_models.DEPOSIT,
                 payment_status = main_models.PENDING,
             )
         payment_create.save()
-        return redirect("home")
+        
+        print(payment_create)
+        if payment_create:
+            messages.success(request, "Successfully depositd, we will notify you shortly.")
+            return redirect("home")
+
+        messages.error(request, "Successfully depositd, we will notify you shortly.")
+        return self.get(request)
     
     @method_decorator(login_required(login_url="login"))
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated and \
             self.request.user.is_active:
-           return super(AmountDeposite, self).dispatch(*args, **kwargs)
+           return super(AmountDeposit, self).dispatch(*args, **kwargs)
        
         if not self.request.user.is_active:
             messages(self.request, "Your account is not active.")
             return redirect("login")
         
 
-
 class WithdrawlView(generic.TemplateView):
     template_name = "main/withdraw.html"
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        banks = main_models.BankDetail.objects.filter(user=user)
+        wallet = main_models.Wallet.objects.get(user=user)
+        
+        context = super().get_context_data(**kwargs)
+        context["bank_accounts"] = banks
+        context["wallet"] = wallet
+        return context
+    
+    def post(self, reqeust):
+        form_data = reqeust.POST
+        
+    

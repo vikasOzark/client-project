@@ -2,11 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-DEPOSITE = "DEPOSITE"
+DEPOSIT = "DEPOSIT"
 WITHDRAWAL = "WITHDRAWAL"
 
 PAYMENT_TYPE = (
-    (DEPOSITE , _('DEPOSITE')),
+    (DEPOSIT , _('DEPOSIT')),
     (WITHDRAWAL , _('WITHDRAWAL'))
 )
 
