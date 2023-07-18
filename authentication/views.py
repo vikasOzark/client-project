@@ -13,25 +13,31 @@ class RegisterUser(generic.TemplateView):
 
     def post(self, request):
         form_data = request.POST
-        
-        if (models.UserProfileDetail.objects.filter(phone_number=form_data.get("phone_number"))):
-            messages.error(request, "Phone number is already exists!")
-            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
-        
-        if (User.objects.filter(username=form_data.get("username"))):
+        print(form_data)
+        phone_number = form_data.get("phone_number")
+
+        if User.objects.filter(username=form_data.get("username")).exists():
             messages.error(request, "Username is already exists!")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
 
-        if (models.UserProfileDetail.objects.filter(phone_number=form_data.get("phone_number"))):
+        if len(phone_number) != 10:
+            messages.error(request, "Phone number is not valid!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
+        
+        if phone_number != form_data.get("confirm_number"):
+            messages.error(request, "Phone number is not matched!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST )
+        
+        if models.UserProfileDetail.objects.filter(phone_number=phone_number).exists():
+            messages.error(request, "Phone number is already exists!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
+        
+        if models.UserProfileDetail.objects.filter(phone_number=phone_number).exists():
             messages.error(request, "Phone number is already exists!")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST )
         
         if form_data.get("password") != form_data.get("password2"):
             messages.error(request, "Password is not matched!")
-            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST )
-
-        if form_data.get("phone_number") != form_data.get("confirm_number"):
-            messages.error(request, "Phone number is not matched!")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST )
 
         new_user = User.objects.create_user(
@@ -46,7 +52,7 @@ class RegisterUser(generic.TemplateView):
         if new_user:
             models.UserProfileDetail.objects.create(
                 user = new_user,
-                phone_number=form_data.get("phone_number"))
+                phone_number=phone_number)
             
             main_model.Wallet.objects.create(
                 user = new_user
@@ -83,4 +89,5 @@ class Login(generic.TemplateView):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, "Logged out successfuly!")
     return redirect("login")
