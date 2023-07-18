@@ -17,7 +17,7 @@ class BaseView(ABC):
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated and \
             self.request.user.is_active:
-           return super(Home, self).dispatch(*args, **kwargs)
+           return super().dispatch(*args, **kwargs)
        
         if not self.request.user.is_active:
             messages(self.request, "Your account is not active.")
@@ -87,6 +87,7 @@ class BankData(generic.CreateView):
             return self.get(self.request)
             
         form.instance.user = self.request.user
+        messages.success(self.request, "New bank account is added.")
         return super().form_valid(form)
     
     @method_decorator(login_required(login_url="login"))
@@ -100,7 +101,7 @@ class BankData(generic.CreateView):
             return redirect("login")
 
 
-class AmountDeposit(generic.TemplateView):
+class AmountDeposit(ABC, generic.TemplateView): 
     template_name = "main/deposit.html"
 
 
@@ -135,39 +136,39 @@ class AmountDeposit(generic.TemplateView):
             )
         payment_create.save()
         
-        print(payment_create)
         if payment_create:
-            messages.success(request, "Successfully depositd, we will notify you shortly.")
+            messages.success(request, "Successfully deposited, we will notify you shortly.")
             return redirect("home")
 
-        messages.error(request, "Successfully depositd, we will notify you shortly.")
+        messages.error(request, "Successfully deposited, we will notify you shortly.")
         return self.get(request)
     
     @method_decorator(login_required(login_url="login"))
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated and \
             self.request.user.is_active:
-           return super(AmountDeposit, self).dispatch(*args, **kwargs)
+           return super().dispatch(*args, **kwargs)
        
         if not self.request.user.is_active:
             messages(self.request, "Your account is not active.")
             return redirect("login")
         
 
-class WithdrawlView(generic.TemplateView):
+class WithdrawalView(generic.TemplateView):
     template_name = "main/withdraw.html"
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        banks = main_models.BankDetail.objects.filter(user=user)
+        bank_accounts = main_models.BankDetail.objects.filter(user=user)
         wallet = main_models.Wallet.objects.get(user=user)
-        
+
         context = super().get_context_data(**kwargs)
-        context["bank_accounts"] = banks
+        context["bank_accounts"] = bank_accounts
         context["wallet"] = wallet
         return context
     
-    def post(self, reqeust):
-        form_data = reqeust.POST
+    def post(self, request):
+        form_data = request.POST
+        print(form_data)
         
     

@@ -1,112 +1,133 @@
-{% extends 'base/base.html' %}
-{% load static %}
-{% block title %}
-<title>Investment | Withdraw</title>
-{% endblock title %}
+    {% extends 'base/base.html' %}
+    {% load static %}
+    {% block title %}
+    <title>Investment | Withdraw</title>
+    {% endblock title %}
 
-{% block breadcrumb %}
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
-        <span class="text-base text-gray-400 font-light">/</span>
-    </li>
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-red-600 font-medium tracking-wide">Withdraw</span>
-        <span class="text-3xl text-gray-400 font-light">|</span>
-    </li>
-{% endblock breadcrumb %}
+    {% block breadcrumb %}
+        <li class="flex items-center gap-3">
+            <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
+            <span class="text-base text-gray-400 font-light">/</span>
+        </li>
+        <li class="flex items-center gap-3">
+            <span class="text-sm text-red-600 font-medium tracking-wide">Withdraw</span>
+            <span class="text-3xl text-gray-400 font-light">|</span>
+        </li>
+    {% endblock breadcrumb %}
 
-{% block breadcrumbtitle %}
-Withdraw
-{% endblock breadcrumbtitle %}
+    {% block breadcrumbtitle %}
+    Withdraw
+    {% endblock breadcrumbtitle %}
 
 
-{% block content %}
-<div class="">
+    {% block content %}
     <div class="">
-        <div class="bg-gray-200 flex gap-2 px-4 py-2 rounded">
-            <p>Available Balance :</p>
-            <p>{{wallet.amount}}</p>
+        <div class="">
+            <div class="bg-gray-200 flex gap-2 px-4 py-2 rounded">
+                <p>Available Balance :</p>
+                <p>{{wallet.amount}}</p>
+            </div>
+
         </div>
 
-    </div>
-
-    <div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4 mt-2">
-        <div class="md:col-span-7 w-full lg:col-span-7">
-            <h2 class="text-lg text-gray-500 mb-2">Deposit History</h2>
-            {% comment %} {% for item in deposit_data %}
-                <div class=" rounded shadow bg-slate-200 p-2 mb-2">
-                <div class="flex items-center justify-between">
-                    <div class=" text-sm text-gray-400">Date<span class=" text-gray-400"> : {{item.created_at}}</span></div>
-                    <div class="text-sm text-gray-500 ">Ref ID : <span class="text-purple-500">{{item.payment_ref}}</span></div>
-                </div>
-                <div class="flex justify-between">
-                    <div class="text-gray-700">Status : 
-                        {% if item.payment_status == "pending" %}
-                            <span class="font-bold text-blue-500">
-                                Pedning
-                            </span>
-                        {% elif item.payment_status == "success" %}
-                            <span class="font-bold text-green-500">
-                                Success
-                            </span>
-                        {% else %}
-                            <span class="font-bold text-red-500">
-                                Rejected
-                            </span>
-                        {% endif %}
-                </div>
-                  <div class=""><span class=" text-gray-700">Amnount</span> : {{item.amount}}</div>
-                </div>
-                <div class=""><span class=" text-gray-700">Payment Mode</span> : {{item.payment_channel}}</div>
-              </div>
-            {% endfor %} {% endcomment %}
-        </div>
-    
-        <div class="col-span-5 ">
-            <h2 class="text-lg text-gray-500 mb-2">Add Money </h2>
-            <form method="POST" class="shadow p-2 rounded bg-slate-200">
-                {% csrf_token %}
-                <div class="">
-                    <div class="mb-2">
-                        <label for="" class="font-bold">Enter Amount</label>
-                        <div class="">
-                            <input style="appearance: none !important;" type="number" name="amount" class="rounded py-1  px-2" required />
-                        </div>
+        <div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4 mt-2">
+            <div class="md:col-span-7 w-full lg:col-span-7">
+                <h2 class="text-lg text-gray-500 mb-2">Withdraw History</h2>
+                {% comment %} {% for item in deposit_data %}
+                    <div class=" rounded shadow bg-slate-200 p-2 mb-2">
+                    <div class="flex items-center justify-between">
+                        <div class=" text-sm text-gray-400">Date<span class=" text-gray-400"> : {{item.created_at}}</span></div>
+                        <div class="text-sm text-gray-500 ">Ref ID : <span class="text-purple-500">{{item.payment_ref}}</span></div>
                     </div>
-
-                    
-                   
-                    <div class="flex gap-2">
-                        <div class="mb-2">
-                            <label for="" class="font-bold">Enter UPI ID</label>
-                            <div class="">
-                                <input type="text" name="upi-id" class="rounded py-1  px-2" required />
-                            </div>
-                        </div>
-    
-                        <div class="mb-2">
-                            <label for="" class="font-bold">Re-Enter UPI ID</label>
-                            <div class="">
-                                <input type="text" name="confirm-upi-id" class="rounded py-1  px-2" required />
-                            </div>
-                        </div>
+                    <div class="flex justify-between">
+                        <div class="text-gray-700">Status : 
+                            {% if item.payment_status == "pending" %}
+                                <span class="font-bold text-blue-500">
+                                    Pedning
+                                </span>
+                            {% elif item.payment_status == "success" %}
+                                <span class="font-bold text-green-500">
+                                    Success
+                                </span>
+                            {% else %}
+                                <span class="font-bold text-red-500">
+                                    Rejected
+                                </span>
+                            {% endif %}
                     </div>
-
+                    <div class=""><span class=" text-gray-700">Amnount</span> : {{item.amount}}</div>
+                    </div>
+                    <div class=""><span class=" text-gray-700">Payment Mode</span> : {{item.payment_channel}}</div>
+                </div>
+                {% endfor %} {% endcomment %}
+            </div>
+        
+            <div class="col-span-5 ">
+                <h2 class="text-lg text-gray-500 mb-2">Withdraw Money </h2>
+                <form method="POST" class="shadow p-2 rounded bg-slate-200">
+                    {% csrf_token %}
                     <div class="">
-                    <label for="" class="font-bold">Select Payment Channel</label>
-                    <select name="payment_channel" class="w-full py-1 rounded  px-2" id="" required>
-                        {% for bank in banks %}
-                            <option value="bank.id">{{bank.name}}</option>
-                        {% empty %}
-                            <option value="">No bank Available</option>
-                        {% endfor %}
-                    </select>
+                        <div class="mb-2">
+                            <label for="" class="font-bold">Enter Amount</label>
+                            <div class="">
+                                <input style="appearance: none !important;" type="number" name="amount" class="rounded py-1  px-2" required />
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <input type="radio" onchange="handleTransactionType(this)" value="UPI"  name="transaction-type">
+                            <input type="radio" onchange="handleTransactionType(this)" value="BANK" name="transaction-type">
+                        </div>
+                        
+                        <div class="gap-2 hidden" id="upi-div">
+                            <div class="mb-2">
+                                <label for="" class="font-bold">Enter UPI ID</label>
+                                <div class="">
+                                    <input type="text" name="upi-id" class="rounded py-1  px-2" required />
+                                </div>
+                            </div>
+        
+                            <div class="mb-2">
+                                <label for="" class="font-bold">Re-Enter UPI ID</label>
+                                <div class="">
+                                    <input type="text" name="confirm-upi-id" class="rounded py-1  px-2" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hidden" id="bank-div">
+                            <label for="" class="font-bold">Select Bank Account</label>
+                            <select name="payment_channel" class="w-full py-1 rounded  px-2" id="" required>
+                                {% for bank in bank_accounts %}
+                                    <option value="bank.id">{{bank.bank_name}} : {{bank.account_number}}</option>
+                                {% empty %}
+                                    <option value="">No bank Available</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mt-2 cursor-pointer rounded bg-blue-500 hover:bg-blue-700 transition-all text-center py-1 font-semibold text-white">Withdrawl</div>
                     </div>
-                    <div class="mt-2 cursor-pointer rounded bg-blue-500 hover:bg-blue-700 transition-all text-center py-1 font-semibold text-white">Withdrawl</div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+        
     </div>
-    
-</div>
-{% endblock content %}
+    <script>
+        const handleTransactionType = (e) => {
+            console.log((e));
+            const upiDiv = document.getElementById("upi-div")
+            const bankDiv = document.getElementById("bank-div")
+            const HIDDEN = "hidden"
+            if (e.value === "UPI"){
+                upiDiv.classList.remove(HIDDEN)
+                bankDiv.classList.add(HIDDEN)
+            }
+            if (e.value === "BANK"){
+                bankDiv.classList.remove(HIDDEN)
+                upiDiv.classList.add(HIDDEN)
+            }
+
+
+        }
+    </script>
+    {% endblock content %}

@@ -65,3 +65,7 @@ class BankDetail(models.Model):
     branch = models.CharField(max_length=20)
     account_number = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    
+    def __str__(self) -> str:
+        return str(self.user)
