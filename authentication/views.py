@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from rest_framework import status
 from main import models as main_model
+from uuid import uuid4
 
 
 class RegisterUser(generic.TemplateView):
@@ -52,7 +53,9 @@ class RegisterUser(generic.TemplateView):
         if new_user:
             models.UserProfileDetail.objects.create(
                 user = new_user,
-                phone_number=phone_number)
+                phone_number=phone_number,
+                invite_code=str(uuid4[6]).upper()
+                )
             
             main_model.Wallet.objects.create(
                 user = new_user
@@ -91,3 +94,7 @@ def logout_view(request):
     logout(request)
     messages.success(request, "Logged out successfuly!")
     return redirect("login")
+
+
+def invite(request):
+    pass

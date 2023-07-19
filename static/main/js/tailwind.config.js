@@ -11,7 +11,16 @@ tailwind.config = {
       },
       backgroundImage: {
         'pattern': "url('./static/main/image/bg-grain-dark.png')",
-      }
+      },
+      animation: {
+        marquee: 'marquee 25s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        }
+      },
     }
   }
 }
