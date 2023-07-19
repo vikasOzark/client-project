@@ -161,14 +161,64 @@ class WithdrawalView(generic.TemplateView):
         user = self.request.user
         bank_accounts = main_models.BankDetail.objects.filter(user=user)
         wallet = main_models.Wallet.objects.get(user=user)
+        withdrawal_data = main_models.Payments.objects.filter(
+            user = self.request.user,
+            payment_type = main_models.WITHDRAWAL
+        )
 
         context = super().get_context_data(**kwargs)
         context["bank_accounts"] = bank_accounts
+        context["withdrawal_data"] = withdrawal_data
         context["wallet"] = wallet
         return context
     
     def post(self, request):
         form_data = request.POST
         print(form_data)
+        amount = form_data.get("amount")
+        transaction_type = form_data.get("transaction-type", False)
+
+        if not transaction_type:
+            print(transaction_type)
+            messages.error(request, "Please select any payment method.")
+            return self.get(request)
         
-    
+        if transaction_type == "UPI":
+            upi_id = form_data.get("upi-id")
+            upi_id_confirm = form_data.get("confirm-upi-id")
+            
+            if not upi_id:
+                messages.error(request, "Please provide valid UPI ID.")
+                return self.get(request)
+
+            if upi_id != upi_id_confirm:
+                messages.info(request, "Your UPI ID is not matched!")
+                return self.get(request)
+            withdrawal_payment = main_models.Payments(
+                user = request.user,
+                amount = amount,
+                payment_upi_id = upi_id,
+                payment_channel = main_models.UPI,
+                payment_type = main_models.WITHDRAWAL,
+                payment_status = main_models.PENDING
+            )
+            withdrawal_payment.save()
+            messages.success(request, "Successfully withdrawal request in generated.")
+            return redirect("home")
+                
+        else:
+            bank_obj = main_models.BankDetail.objects.get(
+                user=request.user,
+                pk=form_data.get("bank_id")
+            )
+            withdrawal_payment = main_models.Payments(
+                user = request.user,
+                amount = amount,
+                payment_channel = main_models.BANK,
+                payment_type = main_models.WITHDRAWAL,
+                payment_status = main_models.PENDING,
+                selected_bank = bank_obj,
+            )
+            withdrawal_payment.save()
+            messages.success(request, "Successfully withdrawal request in generated.")
+        

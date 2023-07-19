@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import format_html
+from django.contrib import admin
 
 DEPOSIT = "DEPOSIT"
 WITHDRAWAL = "WITHDRAWAL"
@@ -30,7 +32,7 @@ PAYMENT_STATUS = (
 
 class Payments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    payment_ref = models.CharField(max_length=10, default="")
+    payment_ref = models.CharField(max_length=10, default="", blank=True)
     payment_type = models.CharField(max_length=25, choices=PAYMENT_TYPE, )
     amount = models.CharField(max_length=10, null=False, blank=False)
     payment_channel = models.CharField(max_length=10, choices=PAYMENT_CHANNEL)
@@ -50,7 +52,23 @@ class Payments(models.Model):
         return None
     
     def __str__(self) -> str:
-        return f"User : {self.user}"
+        return f" {self.user}"
+    
+    @admin.display
+    def colored_status(self):
+        color = ""
+        if self.payment_status == "pending":
+            color = "1D5D9B"
+        elif self.payment_status == "success":
+            color = "1A5D1A"
+        else:
+            color = "F24C3D"
+        
+        return format_html(
+            '<span style="color: #{};">{}</span>',
+            color,
+            self.payment_status,
+        )
 
 class Wallet(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  db_index=True)
