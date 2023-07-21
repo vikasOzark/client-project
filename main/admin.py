@@ -1,11 +1,19 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from . import models
+
+admin.site.unregister(Group)
+# admin.site.site_header  =  "Custom bookstore admin"  
+# admin.site.site_title  =  "Custom bookstore admin site"
+# admin.site.index_title  =  "Custom Bookstore Admin"
 
 
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ["user", "amount", "payment_type", "colored_status", "payment_channel", "created_at"]
     date_hierarchy = "created_at"
     readonly_fields = ["user", "payment_type", "payment_channel", "created_at", "payment_ref", "amount", "selected_bank", "payment_upi_id", "is_settled"]
+    list_filter = ("user", "payment_type", "payment_channel")
+    search_fields = ("user__first_name__startswith", )
 
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = list(super(PaymentAdmin, self).get_readonly_fields(request, obj))

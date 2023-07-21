@@ -36,7 +36,7 @@ class Home(generic.TemplateView):
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
         payments = main_models.Payments.get_latest_payments(self.request)
         userprofile = auth_model.UserProfileDetail.objects.get(user=user)
-
+        
         # Generating the invite link 
         scheme = self.request.scheme
         BASE_ADDRESS = self.request.META.get("HTTP_HOST")
