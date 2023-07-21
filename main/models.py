@@ -99,3 +99,6 @@ class BankDetail(models.Model):
         return str(self.user)
     
     
+class Commissions(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
