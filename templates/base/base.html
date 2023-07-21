@@ -29,7 +29,7 @@
             <div class="mx-auto relative z-50">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="flex items-center justify-between w-full">
-                        <div class="md:w-60 lg:w-60 pl-8 lg:border-r md:border-r border-gray-400 py-4">
+                        <div class="md:w-60 lg:w-60 lg:pl-8 pl-2 lg:border-r md:border-r border-gray-400 py-4">
                             <a href="#" class="flex items-center gap-2">
                                 <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
@@ -48,11 +48,10 @@
                                 <i class="icon-log-out"></i>
                             </a>
                         </div>
-                        <div class="flex items-center border-l pl-3 pr-8">
+                        <div class="flex items-center border-l pl-3 lg:pr-8 pr-2">
                             <a href="" class="flex  items-center focus:outline-none">
                                 <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
-                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                        class="object-cover w-full h-full" alt="avatar">
+                                    <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
                                 </div>
                             </a>
                         </div>
@@ -60,114 +59,120 @@
                 </div>
             </div>
         </nav>
-        <div class="flex ">
-            <aside class="bg-gray-100 fixed pt-20 shadow-xl border-r hidden  border-gray-400 lg:flex md:flex flex-col w-60 min-h-screen  px-4 overflow-y-auto ">
-                <div class="flex flex-col justify-between flex-1">
-                    <nav class="-mx-3 space-y-1 ">
-                        <div class="space-y-1 ">
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="{% url 'home' %}">
-                                <i class="icon-dashboard"></i>
-                                <span class="mx-2 text-sm font-medium">Dashboard</span>
-                            </a>
-
-                        </div>
-                        <div class="space-y-[2px] ">
-                            <label class="px-3 text-sm text-gray-700 tracking-wide uppercase dark:text-gray-400">Account
-                                Settings</label>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="{% url 'add_bank' %}">
-                                <i class="icon-museum"></i>
-                                <span class="mx-2 text-sm font-medium">Bank Account</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="{% url 'deposit' %}">
-                                <i class="icon-wallet"></i>
-                                <span class="mx-2 text-sm font-medium">Deposit</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="{% url 'withdrawl' %}">
-                                <i class="icon-withdrawal"></i>
-                                <span class="mx-2 text-sm font-medium">Withdraw</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
-                                <i class="icon-edit"></i>
-                                <span class="mx-2 text-sm font-medium">Record</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
-                                <i class="icon-order"></i>
-                                <span class="mx-2 text-sm font-medium">Order Hall</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="#">
-                                <i class="icon-report"></i>
-                                <span class="mx-2 text-sm font-medium">Message & Report</span>
-                            </a>
-                        </div>
-
-                        <div class="space-y-[2px] ">
-                            <label
-                                class="px-3 text-sm tracking-wide text-gray-700 uppercase dark:text-gray-400">More Actions</label>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="">
-                                <i class="icon-profile-setting"></i>
-                                <span class="mx-2 text-sm font-medium">About</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="">
-                                <i class="icon-profile-setting"></i>
-                                <span class="mx-2 text-sm font-medium">Notice</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="">
-                                <i class="icon-profile-setting"></i>
-                                <span class="mx-2 text-sm font-medium">About Investment Income</span>
-                            </a>
-                            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                href="">
-                                <i class="icon-profile-setting"></i>
-                                <span class="mx-2 text-sm font-medium">Company Qualification</span>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
-            </aside>
-            <main class="p-8 ml-60 relative  md:pt-24 lg:pt-24 flex-1">
-                {% block message %}
-                    
-                {% endblock message%}
-                <section class="space-y-7">
-                    <nav class="flex gap-4 bg-slate-200 py-2 px-5 rounded border border-gray-400" aria-label="Breadcrumb">
-                        <ol class=" inline-flex items-center space-x-1 md:space-x-3">
-                            <li class="inline-flex items-center gap-3">
-                                <a href="#"
-                                    class="inline-flex items-center text-base font-medium hover:text-gray-700 text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                                    <i class="icon-home"></i>
+        <div class="flex flex-wrap">
+            <div class="flex">
+                <aside class="bg-gray-100 fixed pt-20 shadow-xl border-r hidden  border-gray-400 lg:flex md:flex flex-col w-60 min-h-screen  px-4 overflow-y-auto ">
+                    <div class="flex flex-col justify-between flex-1">
+                        <nav class="-mx-3 space-y-1 ">
+                            <div class="space-y-1 ">
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'home' %}">
+                                    <i class="icon-dashboard"></i>
+                                    <span class="mx-2 text-sm font-medium">Dashboard</span>
                                 </a>
-                                <span class="text-base text-gray-400 font-light">/</span>
-                            </li>
-                            {% block breadcrumb %}
-                            
-                            {% endblock breadcrumb %}
-                            
-                        </ol>
-                        <h2 class="text-2xl text-slate-700 font-medium tracking-widest">
-                            {% block breadcrumbtitle %}
-                            {% endblock breadcrumbtitle %}
-                        </h2>
-                    </nav>
-                    <div class="section-main">
-                        {% block content %}
-                        {% endblock content %}
+    
+                            </div>
+                            <div class="space-y-[2px] ">
+                                <label class="px-3 text-sm text-gray-700 tracking-wide uppercase dark:text-gray-400">Account
+                                    Settings</label>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'add_bank' %}">
+                                    <i class="icon-museum"></i>
+                                    <span class="mx-2 text-sm font-medium">Bank Account</span>
+                                </a>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'deposit' %}">
+                                    <i class="icon-wallet"></i>
+                                    <span class="mx-2 text-sm font-medium">Deposit</span>
+                                </a>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'withdrawl' %}">
+                                    <i class="icon-withdrawal"></i>
+                                    <span class="mx-2 text-sm font-medium">Withdraw</span>
+                                </a>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="#">
+                                    <i class="icon-report"></i>
+                                    <span class="mx-2 text-sm font-medium">Message & Report</span>
+                                </a>
+                            </div>
+    
+                            <div class="space-y-[2px] ">
+                                <label
+                                    class="px-3 text-sm tracking-wide text-gray-700 uppercase dark:text-gray-400">Profile</label>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'profile-setting' %}">
+                                    <i class="icon-profile-setting"></i>
+                                    <span class="mx-2 text-sm font-medium">Profile Setting</span>
+                                </a>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'user-list' %}">
+                                    <i class="icon-profile-setting"></i>
+                                    <span class="mx-2 text-sm font-medium">Users List</span>
+                                </a>
+                            </div>
+                        </nav>
                     </div>
-
-                </section>
-            </main>
-        </div>
-        <div class="flex w-full p-3 justify-end">
-            <span class="block font-medium text-sm tracking-wide text-gray-500">Copyright © 2012 - 2023 <strong>Investment</strong>. All rights reserved.</span>
+                </aside>
+                <main class="p-8 lg:ml-60 relative  md:pt-24 lg:pt-24 flex-1">
+                    {% block message %}
+                        
+                    {% endblock message%}
+                    <section class="space-y-7">
+                        <nav class="lg:grid lg:grid-cols-12 bg-slate-200 py-2 px-5 rounded border border-gray-400">
+                            <div class="col-span-12 flex gap-4 items-center">
+                                <ol class=" inline-flex items-center space-x-1 md:space-x-3">
+                                    <li class="inline-flex items-center gap-3">
+                                        <a href="#"
+                                            class="inline-flex items-center text-base font-medium hover:text-gray-700 text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                            <i class="icon-home"></i>
+                                        </a>
+                                        <span class="text-base text-gray-400 font-light">/</span>
+                                    </li>
+                                    {% block breadcrumb %}
+                                    
+                                    {% endblock breadcrumb %}
+                                    
+                                </ol>
+                                <h2 class="text-2xl flex-auto text-slate-700 font-medium tracking-widest">
+                                    {% block breadcrumbtitle %}
+                                    {% endblock breadcrumbtitle %}
+                                </h2>
+                            </div>
+                        </nav>
+                        <div class="section-main">
+                            {% block content %}
+                            {% endblock content %}
+                        </div>
+    
+                    </section>
+                </main>
+            </div>
+            <div class="lg:grid lg:grid-cols-12 lg:gap-7 w-full lg:ml-60 py-3  px-8">
+                <div class="col-span-7">
+                    <div class="flex gap-4">
+                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium">
+                            <i class="icon-about-us"></i>
+                            <span class="">About Us</span>
+                        </a>
+                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium">
+                            <i class="icon-notice"></i>
+                            <span class="">Notice</span>
+                        </a>
+                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium">
+                            <i class="icon-investment"></i>
+                            <span class="">Investment Income</span>
+                        </a>
+                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium ">
+                            <i class="icon-qualifications"></i>
+                            <span class="">Company Qualification</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-5 text-end">
+                    <span class="block font-medium text-sm tracking-wide text-gray-500">Copyright © 2012 <strong>Investment</strong>. All rights reserved.</span>
+                </div>
+            </div>
         </div>
     </section>
 </body>

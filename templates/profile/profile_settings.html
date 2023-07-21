@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Investment | Profile Settings</title>
+{% endblock title %}
+
+{% block breadcrumb %}
+    <li class="flex items-center gap-3">
+        <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
+        <span class="text-base text-gray-400 font-light">/</span>
+    </li>
+    <li class="flex items-center gap-3">
+        <span class="text-sm text-red-600 font-medium tracking-wide">Profile Settings</span>
+        <span class="text-3xl text-gray-400 font-light">|</span>
+    </li>
+{% endblock breadcrumb %}
+
+{% block breadcrumbtitle %}
+Profile Settings
+{% endblock breadcrumbtitle %}
+
+
+{% block content %}
+<div class="space-y-7">
+    <div class="grid grid-cols-12 gap-7">
+        <div class="col-span-12">
+            <div class="border rounded-t py-3 px-4 border-b-0 bg-gray-100 border-gray-400">
+                <span class="font-medium text-slate-700 text-lg ">User Details</span>
+            </div>
+            <div class="border grid grid-cols-6 gap-2 py-6 px-4 border-gray-400 rounded-b">
+                <div class="col-span-12">
+                    <div class="w-full text-center">
+                        <img class="w-16 h-16 m-auto mb-2 rounded-full border-2 border-gray-400" src="{% static 'main/image/avtar.avif' %}">
+                        <span class="text-2xl text-slate-700 block font-bold tracking-wider">Admin </span>
+                    </div>
+                    <div class="space-y-3 mt-3">
+                        <div class="flex flex-wrap justify-between">
+                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Full Name </span>
+                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Admin </span>
+                        </div>
+                        <div class="flex flex-wrap justify-between">
+                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Full Name </span>
+                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Admin </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
