@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title></title>
+    {% endblock title %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/image/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
+    <script type="module" src="{% static 'main/js/tailwind.js' %}"></script>
+    <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
+    <script type="module" src="{% static 'main/js/alert.js' %}"></script>
+    <script type="module" src="{% static 'main/js/loading.js' %}"></script>
+    <script type="module" src="{% static 'main/js/dashboard.js' %}"></script>
+    {% block script %}
+    {% endblock script %}
+</head>
+
+<body class="" id="onLoadAnimation">
+    <div class="" id="loading">
+        <img src="{% static 'main/image/loading.gif' %}">
+    </div>
+    <section class="">
+        <nav class="fixed z-50 border-b after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  w-full border-gray-400"
+            style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
+            <div class="mx-auto relative z-50">
+                <div class="lg:flex lg:items-center lg:justify-between">
+                    <div class="flex items-center justify-between w-full">
+                        <div class="pl-8 py-4">
+                            <a href="/" class="flex items-center gap-2">
+                                <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
+                                <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
+                            </a>
+                        </div>
+                        <div class="flex-1 w-full gap-8 flex items-center justify-center">
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'about' %}">
+                                <i class="icon-about-us"></i>
+                                <span>About Company</span>
+                            </a>
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'investment' %}">
+                                <i class="icon-investment"></i>
+                                <span>Investment</span>
+                            </a>
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'company_qualification' %}">
+                                <i class="icon-qualifications"></i>
+                                <span>Company Qualification</span>
+                            </a>
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'notice' %}">
+                                <i class="icon-notice"></i>
+                                <span>Notice</span>
+                            </a>
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'terms_condition' %}">
+                                <i class="icon-edit"></i>
+                                <span>Terms & Conditions</span>
+                            </a>
+                        </div>
+                        <div class="flex px-3 gap-2">
+                            <button  class="inline-flex text-white w-7 hover:text-black h-7  items-center justify-center rounded text-xl ">
+                                <i class="icon-sun"></i>
+                            </button>                       
+                        </div>
+                        <div class="relative flex items-center border-l pl-3 lg:pr-8 pr-2">
+                            <button class="flex  items-center focus:outline-none" data-admin-toggle="admin">
+                                <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
+                                    <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
+                                </div>
+                            </button>
+                            <div class="absolute overflow-hidden border shadow rounded border-gray-400 right-[35%] bg-white top-[110%] hidden  w-60" data-admin-main="false">
+                                <div class="bg-slate-200 pt-5 pb-7 px-4 flex justify-center">
+                                    <h2 class="text-base font-semibold uppercase text-gray-600 tracking-wider">{{request.user}}</h2>
+                                    <img class="object-cover top-12 shadow-lg w-12 h-12 rounded-full border-2 absolute border-white" src="{% static 'main/image/avtar.avif'%}"/>
+                                </div>
+                                <div class="pt-10">
+                                    <a href="{% url 'profile-setting' %}" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
+                                        <i class="icon-dashboard"></i>
+                                        <span>Dashboard</span>
+                                    </a>                                  
+                                </div>
+                                <div class="py-4 text-center">
+                                    <a href="{% url 'logout' %}" class="hover:text-red-800 gap-2 text-red-600 inline-flex items-center focus:outline-none">
+                                        <span class="text-sm tracking-wide">Logout</span>
+                                        <i class="icon-log-out"></i>
+                                    </a>                           
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="w-full">
+            {% block background %}
+            
+            {% endblock background %}
+            <main class="container  mx-auto">
+                <section class="space-y-7 my-16">
+                    {% block content %}
+                    {% endblock content %}
+                </section>
+            </main>
+            <div class="lg:grid lg:grid-cols-12 lg:gap-7 w-full py-3  px-8">
+                <div class="col-span-12 text-center">
+                    <span class="block font-medium text-sm tracking-wide text-gray-500">Copyright © 2012 <strong>Investment</strong>. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
