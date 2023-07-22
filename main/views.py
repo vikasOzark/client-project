@@ -12,21 +12,11 @@ from abc import ABC, abstractmethod
 from uuid import uuid4
 from authentication import models as auth_model
 from django.urls import reverse
-
-class BaseView(ABC):
-    
-    @method_decorator(login_required(login_url="login"))
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated and \
-            self.request.user.is_active:
-           return super().dispatch(*args, **kwargs)
-       
-        if not self.request.user.is_active:
-            messages(self.request, "Your account is not active.")
-            return redirect("login")
+from django.contrib.auth.mixins import LoginRequiredMixin
+from utils import AdminOnlyView, UserOnlyView, check_is_superuser
 
 
-class Home(generic.TemplateView):
+class Home(UserOnlyView, generic.TemplateView):
     template_name = "main/home.html"
     
     def get_context_data(self, **kwargs):
@@ -48,19 +38,9 @@ class Home(generic.TemplateView):
         context['payments'] = payments
         context["invite_link"] = invite_link 
         return context
-    
-    @method_decorator(login_required(login_url="login"))
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated and \
-            self.request.user.is_active:
-           return super(Home, self).dispatch(*args, **kwargs)
-       
-        if not self.request.user.is_active:
-            messages(self.request, "Your account is not active.")
-            return redirect("login")
-    
+     
 
-class HandlePaymentRequest(generic.CreateView):
+class HandlePaymentRequest(UserOnlyView, generic.CreateView):
     template_name = "main/payments.html"
     model = main_models.BankDetail
     form_class = forms.PaymentRequestForm
@@ -69,17 +49,7 @@ class HandlePaymentRequest(generic.CreateView):
         return self.get()
     
     
-    @method_decorator(login_required(login_url="login"))
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated and \
-            self.request.user.is_active:
-           return super(HandlePaymentRequest, self).dispatch(*args, **kwargs)
-       
-        if not self.request.user.is_active:
-            messages(self.request, "Your account is not active.")
-            return redirect("login")
-
-class BankData(generic.CreateView):
+class BankData(UserOnlyView, generic.CreateView):
     model = main_models.BankDetail
     template_name = "main/add_bank_form.html"
     form_class = forms.AddBank
@@ -100,18 +70,8 @@ class BankData(generic.CreateView):
         messages.success(self.request, "New bank account is added.")
         return super().form_valid(form)
     
-    @method_decorator(login_required(login_url="login"))
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated and \
-            self.request.user.is_active:
-           return super(BankData, self).dispatch(*args, **kwargs)
-       
-        if not self.request.user.is_active:
-            messages(self.request, "Your account is not active.")
-            return redirect("login")
 
-
-class AmountDeposit(ABC, generic.TemplateView): 
+class AmountDeposit(UserOnlyView, generic.TemplateView): 
     template_name = "main/deposit.html"
 
 
@@ -151,19 +111,9 @@ class AmountDeposit(ABC, generic.TemplateView):
 
         messages.error(request, "Successfully deposited, we will notify you shortly.")
         return self.get(request)
-    
-    @method_decorator(login_required(login_url="login"))
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated and \
-            self.request.user.is_active:
-           return super().dispatch(*args, **kwargs)
-       
-        if not self.request.user.is_active:
-            messages(self.request, "Your account is not active.")
-            return redirect("login")
-        
+         
 
-class WithdrawalView(generic.TemplateView):
+class WithdrawalView(UserOnlyView, generic.TemplateView):
     template_name = "main/withdraw.html"
 
     def get_context_data(self, **kwargs):

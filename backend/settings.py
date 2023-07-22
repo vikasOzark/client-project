@@ -134,3 +134,5 @@ COMPRESS_ENABLED = True
 
 STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+
+LOGIN_URL = "login"
