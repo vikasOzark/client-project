@@ -6,6 +6,9 @@ from uuid import uuid4
 class UserProfileDetail(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     invite_code = models.CharField(max_length=5, unique=True, blank=True)
+    invited_ref_code = models.CharField(max_length=10, blank=True)
+    invited_user = models.ForeignKey(User,max_length=20, null=True, on_delete=models.CASCADE, related_name="invited_by")
+    is_invited = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=15, db_index=True)
 
     def __str__(self) -> str:

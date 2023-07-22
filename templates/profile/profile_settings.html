@@ -23,6 +23,27 @@
 Profile Settings
 {% endblock breadcrumbtitle %}
 
+{% block message %}
+{% if messages %}
+<div class="w-fit bg-white absolute right-8 top-16" data-alert="notification">
+    {% for message in messages %}
+    <div class="flex">
+        <div
+            class="bg-{{message.tags}} flex px-3 rounded-l text-xl items-center border-{{message.tags}} border text-white">
+            <i class="icon-{{message.tags}}"></i>
+        </div>
+        <div
+            class="border flex gap-3 text-sm tracking-wide font-medium rounded-r border-{{message.tags}} bg-{{message.tags}}_light px-4 py-3 text-{{message.tags}}">
+            <span>{{ message }}</span>
+            <button data-alert-close="close"
+                class="icon-circle-with-cross border-l border-{{message.tags}} pl-3"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock message %}
+
 
 {% block content %}
 <div class="space-y-7">
@@ -35,21 +56,21 @@ Profile Settings
                 <div class="col-span-12">
                     <div class="w-full text-center">
                         <img class="w-16 h-16 m-auto mb-2 rounded-full border-2 border-gray-400" src="{% static 'main/image/avtar.avif' %}">
-                        <span class="text-xl text-slate-700 block font-bold tracking-wider">Admin </span>
+                        <span class="text-xl text-slate-700 block font-bold tracking-wider">{{request.user}} </span>
                     </div>
                     <div class="space-y-3 mt-5">
                         <span class="text-base tracking-wide text-gray-700 uppercase">Genral Info</span>
                         <div class="lg:flex lg:flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Full Name </span>
-                            <span class="text-sm text-slate-500 block font-medium tracking-wider">Admin </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider">{{request.user.first_name}}</span>
                         </div>
                         <div class="lg:flex lg:flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Email </span>
-                            <span class="text-sm text-slate-500 block font-medium tracking-wider">wwwww </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider">{{request.user.email|default:"None"}}</span>
                         </div>
                         <div class="flex flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Mobile </span>
-                            <span class="text-sm text-slate-500 block font-medium tracking-wider">9999 </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider">{{user_profile.phone_number}} </span>
                         </div>
                         <div class="flex flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Password </span>
