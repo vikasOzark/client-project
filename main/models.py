@@ -99,3 +99,12 @@ class BankDetail(models.Model):
         return str(self.user)
     
     
+class Commissions(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profit = models.IntegerField(default=0)
+    loss = models.IntegerField(default=0)
+    create_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.user
+    
