@@ -1,13 +1,13 @@
-/** @type {HTMLDivElement} */
+/** @type {?HTMLDivElement} */
 const slideMain = document.querySelectorAll(".slide");
 
 let counter = 0;
-slideMain.forEach(
+slideMain?.forEach(
   (slide, index) => { 
     slide.style.left = `${index *  100}%`
 })
 const slideImage = () => {
-  slideMain.forEach(
+  slideMain?.forEach(
     (slide) => {
       slide.style.transform = `translateX(-${counter * 100}%)`
     }

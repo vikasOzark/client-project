@@ -31,7 +31,6 @@ class Home(generic.TemplateView):
     
     def get_context_data(self, **kwargs):
         user = self.request.user
-        print(user)
         
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
         payments = main_models.Payments.get_latest_payments(self.request)
@@ -43,7 +42,6 @@ class Home(generic.TemplateView):
         invite = reverse("invite")
         invite_link = f"{scheme}://{BASE_ADDRESS}{invite}?user={user}&invite_code={userprofile.invite_code}"
 
-        print(invite_link)
 
         context = super().get_context_data(**kwargs)
         context["user_data"] = user_data

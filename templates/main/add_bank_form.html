@@ -4,15 +4,19 @@
 <title>Investment | Bank Account</title>
 {% endblock title %}
 
+{% block script %}
+<script type="module" src="{% static 'main/js/add_bank.js' %}"></script>
+{% endblock script %}
+
 {% block breadcrumb %}
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
-        <span class="text-base text-gray-400 font-light">/</span>
-    </li>
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-red-600 font-medium tracking-wide">Bank Account</span>
-        <span class="text-3xl text-gray-400 font-light">|</span>
-    </li>
+<li class="flex items-center gap-3">
+    <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
+    <span class="text-base text-gray-400 font-light">/</span>
+</li>
+<li class="flex items-center gap-3">
+    <span class="text-sm text-red-600 font-medium tracking-wide">Bank Account</span>
+    <span class="text-3xl text-gray-400 font-light">|</span>
+</li>
 {% endblock breadcrumb %}
 
 {% block breadcrumbtitle %}
@@ -20,67 +24,163 @@ Bank Account
 {% endblock breadcrumbtitle %}
 
 
+{% block message %}
+{% if messages %}
+<div class="w-fit bg-white absolute right-8 top-16" data-alert="notification">
+    {% for message in messages %}
+    <div class="flex">
+        <div
+            class="bg-{{message.tags}} flex px-3 rounded-l text-xl items-center border-{{message.tags}} border text-white">
+            <i class="icon-{{message.tags}}"></i>
+        </div>
+        <div
+            class="border flex gap-3 text-sm tracking-wide font-medium rounded-r border-{{message.tags}} bg-{{message.tags}}_light px-4 py-3 text-{{message.tags}}">
+            <span>{{ message }}</span>
+            <button data-alert-close="close"
+                class="icon-circle-with-cross border-l border-{{message.tags}} pl-3"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock message %}2
+
 {% block content %}
 <div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4">
-    <div class="md:col-span-7 w-full lg:col-span-7">
-        <h2 class="text-lg text-gray-500 mb-2">Bank Accounts</h2>
-        {% for bank in banks %}
-            <div class="lg:w-1/2 md:w-1/2 rounded shadow bg-slate-200 p-2 mb-2">
-            <div class="flex">
+    <div class="lg:col-span-12 flex flex-col border rounded overflow-hidden border-gray-400">
+        <div class="py-3 px-4 bg-gray-100 lg:flex items-center justify-between">
+            <span class="font-medium text-slate-700 text-lg ">Bank Details</span>
+            <button data-add-bank-button="add-bank" class=" inline-flex font-medium text-sm text-white bg-yellow-600 py-1 px-3 gap-2 rounded border border-yellow-800 items-center justify-center "
+                type="button">
+                <i class="icon-museum"></i>
+                <span>Add Bank </span>
+            </button>
+        </div>
+
+        <div class="gap-2 lg:grid lg:grid-cols-12 py-6 px-4 border-t border-gray-400">
+            <div class="col-span-8 hidden col-start-3" data-addbank-acc="false">
+                <h2 class="text-xl mb-6 text-gray-600 tracking-wide font-medium">Add Bank Account </h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="lg:grid lg:grid-cols-12 gap-2">
+                        <div class="mb-2 col-span-6">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Account Holder
+                                Name <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                    <i class="icon-user"></i>
+                                </span>
+                                {{ form.account_holder_name }}
+                            </div>
+                        </div>
+                        <div class="mb-2 col-span-6">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Bank Name <span
+                                    class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                    <i class="icon-museum"></i>
+                                </span>
+                                {{ form.bank_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-cols-12 gap-2">
+                        <div class="mb-2 col-span-6">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Account Number
+                                <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                    <i class="icon-wallet"></i>
+                                </span>
+                                {{ form.account_number }}
+                            </div>
+                        </div>
+                        <div class="mb-2 col-span-6">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Confirm Account
+                                <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                    <i class="icon-wallet"></i>
+                                </span>
+                                {{form.confirm_account}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:grid lg:grid-cols-12 gap-2">
+                        <div class="mb-2 col-span-6">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">IFSC Code <span
+                                    class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                    <i class="icon-museum"></i>
+                                </span>
+                                {{ form.ifsc_code }}
+                            </div>
+                        </div>
+                        <div class="mb-2 col-span-6">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Branch <span
+                                    class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                    <i class="icon-museum"></i>
+                                </span>
+                                {{ form.branch }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 mb-5 gap-2 flex items-center justify-end">
+                        <button type="button"
+                            class="disabled:bg-red-200 disabled:border-red-300 disabled:text-gray-600 inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
+                            <i class="icon-cycle"></i>
+                            <span>Cancel</span>
+                        </button>
+                        <button type="submit"
+                            class="disabled:bg-blue-200 disabled:border-blue-300 disabled:text-gray-600 inline-flex font-medium text-sm text-white bg-blue-500 py-1 px-3 gap-2 rounded border border-blue-700 items-center justify-center ">
+                            <i class="icon-museum"></i>
+                            <span>Add Bank</span>
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class=""><span class="font-bold text-gray-700">Holder Name</span> : {{bank.account_holder_name}}</div>
-            <div class="flex justify-between">
-              <div class=""><span class="font-bold text-gray-700">Bank</span> : {{bank.bank_name}}</div>
-              <div class=""><span class="font-bold text-gray-700">Branch</span> : {{bank.branch}}</div>
+            <div class="col-span-12">
+                <h2 class="text-xl mb-6 text-gray-600 tracking-wide font-medium">Bank Account List </h2>
+                <div class="lg:grid grid-cols-3 gap-2">
+                    {% for bank in banks %}
+                    <div class="flex-col group/item  relative cursor-pointer hover:chil flex lg:col-span-1 transition-all rounded bg-gray-50 hover:border-red-700 hover:shadow-xl border-gray-400 border py-4 px-4">
+                        <a href="{% url 'delete-bank' bank.pk %}" class="absolute text-sm transition-all group-hover/item:opacity-100 right-4 opacity-0 top-4 w-6 h-6 inline-flex items-center justify-center rounded-full bg-red-500 border-red-700 border text-white">
+                            <i class="icon-delete"></i>
+                        </a>
+                        <div class="w-full lg:flex gap-2 items-center">
+                            <span class="w-12 h-12 inline-flex shadow text-gray-400 items-center justify-center text-2xl rounded-full border-2 border-gray-400">
+                                <i class="icon-museum"></i>
+                            </span>
+                            <span class="text-lg uppercase truncate flex-1 text-slate-700 block font-medium tracking-wider">{{bank.account_holder_name}} </span>
+                        </div>
+                        <div class="space-y-1 mt-2">
+                            <div class="lg:flex lg:flex-wrap justify-start gap-3">
+                                <span class="text-sm text-slate-700 block font-semibold tracking-wider">Bank Name : </span>
+                                <span class="text-sm text-slate-500 block font-medium tracking-wider">{{bank.bank_name}} </span>
+                            </div>
+                            <div class="flex flex-wrap justify-start gap-3">
+                                <span class="text-sm text-slate-700 block font-semibold tracking-wider">Account Number : </span>
+                                <span class="text-sm text-slate-500 block font-medium tracking-wider">••••••{{bank.account_number}} </span>
+                            </div>
+                            <div class="flex flex-wrap justify-start gap-3">
+                                <span class="text-sm text-slate-700 block font-semibold tracking-wider">Branch : </span>
+                                <span class="text-sm text-slate-500 block font-medium tracking-wider"> {{bank.branch}} </span>
+                            </div>
+                            <div class="flex flex-wrap justify-start gap-3">
+                                <span class="text-sm text-slate-700 block font-semibold tracking-wider">IFSC Code : </span>
+                                <span class="text-sm text-slate-500 block font-medium tracking-wider"> {{bank.ifsc_code}} </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class=""><span class="font-bold text-gray-700">Account number</span> : {{bank.account_number}}</div>
-            <div class=""><span class="font-bold text-gray-700">IFSC Code </span>: {{bank.ifsc_code}}</div>
-          </div>
-        {% endfor %}
+        </div>
     </div>
 
-    <div class="col-span-5">
-        <h2 class="text-lg text-gray-500 mb-2">Add Bank Account </h2>
-        <form method="POST" class="shadow-lg border p-2 rounded bg-gray-100" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="md:grid lg:grid-cols-2 gap-2">
-                <div class="">
-                    <div class=""><label for="">Account Holder Name</label></div>
-                    {{ form.account_holder_name }}
-                </div>
-                <div class="">
-                    <div class=""><label for="">Bank Name</label></div>
-                    {{ form.bank_name }}
-                </div>
-                <div class="">
-                    <div class=""><label for="">Account Number</label></div>
-                    {{ form.account_number }}
-                </div>
-                <div class="">
-                    <div class=""><label for="">Confirm Account</label></div>
-                    {{form.confirm_account}}
-                </div>
-                <div class="">
-                    <div class=""><label for="">IFSC CODE</label></div>
-                    {{ form.ifsc_code }}
-                </div>
-                <div class="">
-                    <div class=""><label for="">Branch</label></div>
-                    {{ form.branch }}
-                </div>
-            </div> 
-            <div class="flex mt-2 justify-end">
-                <button class="px-3 py-1 text-white transition-all hover:bg-purple-700 bg-purple-500 rounded ">Add Bank</button>
-                
-            </div>
-            {% if messages %}
-            <ul class="messages rounded px-3 py-1 mt-2 mb-2 bg-slate-200">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-            </ul>
-            {% endif %}
-        </form>
-    </div>
+
 </div>
 {% endblock content %}
