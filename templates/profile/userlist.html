@@ -4,15 +4,19 @@
 <title>Investment | Users List</title>
 {% endblock title %}
 
+{% block script %}
+<script type="module" src="{% static 'main/js/user_list.js' %}"></script>
+{% endblock script %}
+
 {% block breadcrumb %}
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
-        <span class="text-base text-gray-400 font-light">/</span>
-    </li>
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-red-600 font-medium tracking-wide">Users List</span>
-        <span class="text-3xl text-gray-400 font-light">|</span>
-    </li>
+<li class="flex items-center gap-3">
+    <span class="text-sm text-gray-500 font-medium tracking-wide">Profile</span>
+    <span class="text-base text-gray-400 font-light">/</span>
+</li>
+<li class="flex items-center gap-3">
+    <span class="text-sm text-red-600 font-medium tracking-wide">Users List</span>
+    <span class="text-3xl text-gray-400 font-light">|</span>
+</li>
 {% endblock breadcrumb %}
 
 {% block breadcrumbtitle %}
@@ -21,5 +25,179 @@ Users List
 
 
 {% block content %}
-Users List
+<div class="space-y-7">
+    <div class="lg:grid lg:grid-cols-12 gap-7">
+        <div class="lg:col-span-12 flex flex-col border rounded overflow-hidden border-gray-400">
+            <div class="py-3 px-4 bg-gray-100 ">
+                <span class="font-medium text-slate-700 text-lg ">Users List</span>
+            </div>
+            <div class="gap-2 py-6 px-4 border-t border-gray-400 space-y-6">
+                <div class="lg:grid lg:grid-cols-12 gap-2">
+                    <div class="lg:col-span-3 lg:flex">
+                        <select type="text"
+                            class="border bg-gray-50 h-10 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full py-1 px-3">
+                            <option class="font-medium" value="username">Username</option>
+                            <option class="font-medium" value="username">Mobile</option>
+                            <option class="font-medium" value="username">Email</option>
+                        </select>
+                    </div>
+                    <div class="lg:col-span-6 lg:flex">
+                        <input type="text" placeholder="Search By Username"
+                            class="border border-r-0 bg-gray-50 rounded-l h-10 border-gray-500 text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full py-1 px-3">
+                        <button
+                            class="bg-red-500 border gap-2 items-center tracking-wide border-red-700 rounded-r text-white py-1 px-3 font-medium inline-flex"
+                            type="button">
+                            <i class="icon-magnifying-glass"></i>
+                            <span>Search</span>
+                        </button>
+                    </div>
+                    <div class="lg:col-span-3 lg:flex">
+                        <select type="text"
+                            class="border bg-gray-50 h-10 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full py-1 px-3">
+                            <option class="font-medium" value="username">Sort By Ascending</option>
+                            <option class="font-medium" value="username">Sort By Descending</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-span-12">
+                    <div class="relative">
+                        <table
+                            class="w-full border border-gray-300 font-medium text-sm tracking-wide text-left text-gray-500 ">
+                            <thead class="uppercase bg-gray-200 border-b border-gray-300">
+                                <tr>
+                                    <th scope="col" class="w-3 font-medium px-3 py-2 border-r border-gray-300">
+                                        <input type="checkbox" class="w-4 h-4">
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Username
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Mobile
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Wallet Money
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Invite Id
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Permission
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-gray-100 border-b border-gray-300 last:border-b-0">
+                                    <td scope="col" class="w-3 font-medium px-3 py-2 border-r border-gray-300">
+                                        <input type="checkbox" class="w-4 h-4">
+                                    </td>
+                                    <td scope="col" class=" px-3 py-2 border-r border-gray-300">
+                                        Apple MacBook Pro 17"
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        <label class="relative inline-flex items-center gap-2 cursor-pointer">
+                                            <input data-check-user="true" type="checkbox" value="" class="sr-only peer" checked>
+                                            <div class="w-7 h-4 bg-red-600 rounded peer border border-red-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded after:h-3 after:w-3 after:transition-all  peer-checked:bg-green-600 peer-checked:border-green-800"></div>
+                                            <span  class="w-10 text-xs">Active</span>
+                                        </label>
+                                    </th>
+                                    <td scope="col" class="w-16 px-3 py-2 border-r border-gray-300">
+                                        <a title="Details (username)" href=""
+                                            class="inline-flex items-center text-xs gap-2 text-white bg-blue-500 border border-blue-700 rounded p-1">
+                                            <i class="icon-eye"></i>
+                                        </a>
+                                        <a title="Remove (username)" href=""
+                                            class="inline-flex items-center text-xs gap-2 text-white bg-red-500 border border-red-700 rounded p-1">
+                                            <i class="icon-remove-user"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-100 border-b border-gray-300 last:border-b-0">
+                                    <td scope="col" class="w-3 font-medium px-3 py-2 border-r border-gray-300">
+                                        <input type="checkbox" class="w-4 h-4">
+                                    </td>
+                                    <td scope="col" class=" px-3 py-2 border-r border-gray-300">
+                                        Apple MacBook Pro 17"
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Silver
+                                    </td>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        <label class="relative gap-2 inline-flex items-center  cursor-pointer">
+                                            <input data-check-user="false" type="checkbox" value="" class="sr-only peer">
+                                            <div class="w-7 h-4 bg-red-600 rounded peer border border-red-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded after:h-3 after:w-3 after:transition-all  peer-checked:bg-green-600 peer-checked:border-green-800"></div>
+                                            <span class="w-10 text-xs">Inactive</span>
+                                        </label>
+                                    </th>
+                                    <td scope="col" class="w-16 px-3 py-2 border-r border-gray-300">
+                                        <a title="Details (username)" href=""
+                                            class="inline-flex items-center text-xs gap-2 text-white bg-blue-500 border border-blue-700 rounded p-1">
+                                            <i class="icon-eye"></i>
+                                        </a>
+                                        <a title="Remove (username)" href=""
+                                            class="inline-flex items-center text-xs gap-2 text-white bg-red-500 border border-red-700 rounded p-1">
+                                            <i class="icon-remove-user"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="lg:grid lg:grid-cols-12 gap-2">
+                    <div class="lg:col-span-4 lg:flex">
+                        <span class="text-sm tracking-wide text-gray-500 font-medium gap-2 flex items-center">
+                            Showing
+                            <select class="border rounded border-gray-400 focus:outline-none">
+                                <option class="font-medium" selected="" value="20">20</option>
+                                <option class="font-medium" value="50">50</option>
+                                <option class="font-medium" value="100">100</option>
+                            </select>
+                            records
+                        </span>
+                    </div>
+                    <div class="lg:col-span-4 lg:flex items-center justify-center">
+                        <span class="text-sm tracking-wide font-medium  text-gray-500">No of Pages 10</span>
+                    </div>
+                    <div class="lg:col-span-4 lg:flex items-center justify-end gap-2">
+                        <a href="" class="inline-flex items-center gap-2 font-medium text-sm text-white border-red-700 border px-2 py-1 rounded bg-red-500">
+                            <i class="icon-arrow-left"></i>
+                            <span>Previous</span>
+                        </a>
+                        <a href="" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
+                            <span>Next</span>
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

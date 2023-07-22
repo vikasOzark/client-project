@@ -3,9 +3,9 @@
 // Notification
 
 const notificationAlert = function () {
-	/** @type {HTMLDivElement} */
+	/** @type {?HTMLDivElement} */
 	const alertArea = document.querySelectorAll('[data-alert]');
-	/** @type {HTMLDivElement} */
+	/** @type {?HTMLDivElement} */
 	const alertButton = document.querySelectorAll('[data-alert-close]');
 	
 	let count = 0;
@@ -19,7 +19,7 @@ const notificationAlert = function () {
 		}
 	}, 80);
 	for (const alertBtn of alertButton) {
-		alertBtn.addEventListener('click', (event) => {
+		alertBtn?.addEventListener('click', (event) => {
 			event.currentTarget.closest('[data-alert]').remove();
 		});
 	}

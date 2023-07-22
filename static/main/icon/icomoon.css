@@ -24,6 +24,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-moon:before {
+  content: "\e916";
+}
+.icon-minimize:before {
+  content: "\e917";
+}
+.icon-expand:before {
+  content: "\e918";
+}
+.icon-sun:before {
+  content: "\e924";
+}
 .icon-investment:before {
   content: "\e910";
 }
@@ -39,7 +51,7 @@
 .icon-success:before {
   content: "\e90b";
 }
-.icon-error:before {
+.icon-danger:before {
   content: "\e90c";
 }
 .icon-warning1:before {
@@ -168,12 +180,6 @@
 .icon-install:before {
   content: "\e946";
 }
-.icon-resize-100:before {
-  content: "\e949";
-}
-.icon-resize-full-screen:before {
-  content: "\e94a";
-}
 .icon-save:before {
   content: "\e94b";
 }
@@ -197,9 +203,6 @@
 }
 .icon-add-user:before {
   content: "\e957";
-}
-.icon-adjust:before {
-  content: "\e959";
 }
 .icon-back:before {
   content: "\e969";
@@ -285,12 +288,6 @@
 .icon-level-up:before {
   content: "\e9c9";
 }
-.icon-light-bulb:before {
-  content: "\e9cb";
-}
-.icon-light-up:before {
-  content: "\e9cd";
-}
 .icon-link:before {
   content: "\e9cf";
 }
@@ -326,9 +323,6 @@
 }
 .icon-minus:before {
   content: "\e9e3";
-}
-.icon-moon:before {
-  content: "\e9e6";
 }
 .icon-new-message:before {
   content: "\e9ea";

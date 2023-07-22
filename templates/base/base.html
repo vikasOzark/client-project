@@ -15,6 +15,7 @@
     <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
     <script type="module" src="{% static 'main/js/alert.js' %}"></script>
     <script type="module" src="{% static 'main/js/loading.js' %}"></script>
+    <script type="module" src="{% static 'main/js/dashboard.js' %}"></script>
     {% block script %}
     {% endblock script %}
 </head>
@@ -39,28 +40,49 @@
                             <h1 class="lg:text-2xl md:text-2xl hidden md:flex text-white font-light tracking-wide">Welcome Back, {{request.user}}</h1>
                         </div>
                         <div class="flex px-3 gap-2">
-                            <div class="text-sm font-semibold py-1 px-2 rounded border-2 border-red-700 bg-white tracking-widest text-green-600 gap-2 flex items-center justify-center ">
-                                <i class="icon-wallet"></i>
-                                <span class="">500</span>
-                            </div>
-                            <a href="{% url 'logout' %}" class="border-2 hover:text-red-800 bg-white rounded gap-2 border-red-700 text-red-700 px-2 py-1 flex items-center focus:outline-none">
-                                <span class="text-sm tracking-wide">Logout</span>
-                                <i class="icon-log-out"></i>
-                            </a>
+                            <button  class="inline-flex text-white w-7 hover:text-black h-7  items-center justify-center rounded text-xl ">
+                                <i class="icon-sun"></i>
+                            </button>
+                            <span class="font-light text-xl text-white">|</span>
+                            <button class="inline-flex text-white w-7 h-7  hover:text-black items-center justify-center rounded text-xl ">
+                                <i class="icon-expand"></i>
+                            </button>                         
                         </div>
-                        <div class="flex items-center border-l pl-3 lg:pr-8 pr-2">
-                            <a href="" class="flex  items-center focus:outline-none">
+                        <div class="relative flex items-center border-l pl-3 lg:pr-8 pr-2">
+                            <button class="flex  items-center focus:outline-none" data-admin-toggle="admin">
                                 <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
                                     <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
                                 </div>
-                            </a>
+                            </button>
+                            <div class="absolute overflow-hidden border shadow rounded border-gray-400 right-[35%] bg-white top-[110%] hidden  w-60" data-admin-main="false">
+                                <div class="bg-slate-200 pt-5 pb-7 px-4 flex justify-center">
+                                    <h2 class="text-base font-semibold uppercase text-gray-600 tracking-wider">Sajan</h2>
+                                    <img class="object-cover top-12 shadow-lg w-12 h-12 rounded-full border-2 absolute border-white" src="{% static 'main/image/avtar.avif'%}"/>
+                                </div>
+                                <div class="pt-10">
+                                    <a href="" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
+                                        <i class="icon-profile-setting"></i>
+                                        <span>Profile Setting</span>
+                                    </a>
+                                    <a href="" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
+                                        <i class="icon-lock"></i>
+                                        <span>Change Password</span>
+                                    </a>                                    
+                                </div>
+                                <div class="py-4 text-center">
+                                    <a href="{% url 'logout' %}" class="hover:text-red-800 gap-2 text-red-600 inline-flex items-center focus:outline-none">
+                                        <span class="text-sm tracking-wide">Logout</span>
+                                        <i class="icon-log-out"></i>
+                                    </a>                           
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
         <div class="flex flex-wrap">
-            <div class="flex">
+            <div class="flex w-full">
                 <aside class="bg-gray-100 fixed pt-20 shadow-xl border-r hidden  border-gray-400 lg:flex md:flex flex-col w-60 min-h-screen  px-4 overflow-y-auto ">
                     <div class="flex flex-col justify-between flex-1">
                         <nav class="-mx-3 space-y-1 ">
@@ -93,7 +115,7 @@
                                 <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                     href="#">
                                     <i class="icon-report"></i>
-                                    <span class="mx-2 text-sm font-medium">Message & Report</span>
+                                    <span class="mx-2 text-sm font-medium">Team Report</span>
                                 </a>
                             </div>
     
@@ -107,7 +129,7 @@
                                 </a>
                                 <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                     href="{% url 'user-list' %}">
-                                    <i class="icon-profile-setting"></i>
+                                    <i class="icon-users"></i>
                                     <span class="mx-2 text-sm font-medium">Users List</span>
                                 </a>
                             </div>

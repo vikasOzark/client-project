@@ -4,9 +4,13 @@
 <title>Investment | Profile Settings</title>
 {% endblock title %}
 
+{% block script %}
+<script type="module" src="{% static 'main/js/user_profile.js' %}"></script>
+{% endblock script %}
+
 {% block breadcrumb %}
     <li class="flex items-center gap-3">
-        <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
+        <span class="text-sm text-gray-500 font-medium tracking-wide">Profile</span>
         <span class="text-base text-gray-400 font-light">/</span>
     </li>
     <li class="flex items-center gap-3">
@@ -22,28 +26,59 @@ Profile Settings
 
 {% block content %}
 <div class="space-y-7">
-    <div class="grid grid-cols-12 gap-7">
-        <div class="col-span-12">
-            <div class="border rounded-t py-3 px-4 border-b-0 bg-gray-100 border-gray-400">
+    <div class="lg:grid lg:grid-cols-12 gap-7">
+        <div class="lg:col-span-5 flex flex-col border rounded overflow-hidden border-gray-400">
+            <div class="py-3 px-4 bg-gray-100 ">
                 <span class="font-medium text-slate-700 text-lg ">User Details</span>
             </div>
-            <div class="border grid grid-cols-6 gap-2 py-6 px-4 border-gray-400 rounded-b">
+            <div class="gap-2 py-6 px-4 border-t border-gray-400">
                 <div class="col-span-12">
                     <div class="w-full text-center">
                         <img class="w-16 h-16 m-auto mb-2 rounded-full border-2 border-gray-400" src="{% static 'main/image/avtar.avif' %}">
-                        <span class="text-2xl text-slate-700 block font-bold tracking-wider">Admin </span>
+                        <span class="text-xl text-slate-700 block font-bold tracking-wider">Admin </span>
                     </div>
-                    <div class="space-y-3 mt-3">
-                        <div class="flex flex-wrap justify-between">
-                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Full Name </span>
-                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Admin </span>
+                    <div class="space-y-3 mt-5">
+                        <span class="text-base tracking-wide text-gray-700 uppercase">Genral Info</span>
+                        <div class="lg:flex lg:flex-wrap justify-start">
+                            <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Full Name </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider">Admin </span>
                         </div>
-                        <div class="flex flex-wrap justify-between">
-                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Full Name </span>
-                            <span class="text-sm text-slate-700 block font-medium tracking-wider">Admin </span>
+                        <div class="lg:flex lg:flex-wrap justify-start">
+                            <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Email </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider">wwwww </span>
                         </div>
+                        <div class="flex flex-wrap justify-start">
+                            <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Mobile </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider">9999 </span>
+                        </div>
+                        <div class="flex flex-wrap justify-start">
+                            <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Password </span>
+                            <span class="text-sm text-slate-500 block font-medium tracking-wider"> •••••• </span>
+                            <button type="button" data-changepass-button="change-password" class="disabled:bg-red-200 disabled:border-red-300 disabled:text-gray-600 inline-flex ml-3 items-center justify-center gap-1 text-xs bg-red-500 border-red-700 border text-white py-[2px] px-1 rounded">
+                                <i class="icon-key"></i>
+                                <span>Change</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-8 gap-2 flex items-center justify-end">
+                        <button type="button" data-cancelpro-button="cancel-profile"  disabled class="disabled:bg-red-200 disabled:border-red-300 disabled:text-gray-600 inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
+                            <i class="icon-cycle"></i> 
+                            <span>Cancel</span>
+                        </button>
+                        <button type="button" data-editpro-button="edit-profile" class="disabled:bg-blue-200 disabled:border-blue-300 disabled:text-gray-600 inline-flex font-medium text-sm text-white bg-blue-500 py-1 px-3 gap-2 rounded border border-blue-700 items-center justify-center ">
+                            <i class="icon-pencil"></i> 
+                            <span>Edit Profile</span>
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="lg:col-span-7 flex flex-col border rounded overflow-hidden border-gray-400">
+            <div class="block" data-change-password="true">
+                {% include 'profile/change_password.html' %}
+            </div>
+            <div class="hidden" data-edit-profile="false">
+                {% include 'profile/edit.profile.html' %}
             </div>
         </div>
     </div>

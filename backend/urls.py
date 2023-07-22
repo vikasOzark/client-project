@@ -7,5 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("auth/", include("authentication.urls")),
     path("", include("main.urls")),
-    path("", include("userprofile.urls"))
+    path("profile/", include("userprofile.urls"))
 ]
