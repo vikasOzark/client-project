@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from abc import ABC, abstractmethod
 from uuid import uuid4
+from authentication import models as auth_model
+from django.urls import reverse
 
 class BaseView(ABC):
     
@@ -29,12 +31,22 @@ class Home(generic.TemplateView):
     
     def get_context_data(self, **kwargs):
         user = self.request.user
+        
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
         payments = main_models.Payments.get_latest_payments(self.request)
-        print(payments)
+        userprofile = auth_model.UserProfileDetail.objects.get(user=user)
+
+        # Generating the invite link 
+        scheme = self.request.scheme
+        BASE_ADDRESS = self.request.META.get("HTTP_HOST")
+        invite = reverse("invite")
+        invite_link = f"{scheme}://{BASE_ADDRESS}{invite}?user={user}&invite_code={userprofile.invite_code}"
+
+
         context = super().get_context_data(**kwargs)
         context["user_data"] = user_data
         context['payments'] = payments
+        context["invite_link"] = invite_link 
         return context
     
     @method_decorator(login_required(login_url="login"))
@@ -54,7 +66,6 @@ class HandlePaymentRequest(generic.CreateView):
     form_class = forms.PaymentRequestForm
 
     def post(self, request):
-        print(request.POST)
         return self.get()
     
     
@@ -81,9 +92,8 @@ class BankData(generic.CreateView):
 	
     def form_valid(self, form):
         form_data = form.cleaned_data
-        print("acount : ", form_data)
         if form_data.get("account_number") != form_data.get("confirm_account"):
-            messages.error(self.request, "Account Number is not mathed !")
+            messages.error(self.request, "Account Number is not matched !")
             return self.get(self.request)
             
         form.instance.user = self.request.user
@@ -121,7 +131,6 @@ class AmountDeposit(ABC, generic.TemplateView):
 
     def post(self, request):
         form_data = request.POST
-        print(form_data)
         amount = form_data.get("amount")
         payment_channel = form_data.get("payment_channel")
         payment_ref_code = form_data.get("payment_ref_code")
@@ -174,12 +183,15 @@ class WithdrawalView(generic.TemplateView):
     
     def post(self, request):
         form_data = request.POST
-        print(form_data)
         amount = form_data.get("amount")
         transaction_type = form_data.get("transaction-type", False)
+        
+        wallet = main_models.Wallet.objects.get(user=request.user)
+        if int(amount) > wallet.amount:
+            messages.error(request, "You have insufficient balance!")
+            return self.get(request)
 
         if not transaction_type:
-            print(transaction_type)
             messages.error(request, "Please select any payment method.")
             return self.get(request)
         
@@ -194,6 +206,7 @@ class WithdrawalView(generic.TemplateView):
             if upi_id != upi_id_confirm:
                 messages.info(request, "Your UPI ID is not matched!")
                 return self.get(request)
+            
             withdrawal_payment = main_models.Payments(
                 user = request.user,
                 amount = amount,
@@ -221,4 +234,4 @@ class WithdrawalView(generic.TemplateView):
             )
             withdrawal_payment.save()
             messages.success(request, "Successfully withdrawal request in generated.")
-        
+            return redirect("home")

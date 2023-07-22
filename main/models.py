@@ -65,7 +65,7 @@ class Payments(models.Model):
             color = "F24C3D"
         
         return format_html(
-            '<span style="color: #{};">{}</span>',
+            '<span style="color: #{}; font-size: medium; font-weight: 500">{}</span>',
             color,
             self.payment_status,
         )
@@ -74,6 +74,16 @@ class Wallet(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  db_index=True)
     amount = models.IntegerField(default=0, null=False, blank=False)
     last_updated = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.user)
+    
+    @admin.display
+    def color_amount(self):
+        amount = self.amount
+        return format_html(
+            f"<span style='color: #1A5D1A; font-size: medium; font-weight: 500' >{amount}</span>"
+        )
     
 class BankDetail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -87,3 +97,5 @@ class BankDetail(models.Model):
     
     def __str__(self) -> str:
         return str(self.user)
+    
+    

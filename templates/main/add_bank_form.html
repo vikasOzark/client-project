@@ -147,7 +147,7 @@ Bank Account
                 <div class="lg:grid grid-cols-3 gap-2">
                     {% for bank in banks %}
                     <div class="flex-col group/item  relative cursor-pointer hover:chil flex lg:col-span-1 transition-all rounded bg-gray-50 hover:border-red-700 hover:shadow-xl border-gray-400 border py-4 px-4">
-                        <a href="" class="absolute text-sm transition-all group-hover/item:opacity-100 right-4 opacity-0 top-4 w-5 h-5 inline-flex items-center justify-center rounded-full bg-red-500 border-red-700 border text-white">
+                        <a href="{% url 'delete-bank' bank.pk %}" class="absolute text-sm transition-all group-hover/item:opacity-100 right-4 opacity-0 top-4 w-5 h-5 inline-flex items-center justify-center rounded-full bg-red-500 border-red-700 border text-white">
                             <i class="icon-cross"></i>
                         </a>
                         <div class="w-full lg:flex gap-2 items-center">
