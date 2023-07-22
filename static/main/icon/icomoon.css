@@ -24,6 +24,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-delete:before {
+  content: "\e925";
+}
 .icon-moon:before {
   content: "\e916";
 }

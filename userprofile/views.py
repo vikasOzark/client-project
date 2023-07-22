@@ -9,3 +9,7 @@ class ProfileSettings(generic.TemplateView):
 
 class UserList(generic.TemplateView):
     template_name = "profile/userlist.html"
+
+
+class UserDetails(generic.TemplateView):
+    template_name = "profile/user_details.html"

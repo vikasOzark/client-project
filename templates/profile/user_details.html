@@ -1,0 +1,218 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Investment | User Details</title>
+{% endblock title %}
+
+
+{% block breadcrumb %}
+<li class="flex items-center gap-3">
+    <span class="text-sm text-red-600 font-medium tracking-wide">Profile</span>
+    <span class="text-3xl text-gray-400 font-light">|</span>
+</li>
+{% endblock breadcrumb %}
+
+{% block breadcrumbtitle %}
+User Details
+{% endblock breadcrumbtitle %}
+{% block message %}
+{% if messages %}
+<div class="w-fit bg-white absolute right-8 top-16" data-alert="notification">
+    {% for message in messages %}
+    <div class="flex">
+        <div
+            class="bg-{{message.tags}} flex px-3 rounded-l text-xl items-center border-{{message.tags}} border text-white">
+            <i class="icon-{{message.tags}}"></i>
+        </div>
+        <div
+            class="border flex gap-3 text-sm tracking-wide font-medium rounded-r border-{{message.tags}} bg-{{message.tags}}_light px-4 py-3 text-{{message.tags}}">
+            <span>{{ message }}</span>
+            <button data-alert-close="close"
+                class="icon-circle-with-cross border-l border-{{message.tags}} pl-3"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock message %}
+
+{% block content %}
+<div class="space-y-7">
+    <div class="lg:grid lg:grid-cols-12 gap-7">
+        <div class="lg:col-span-6 flex group/item flex-col space-y-8 rounded py-6 px-8 bg-dep relative overflow-hidden border-gray-400">
+            <a href="" class="absolute text-sm transition-all group-hover/item:opacity-100 right-4 opacity-0 top-4 w-6 h-6 inline-flex items-center justify-center rounded-full bg-red-500 border-red-700 border text-white">
+                <i class="icon-delete"></i>
+            </a>
+            <div class="space-y-1">
+                <div
+                    class="w-full text-center font-semibold flex justify-center items-center tracking-wide text-yellow-500 text-3xl">
+                    <i class="icon-credit text-yellow-500"></i>
+                    <span>500</span>
+                </div>
+                <div class="w-full text-center">
+                    <span class="font-semibold tracking-wide text-white text-2xl">Total Balance</span>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <div class="text-white justify-between flex text-center px-2 text-base tracking-wide font-medium">
+                    <span class="block">Username</span>
+                    <span class="text-white tracking-wide font-semibold">Sajan</span>
+                </div>
+                <div class="text-white flex justify-between text-center px-2 text-base tracking-wide font-medium">
+                    <span class="block">Mobile</span>
+                    <span class="text-white tracking-wide font-semibold">888888</span>
+                </div>
+                <div class="text-white flex justify-between text-center px-2 text-base tracking-wide font-medium">
+                    <span class="block">Primary Account</span>
+                    <span class="text-white tracking-wide font-semibold">••••••</span>
+                </div>
+                <div class="text-white flex items-center justify-between text-center px-2 text-base tracking-wide font-medium">
+                    <span class="block">Permission</span>
+                    <label class="relative inline-flex items-center gap-2 cursor-pointer">
+                        <input data-check-user="true" type="checkbox" value="" class="sr-only peer" checked>
+                        <div class="w-7 h-4 bg-red-600 rounded peer border border-red-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded after:h-3 after:w-3 after:transition-all  peer-checked:bg-green-600 peer-checked:border-green-800"></div>
+                        <span  class="w-10 text-xs">Active</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="lg:col-span-6 flex flex-col border rounded overflow-hidden border-gray-400">
+            <div class="py-3 px-4 bg-gray-100 ">
+                <span class="font-medium text-slate-700 text-lg ">Payment </span>
+            </div>
+            <div class="gap-2 py-6 px-4 border-t border-gray-400">
+                <form action="">
+                    <div class="space-y-3">
+                        <div class="col-span-12">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Ammount <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-credit"></i>
+                                </span>
+                                <input type="text" name="password" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Ammount">
+                            </div>
+                        </div>
+                        <div class="col-span-12">
+                            <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Last Transaction Id <span class="text-red-500">*</span></label>
+                            <div class="relative flex items-center">
+                                <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-bookmark"></i>
+                                </span>
+                                <input type="text" name="password" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Last Transition Id">
+                            </div>
+                        </div>
+                        <div class="mt-8 gap-2 flex items-center justify-end">
+                            <button type="button" class="inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
+                                <i class="icon-cycle"></i> 
+                                <span>Reset</span>
+                            </button>
+                            <button type="button"  class=" inline-flex font-medium text-sm text-white bg-blue-500 py-1 px-3 gap-2 rounded border border-blue-700 items-center justify-center ">
+                                <span>Submit</span>
+                                <i class="icon-paper-plane"></i> 
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="lg:grid lg:grid-cols-12 gap-7">
+        <div class="lg:col-span-12 flex flex-col border rounded overflow-hidden border-gray-400">
+            <div class="py-3 px-4 bg-gray-100 ">
+                <span class="font-medium text-slate-700 text-lg ">Transaction History</span>
+            </div>
+            <div class="gap-2 py-6 px-4 border-t border-gray-400 space-y-6">
+                <div class="lg:grid lg:grid-cols-12 gap-2">
+                    <div class="lg:col-span-9 lg:flex">
+                        <input type="text" placeholder="Search By Transaction Id"
+                            class="border border-r-0 bg-gray-50 rounded-l h-10 border-gray-500 text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full py-1 px-3">
+                        <button
+                            class="bg-red-500 border gap-2 items-center tracking-wide border-red-700 rounded-r text-white py-1 px-3 font-medium inline-flex"
+                            type="button">
+                            <i class="icon-magnifying-glass"></i>
+                            <span>Search</span>
+                        </button>
+                    </div>
+                    <div class="lg:col-span-3 lg:flex">
+                        <select type="text"
+                            class="border bg-gray-50 h-10 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full py-1 px-3">
+                            <option class="font-medium" value="username">Sort By Ascending</option>
+                            <option class="font-medium" value="username">Sort By Descending</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-span-12">
+                    <div class="relative">
+                        <table
+                            class="w-full border border-gray-300 font-medium text-sm tracking-wide text-left text-gray-500 ">
+                            <thead class="uppercase bg-gray-200 border-b border-gray-300">
+                                <tr>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Date
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Time
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Transaction Id
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-gray-100 border-b border-gray-300 last:border-b-0">
+                                    <td scope="col" class=" px-3 py-2 border-r border-gray-300">
+                                        date
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Time
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Transaction Id
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-100 border-b border-gray-300 last:border-b-0">
+                                    <td scope="col" class=" px-3 py-2 border-r border-gray-300">
+                                        date
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Time
+                                    </td>
+                                    <td scope="col" class="px-3 py-2 border-r border-gray-300">
+                                        Transaction Id
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="lg:grid lg:grid-cols-12 gap-2">
+                    <div class="lg:col-span-4 lg:flex">
+                        <span class="text-sm tracking-wide text-gray-500 font-medium gap-2 flex items-center">
+                            Showing
+                            <select class="border rounded border-gray-400 focus:outline-none">
+                                <option class="font-medium" selected="" value="20">20</option>
+                                <option class="font-medium" value="50">50</option>
+                                <option class="font-medium" value="100">100</option>
+                            </select>
+                            records
+                        </span>
+                    </div>
+                    <div class="lg:col-span-4 lg:flex items-center justify-center">
+                        <span class="text-sm tracking-wide font-medium  text-gray-500">No of Pages 10</span>
+                    </div>
+                    <div class="lg:col-span-4 lg:flex items-center justify-end gap-2">
+                        <a href="" class="inline-flex items-center gap-2 font-medium text-sm text-white border-red-700 border px-2 py-1 rounded bg-red-500">
+                            <i class="icon-arrow-left"></i>
+                            <span>Previous</span>
+                        </a>
+                        <a href="" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
+                            <span>Next</span>
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
