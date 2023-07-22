@@ -8,5 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("auth/", include("authentication.urls")),
     path("invite/", views.invite, name="invite"),
-    path("", include("main.urls"))
+    path("", include("main.urls")),
+    path("profile/", include("userprofile.urls"))
 ]
