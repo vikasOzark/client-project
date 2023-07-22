@@ -1,13 +1,13 @@
 "use strict";
 
-/** @type {HTMLBodyElement}  */
+/** @type {?HTMLBodyElement}  */
 const LoadingAnimation = document.querySelector('#onLoadAnimation');
 
-/** @type {HTMLDivElement}  */
+/** @type {?HTMLDivElement}  */
 const LoadingAnimationGIF = document.querySelector('#loading');
 
 window.addEventListener("load", () => {
   setTimeout(()=>{
-    LoadingAnimationGIF.remove();
+    LoadingAnimationGIF?.remove();
   },100)
 });

@@ -10,7 +10,7 @@ tailwind.config = {
         warning_light: 'rgb(234 179 8 / 15%)',
       },
       backgroundImage: {
-        'pattern': "url('./static/main/image/bg-grain-dark.png')",
+        'pattern': "url('../../static/main/image/bg-grain-dark.png')",
       },
       animation: {
         marquee: 'marquee 25s linear infinite',

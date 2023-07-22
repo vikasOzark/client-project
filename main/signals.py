@@ -14,7 +14,7 @@ def handle_wallet_create(sender, instance, created, **kwargs):
         )
         
 @receiver(post_save, sender=main_models.Payments)
-def handle_wallet_create(sender, instance, created, **kwargs):
+def handle_wallet_update(sender, instance, created, **kwargs):
     model_obj = main_models.Payments.objects.get(pk=instance.pk)
     wallet = main_models.Wallet.objects.get(user=model_obj.user)
     
@@ -22,7 +22,6 @@ def handle_wallet_create(sender, instance, created, **kwargs):
         and not model_obj.is_settled:
         
         if model_obj.payment_type == main_models.DEPOSIT:
-            print(f'==================  {wallet.amount} ============')
             wallet.amount = wallet.amount + int(model_obj.amount)
             wallet.save()
 
