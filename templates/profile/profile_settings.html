@@ -75,10 +75,6 @@ Profile Settings
                         <div class="flex flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Password </span>
                             <span class="text-sm text-slate-500 block font-medium tracking-wider"> •••••• </span>
-                            <button type="button" data-changepass-button="change-password" class="disabled:bg-red-200 disabled:border-red-300 disabled:text-gray-600 inline-flex ml-3 items-center justify-center gap-1 text-xs bg-red-500 border-red-700 border text-white py-[2px] px-1 rounded">
-                                <i class="icon-key"></i>
-                                <span>Change</span>
-                            </button>
                         </div>
                     </div>
                     <div class="mt-8 gap-2 flex items-center justify-end">
@@ -99,7 +95,7 @@ Profile Settings
                 {% include 'profile/change_password.html' %}
             </div>
             <div class="hidden" data-edit-profile="false">
-                {% include 'profile/edit.profile.html' %}
+                {% include 'profile/edit_profile.html' %}
             </div>
         </div>
     </div>
