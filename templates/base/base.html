@@ -31,7 +31,7 @@
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="flex items-center justify-between w-full">
                         <div class="md:w-60 lg:w-60 lg:pl-8 pl-2 lg:border-r md:border-r border-gray-400 py-4">
-                            <a href="#" class="flex items-center gap-2">
+                            <a href="/" class="flex items-center gap-2">
                                 <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
@@ -56,15 +56,15 @@
                             </button>
                             <div class="absolute overflow-hidden border shadow rounded border-gray-400 right-[35%] bg-white top-[110%] hidden  w-60" data-admin-main="false">
                                 <div class="bg-slate-200 pt-5 pb-7 px-4 flex justify-center">
-                                    <h2 class="text-base font-semibold uppercase text-gray-600 tracking-wider">Sajan</h2>
+                                    <h2 class="text-base font-semibold uppercase text-gray-600 tracking-wider">{{request.user}}</h2>
                                     <img class="object-cover top-12 shadow-lg w-12 h-12 rounded-full border-2 absolute border-white" src="{% static 'main/image/avtar.avif'%}"/>
                                 </div>
                                 <div class="pt-10">
-                                    <a href="" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
+                                    <a href="{% url 'profile-setting' %}" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
                                         <i class="icon-profile-setting"></i>
                                         <span>Profile Setting</span>
                                     </a>
-                                    <a href="" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
+                                    <a href="{% url 'profile-setting' %}" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
                                         <i class="icon-lock"></i>
                                         <span>Change Password</span>
                                     </a>                                    
@@ -173,21 +173,9 @@
             <div class="lg:grid lg:grid-cols-12 lg:gap-7 w-full lg:ml-60 py-3  px-8">
                 <div class="col-span-7">
                     <div class="flex gap-4">
-                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium">
+                        <a href="{% url 'about' %}" class="text-sm tracking-wide text-blue-500 font-medium">
                             <i class="icon-about-us"></i>
-                            <span class="">About Us</span>
-                        </a>
-                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium">
-                            <i class="icon-notice"></i>
-                            <span class="">Notice</span>
-                        </a>
-                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium">
-                            <i class="icon-investment"></i>
-                            <span class="">Investment Income</span>
-                        </a>
-                        <a href="" class="text-xs tracking-wide text-slate-600 font-medium ">
-                            <i class="icon-qualifications"></i>
-                            <span class="">Company Qualification</span>
+                            <span class="">To know about the company reach to our website.</span>
                         </a>
                     </div>
                 </div>
