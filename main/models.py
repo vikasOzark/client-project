@@ -73,6 +73,9 @@ class Payments(models.Model):
 class Wallet(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  db_index=True, related_name="user_wallet")
     amount = models.IntegerField(default=0, null=False, blank=False)
+    today_profit = models.CharField(max_length=10, default=0)
+    yesterday_profit = models.CharField(max_length=10, default=0)
+    accumulated_profit = models.CharField(max_length=10, default=0)
     last_updated = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
