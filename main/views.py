@@ -84,7 +84,7 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
         wallet = main_models.Wallet.objects.get(user = self.request.user)
 
         context = super().get_context_data(**kwargs)
-        context["payment_ref_code"] = code[:8]
+        context["payment_ref_code"] = code[:10]
         context["deposit_data"] = deposit_data
         context["wallet"] = wallet
         return context
@@ -156,11 +156,12 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
             if upi_id != upi_id_confirm:
                 messages.info(request, "Your UPI ID is not matched!")
                 return self.get(request)
-            
+            code = str(uuid4())
             withdrawal_payment = main_models.Payments(
                 user = request.user,
                 amount = amount,
                 payment_upi_id = upi_id,
+                payment_ref = code[:10],
                 payment_channel = main_models.UPI,
                 payment_type = main_models.WITHDRAWAL,
                 payment_status = main_models.PENDING

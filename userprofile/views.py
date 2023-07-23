@@ -13,6 +13,7 @@ from utils import AdminOnlyView, UserOnlyView, check_is_superuser
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
+from django.db.models import Q
 
 class UserList(AdminOnlyView, generic.ListView):
     model = main_model.User
@@ -21,9 +22,22 @@ class UserList(AdminOnlyView, generic.ListView):
 
     paginate_by = 10
     def get_queryset(self):
+        query_params = self.request.GET.get("search_query")
         queryset =  super().get_queryset()
-        queryset = queryset.select_related("user_profile", "user_wallet").filter(is_superuser= False)
-        return queryset
+        query_set = queryset.select_related("user_profile", "user_wallet").filter(is_superuser= False)
+
+        if not query_params:
+            return query_set
+        
+        if query_params.lower() == "all":
+            return query_set
+
+        return query_set.filter(
+            Q(username__icontains = query_params) |
+            Q(first_name__icontains = query_params) |
+            Q(email__icontains = query_params) |
+            Q(user_profile__phone_number__icontains = query_params)
+        ) 
     
 @login_required(login_url="login")
 @user_passes_test(check_is_superuser, login_url="login")
@@ -105,6 +119,22 @@ class Transactions(AdminOnlyView, generic.ListView):
     context_object_name = "payments"
     paginate_by = 10
 
+    def get_queryset(self):
+        query_params = self.request.GET.get("search_query")
+        query_set =  super().get_queryset()
+
+        if not query_params:
+            return query_set
+        
+        if query_params.lower() == "all":
+            return query_set
+
+        return query_set.filter(
+            Q(user__username__icontains = query_params) |
+            Q(user__first_name__icontains = query_params) |
+            Q(user__email__icontains = query_params) |
+            Q(payment_ref__icontains = query_params)
+        ) 
 
 def payment_admin_view(request, pk):
     obj = main_model.Payments.objects.get(pk=pk)

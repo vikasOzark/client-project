@@ -34,8 +34,9 @@ class UserOnlyView(UserPassesTestMixin):
         if user.is_superuser and user.is_staff:
             return redirect("user-list")
         
-        logout(self.request)
-        messages.info(self.request, "You don't have permission.")
+        if user.is_authenticated:
+            logout(self.request)
+            messages.info(self.request, "You don't have permission. sds")
         return redirect("login")
     
 def check_is_superuser(user):

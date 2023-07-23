@@ -98,7 +98,6 @@ class RegisterUser(generic.TemplateView):
 
 class Login(generic.TemplateView):
     template_name = "authentication/login.html"
-    logout
     
     def post(self, request):
         form_data = request.POST
