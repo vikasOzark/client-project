@@ -1,0 +1,90 @@
+
+/* Fonts and icon */
+@import url('../fonts/fonts.css');
+@import url('../icon/icomoon.css');
+
+/* Style Main  */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+a:not([href]):not([class]),
+a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+#loading {
+    position: fixed;
+    z-index: 999;
+    background: white;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.bg-gred{
+    background-image: linear-gradient(#ee7724, #d8363a, #dd3675, #b44593)
+}
+
+.bg-dep{
+    background-image: url('../image/is.svg');
+    background-position:100%;
+    background-size: 100%;
+    z-index: 1;
+}
+.bg-dep::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #000;
+    opacity:0.3 ;
+    z-index: -1;
+}
+
+
+.carousel {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+  
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all ease-in-out .5s;
+}
+  
+.slide > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}

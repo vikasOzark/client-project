@@ -1,26 +1,64 @@
+from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.views import generic
 from main import models as main_model
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate
 from authentication.models import UserProfileDetail
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import user_passes_test
+from utils import AdminOnlyView, UserOnlyView, check_is_superuser
+from django.http import JsonResponse, HttpResponseRedirect
+from django.contrib.contenttypes.models import ContentType
+from django.urls import reverse
+from django.db.models import Q
 
-
-class UserList(generic.TemplateView):
+class UserList(AdminOnlyView, generic.ListView):
+    model = main_model.User
     template_name = "profile/userlist.html"
+    context_object_name = "all_users"
 
-class ProfileSettings(generic.TemplateView):
+    paginate_by = 10
+    def get_queryset(self):
+        query_params = self.request.GET.get("search_query")
+        queryset =  super().get_queryset()
+        query_set = queryset.select_related("user_profile", "user_wallet").filter(is_superuser= False)
+
+        if not query_params:
+            return query_set
+        
+        if query_params.lower() == "all":
+            return query_set
+
+        return query_set.filter(
+            Q(username__icontains = query_params) |
+            Q(first_name__icontains = query_params) |
+            Q(email__icontains = query_params) |
+            Q(user_profile__phone_number__icontains = query_params)
+        ) 
+    
+@login_required(login_url="login")
+@user_passes_test(check_is_superuser, login_url="login")
+def user_active_inactive(request):
+    user_pk = request.GET.get("user")
+    user = main_model.User.objects.get(pk=user_pk)
+    if user.is_active:
+        user.is_active = False
+    else:
+        user.is_active = True
+    user.save(update_fields=["is_active"]) 
+    return JsonResponse({"status": "deleted"})
+
+class ProfileSettings(UserOnlyView, generic.TemplateView):
     template_name = "profile/profile_settings.html"
     
-
     def get_context_data(self):
         user_profile = UserProfileDetail.objects.get(user=self.request.user)
         context = super().get_context_data()
         context["user_profile"] = user_profile
         return context
-    
 
     def post(self, request):
         form_data = request.POST
@@ -44,10 +82,7 @@ class ProfileSettings(generic.TemplateView):
         messages.success(request, "You profile info is updated successfull.")
         return redirect("home")
 
-
-
         
-
 @login_required(login_url="login")
 def delete_bank_account(request, pk):
     main_model.BankDetail.objects.get(user=request.user, pk=pk).delete()
@@ -78,3 +113,31 @@ def change_password(request):
     messages.success(request, "Your password is changed successfully.")    
     return redirect("login")
     
+class Transactions(AdminOnlyView, generic.ListView):
+    template_name = "profile/user_details.html"
+    model = main_model.Payments
+    context_object_name = "payments"
+    paginate_by = 10
+
+    def get_queryset(self):
+        query_params = self.request.GET.get("search_query")
+        query_set =  super().get_queryset()
+
+        if not query_params:
+            return query_set
+        
+        if query_params.lower() == "all":
+            return query_set
+
+        return query_set.filter(
+            Q(user__username__icontains = query_params) |
+            Q(user__first_name__icontains = query_params) |
+            Q(user__email__icontains = query_params) |
+            Q(payment_ref__icontains = query_params)
+        ) 
+
+def payment_admin_view(request, pk):
+    obj = main_model.Payments.objects.get(pk=pk)
+    content_type = ContentType.objects.get_for_model(obj)
+    change_url = reverse("admin:%s_%s_change" % (content_type.app_label, content_type.model), args=[obj.pk])
+    return HttpResponseRedirect(change_url)

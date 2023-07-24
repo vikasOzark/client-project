@@ -38,23 +38,22 @@ class RegisterUser(generic.TemplateView):
         
         invite_username = form_data.get("invite_username")
         invite_code = form_data.get("invite_code")
-        print('invited code : ', invite_code)
 
         if User.objects.filter(username=form_data.get("username")).exists():
             messages.error(request, "Username is already exists!")
             return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
 
-        # if len(phone_number) != 10:
-        #     messages.error(request, "Phone number is not valid!")
-        #     return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
+        if len(phone_number) != 10:
+            messages.error(request, "Phone number is not valid!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
         
-        # if phone_number != form_data.get("confirm_number"):
-        #     messages.error(request, "Phone number is not matched!")
-        #     return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST )
+        if phone_number != form_data.get("confirm_number"):
+            messages.error(request, "Phone number is not matched!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST )
         
-        # if models.UserProfileDetail.objects.filter(phone_number=phone_number).exists():
-        #     messages.error(request, "Phone number is already exists!")
-        #     return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
+        if models.UserProfileDetail.objects.filter(phone_number=phone_number).exists():
+            messages.error(request, "Phone number is already exists!")
+            return render(request, self.template_name, status=status.HTTP_400_BAD_REQUEST)
         
         if models.UserProfileDetail.objects.filter(phone_number=phone_number).exists():
             messages.error(request, "Phone number is already exists!")
@@ -114,6 +113,10 @@ class Login(generic.TemplateView):
         if user:
             login(request, user)
             messages.success(request, "Successfully logged in .")
+
+            if user.is_superuser:
+                return redirect("user-list")
+            
             return redirect("home")
         else:
             messages.error(request, "Username or ID is not Matched, or account is not active.")

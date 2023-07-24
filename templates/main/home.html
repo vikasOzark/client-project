@@ -61,7 +61,7 @@ Dashboard
                 <div
                     class="w-full text-center font-semibold flex justify-center items-center tracking-wide text-yellow-500 text-3xl">
                     <i class="icon-credit text-yellow-500"></i>
-                    <span>500</span>
+                    <span>{{user_data.amount}}</span>
                 </div>
                 <div class="w-full text-center">
                     <span class="font-semibold tracking-wide text-white text-2xl">Total Balance</span>
@@ -70,35 +70,36 @@ Dashboard
             <div class="space-y-2">
                 <div class="text-white justify-between flex text-center px-2 text-base tracking-wide font-medium">
                     <span class="block">Today,s Profit</span>
-                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>00.00</span>
+                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>{{user_data.today_profit}}.00</span>
                 </div>
                 <div class="text-white flex justify-between text-center px-2 text-base tracking-wide font-medium">
                     <span class="block">Yesterday's Profit</span>
-                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>00.00</span>
+                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>{{user_data.yesterday_profit}}.00</span>
                 </div>
                 <div class="text-white flex justify-between text-center px-2 text-base tracking-wide font-medium">
                     <span class="block">Accumulated Profit</span>
-                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>00.00</span>
+                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>{{user_data.accumulated_profit}}.00</span>
                 </div>
             </div>
             <div class="flex justify-between">
                 <div class="flex-auto text-center">
-                    <a href="" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
+                    <a href="{% url 'deposit' %}" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
                         <i class="icon-wallet"></i>
                     </a>
                     <span class="text-white text-sm tracking-wide font-medium">Deposite</span>
                 </div>
                 <div class="flex-auto text-center">
-                    <a href="" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
+                    <a href="{% url 'withdrawl' %}" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
                         <i class="icon-withdrawal"></i>
                     </a>
                     <span class="text-white text-sm tracking-wide font-medium">Withdraw</span>
                 </div>
-                <div class="flex-auto text-center">
-                    <a href="" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
+                <div class="flex-auto text-center relative">
+                    <a onclick="copyText('{{invite_link}}')" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
                         <i class="icon-add-user"></i>
                     </a>
-                    <span class="text-white text-sm tracking-wide font-medium">Invite</span>
+                    <span class="text-white text-sm tracking-wide font-medium" >Invite</span>
+                    <div id="copied" class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">Link copied</div>
                 </div>
             </div>
         </div>
@@ -139,4 +140,18 @@ Dashboard
         </div>
     </div>
 </div>
+
+<script>
+    function copyText(text) {
+        /* Copy text into clipboard */
+        const copied = document.getElementById("copied")
+        navigator.clipboard.writeText(text);
+        copied.classList.remove("hidden")
+        setTimeout(() => {
+            copied.classList.add("hidden")
+        }, 2000)
+        
+    }
+</script>
+
 {% endblock content %}

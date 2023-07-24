@@ -40,18 +40,19 @@
         </div>
 
         <div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4 mt-2">
-            <div class="md:col-span-7 w-full lg:col-span-7">
+            <div class="md:col-span-7 w-full lg:col-span-7 h-[35rem] overflow-y-scroll">
                 <h2 class="text-lg text-gray-500 mb-2">Withdraw History</h2>
                 {% for item in withdrawal_data %}
                     <div class=" rounded shadow bg-slate-200 p-2 mb-2">
                         <div class="flex items-center justify-between">
                             <div class=" text-sm text-gray-400">Date<span class=" text-gray-400"> : {{item.created_at}}</span></div>
+                            <div class="text-sm text-gray-500 ">Ref ID : <span class="text-purple-500">{{item.payment_ref|default:"None"}}</span></div>
                         </div>
                         <div class="flex justify-between">
                             <div class="text-gray-700">Status : 
                                 {% if item.payment_status == "pending" %}
                                     <span class="font-bold text-blue-500">
-                                        Pedning
+                                        Pendinging
                                     </span>
                                 {% elif item.payment_status == "success" %}
                                     <span class="font-bold text-green-500">
@@ -98,20 +99,23 @@
                             </div>
                         </div>
                         
-                        <div class="gap-2 hidden flex" id="upi-div">
-                            <div class="mb-2">
-                                <label for="" class="font-bold">Enter UPI ID</label>
-                                <div class="">
-                                    <input type="text" name="upi-id" class="rounded py-1  px-2" />
+                        <div class=" hidden " id="upi-div">
+                            <div class="flex gap-2">
+                                <div class="mb-2">
+                                    <label for="" class="font-bold">Enter UPI ID</label>
+                                    <div class="">
+                                        <input type="text" name="upi-id" class="rounded py-1  px-2" />
+                                    </div>
+                                </div>
+            
+                                <div class="mb-2">
+                                    <label for="" class="font-bold">Re-Enter UPI ID</label>
+                                    <div class="">
+                                        <input type="text" name="confirm-upi-id" class="rounded py-1  px-2" />
+                                    </div>
                                 </div>
                             </div>
-        
-                            <div class="mb-2">
-                                <label for="" class="font-bold">Re-Enter UPI ID</label>
-                                <div class="">
-                                    <input type="text" name="confirm-upi-id" class="rounded py-1  px-2" />
-                                </div>
-                            </div>
+                            <small ><span class="text-red-600">*Note </span>: Please make sure your UPI id is correct, to prevent payment failure.</small>
                         </div>
 
                         <div class="hidden" id="bank-div">
