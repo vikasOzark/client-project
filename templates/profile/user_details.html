@@ -199,7 +199,17 @@ User Details
                                             </span>
                                         </td>
                                         <td scope="col" class="px-3 py-2 border-r border-gray-300">
-                                            <a target="_blank" href="{% url 'admin-panel' pk=transaction.pk %}" class="font-semibold px-3 text-white rounded bg-gray-400">
+                                            <div class="">
+                                                <form action="{% url 'update_payment_status' transaction.pk %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <select name="payment_status" onchange="this.form.submit()">
+                                                        <option value="">select</option>
+                                                        <option value="success">Success</option>
+                                                        <option value="rejected">Rejected</option>
+                                                    </select>
+                                                </form>
+                                            </div>
+                                            <a href="{% url 'admin-panel' pk=transaction.pk %}" class="font-semibold px-3 text-white rounded bg-gray-400">
                                                 {% if transaction.payment_status == "pending" %}
                                                     Action
                                                 {% else %}
@@ -236,6 +246,7 @@ User Details
                             </div>
                             
                             <div class="lg:col-span-4 lg:flex items-center justify-end gap-2">
+                                
                                 {% if page_obj.has_next %}
                                     <a href="?page={{ page_obj.next_page_number }}" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
                                         <span>Next</span>
@@ -254,4 +265,16 @@ User Details
         </div>
     </div>
 </div>
+<script>
+    // const update = document.getElementById("update_payment_status")
+    // console.log(update);
+    // update.addEventListener("change", (event) => {
+    //     console.log(event.target)
+    // })
+    // function update_payment_status (e) {
+    //     console.log(e.target);
+    //     e.preventDefault()
+    //     e.target.submit()
+    // }
+</script>
 {% endblock content %}

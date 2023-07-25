@@ -106,13 +106,20 @@ paymentBack.addEventListener("click", ()=>{
 })
 
 const copyContent = async () => {
+	const textCopied = document.querySelector('#text_copied');
     try {
-      	await navigator.clipboard.writeText(copyUPIItem.textContent);
-      	document.querySelector('#text_copied').textContent = 'Content copied to clipboard!'
+		await navigator.clipboard.writeText(copyUPIItem.textContent);
+		classAddRemoveDeposite(textCopied, ['block'], ['hidden']);
+      	textCopied.textContent = 'Content copied to clipboard!';
     } catch (err) {
-		document.querySelector('#text_copied').textContent = `Failed to copy: ${err}`
+		classAddRemoveDeposite(textCopied, ['hidden'], ['block']);
+		textCopied.textContent = `Failed to copy: ${err}`
     }
+	setTimeout(()=>{
+		classAddRemoveDeposite(textCopied, ['hidden'], ['block']);
+	},1000)
 }
+
 copyUPI.addEventListener("click", ()=>{
 	copyContent()
 })

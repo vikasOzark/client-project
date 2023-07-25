@@ -141,3 +141,22 @@ def payment_admin_view(request, pk):
     content_type = ContentType.objects.get_for_model(obj)
     change_url = reverse("admin:%s_%s_change" % (content_type.app_label, content_type.model), args=[obj.pk])
     return HttpResponseRedirect(change_url)
+
+@require_http_methods(["POST"])    
+def update_payment_status(request, pk):
+    action = request.POST.get("payment_status", None)
+
+    if action is None:
+        return redirect("user-details")
+    
+    transaction = main_model.Payments.objects.get(pk=pk)
+    if transaction.payment_status == main_model.PENDING:
+        
+        transaction.payment_status = action
+        transaction.save(update_fields=["payment_status"])
+        messages.success(request, f"Payment status is update of, {transaction.user.first_name}")
+        return redirect("user-details")
+    else :
+        messages.success(request, f"Payment status is already updated of, {transaction.user.first_name}")
+        return redirect("user-details")
+    
