@@ -199,7 +199,7 @@ User Details
                                             </span>
                                         </td>
                                         <td scope="col" class="px-3 py-2 border-r border-gray-300">
-                                            <a href="{% url 'admin-panel' pk=transaction.pk %}" class="font-semibold px-3 text-white rounded bg-gray-400">
+                                            <a target="_blank" href="{% url 'admin-panel' pk=transaction.pk %}" class="font-semibold px-3 text-white rounded bg-gray-400">
                                                 {% if transaction.payment_status == "pending" %}
                                                     Action
                                                 {% else %}
