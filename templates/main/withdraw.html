@@ -1,166 +1,255 @@
-    {% extends 'base/base.html' %}
-    {% load static %}
-    {% block title %}
-    <title>Investment | Withdraw</title>
-    {% endblock title %}
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+<title>Investment | Withdraw</title>
+{% endblock title %}
 
-    {% block breadcrumb %}
-        <li class="flex items-center gap-3">
-            <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
-            <span class="text-base text-gray-400 font-light">/</span>
-        </li>
-        <li class="flex items-center gap-3">
-            <span class="text-sm text-red-600 font-medium tracking-wide">Withdraw</span>
-            <span class="text-3xl text-gray-400 font-light">|</span>
-        </li>
-    {% endblock breadcrumb %}
+{% block script %}
+<script type="module" src="{% static 'main/js/withdraw.js' %}"></script>
+{% endblock script %}
 
-    {% block breadcrumbtitle %}
-    Withdraw
-    {% endblock breadcrumbtitle %}
+{% block breadcrumb %}
+<li class="flex items-center gap-3">
+    <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
+    <span class="text-base text-gray-400 font-light">/</span>
+</li>
+<li class="flex items-center gap-3">
+    <span class="text-sm text-red-600 font-medium tracking-wide">Withdraw</span>
+    <span class="text-3xl text-gray-400 font-light">|</span>
+</li>
+{% endblock breadcrumb %}
 
+{% block breadcrumbtitle %}
+Withdraw
+{% endblock breadcrumbtitle %}
 
-    {% block content %}
-    <style>
-        input:checked + label {
-            background-color: blueviolet;
-            color: white;
-            transition: all;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-    </style>
-    
-    <div class="">
-        <div class="">
-            <div class="bg-gray-200 flex gap-2 px-4 py-2 rounded">
-                <p>Available Balance :</p>
-                <p>{{wallet.amount}}</p>
-            </div>
-
+{% block message %}
+{% if messages %}
+<div class="w-fit bg-white absolute right-8 top-16" data-alert="notification">
+    {% for message in messages %}
+    <div class="flex">
+        <div
+            class="bg-{{message.tags}} flex px-3 rounded-l text-xl items-center border-{{message.tags}} border text-white">
+            <i class="icon-{{message.tags}}"></i>
         </div>
+        <div
+            class="border flex gap-3 text-sm tracking-wide font-medium rounded-r border-{{message.tags}} bg-{{message.tags}}_light px-4 py-3 text-{{message.tags}}">
+            <span>{{ message }}</span>
+            <button data-alert-close="close"
+                class="icon-circle-with-cross border-l border-{{message.tags}} pl-3"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock message %}
 
-        <div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4 mt-2">
-            <div class="md:col-span-7 w-full lg:col-span-7 h-[35rem] overflow-y-scroll">
-                <h2 class="text-lg text-gray-500 mb-2">Withdraw History</h2>
-                {% for item in withdrawal_data %}
-                    <div class=" rounded shadow bg-slate-200 p-2 mb-2">
-                        <div class="flex items-center justify-between">
-                            <div class=" text-sm text-gray-400">Date<span class=" text-gray-400"> : {{item.created_at}}</span></div>
-                            <div class="text-sm text-gray-500 ">Ref ID : <span class="text-purple-500">{{item.payment_ref|default:"None"}}</span></div>
-                        </div>
-                        <div class="flex justify-between">
-                            <div class="text-gray-700">Status : 
-                                {% if item.payment_status == "pending" %}
-                                    <span class="font-bold text-blue-500">
-                                        Pendinging
-                                    </span>
-                                {% elif item.payment_status == "success" %}
-                                    <span class="font-bold text-green-500">
-                                        Success
-                                    </span>
-                                {% else %}
-                                    <span class="font-bold text-red-500">
-                                        Rejected
-                                    </span>
-                                {% endif %}
-                        </div>
-                        <div class=""><span class=" text-gray-700">Amnount</span> : {{item.amount}}</div>
-                        </div>
-                        <div class=""><span class=" text-gray-700">Payment Mode</span> : {{item.payment_channel}}</div>
-                    </div>
-                {% endfor %}
+{% block content %}
+<div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4">
+    <div class="lg:col-span-5 flex flex-col space-y-8 rounded py-6 px-8 bg-dep relative overflow-hidden border-gray-400">
+        <div class="space-y-1">
+            <div
+                class="w-full text-center font-semibold flex justify-center items-center tracking-wide text-yellow-500 text-3xl">
+                <i class="icon-credit text-yellow-500"></i>
+                <span>{{wallet.amount}}</span>
             </div>
-        
-            <div class="col-span-5 ">
-                <h2 class="text-lg text-gray-500 mb-2">Withdraw Money </h2>
-                <form method="POST" class="shadow p-2 rounded bg-slate-200">
+            <div class="w-full text-center">
+                <span class="font-semibold tracking-wide text-white text-2xl">Available Balance</span>
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div class="flex-auto text-center">
+                <a href="{% url 'deposit' %}"
+                    class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
+                    <i class="icon-museum"></i>
+                </a>
+                <span class="text-white text-sm tracking-wide font-medium">Bank</span>
+            </div>
+            <div class="flex-auto text-center">
+                <a href="{% url 'withdrawl' %}"
+                    class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
+                    <i class="icon-wallet"></i>
+                </a>
+                <span class="text-white text-sm tracking-wide font-medium">Deposite</span>
+            </div>
+            <div class="flex-auto text-center relative">
+                <a onclick="copyText('{{invite_link}}')"
+                    class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
+                    <i class="icon-add-user"></i>
+                </a>
+                <span class="text-white text-sm tracking-wide font-medium">Invite</span>
+                <div id="copied"
+                    class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">
+                    Link copied</div>
+            </div>
+        </div>
+    </div>
+    <div class="lg:col-span-7 flex flex-col border rounded overflow-hidden border-gray-400">
+        <div class="py-3 px-4 bg-gray-100 lg:flex items-center justify-between">
+            <span class="font-medium text-slate-700 text-lg ">Rechare Your Wallet</span>
+        </div>
+        <div class="gap-2 py-6 px-4 border-t border-gray-400">
+            <form method="POST" class="space-y-4">
+                <div class="lg:grid lg:grid-cols-12 gap-3">
                     {% csrf_token %}
-                    <div class="">
-                        <div class="mb-2">
-                            <label for="" class="font-bold">Enter Amount</label>
-                            <div class="">
-                                <input style="appearance: none !important;" type="number" name="amount" class="rounded py-1  px-2" required />
-                            </div>
+                    <div class="mb-1 lg:col-span-6">
+                        <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Enter Amount
+                            <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center">
+                            <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-credit"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                name="amount"
+                                data-ammount="amount" 
+                                class="border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2"
+                                required 
+                                placeholder="Enter Ammount"
+                            />
                         </div>
-
-                        <div class="flex gap-4">
-
-                            <div>
-                                <input class="hidden" id="radio_1" type="radio" onchange="handleTransactionType(this)" value="UPI"  name="transaction-type">
-                                <label class="flex flex-col px-4 py-2 border rounded justify-center items-center border-gray-400 cursor-pointer" for="radio_1">
-                                    <span class="text-xl font-bold">UPI</span>
-                                </label>
-                            </div>
-                            <div>
-                                <input class="hidden" id="radio_2" type="radio" onchange="handleTransactionType(this)" value="BANK"  name="transaction-type">
-                                <label class="flex flex-col px-4 py-2 border rounded justify-center items-center border-gray-400 cursor-pointer" for="radio_2">
-                                    <span class="text-xl font-bold">Bank</span>
-                                </label>
-                            </div>
+                        <span id="ammount" class="text-xs tracking-wide mt-1 text-yellow-600">
+                        </span>
+                    </div>
+                    <div class="mb-1 lg:col-span-6">
+                        <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Select Payment Method
+                            <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center">
+                            <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-price-tag"></i>
+                            </span>
+                            <select disabled id="payment_channel" required name="payment_channel" class="disabled:bg-gray-300 border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2">
+                                <option class="font-medium" selected>Select Payment</option>
+                                <option class="font-medium" value="UPI">UPI</option>
+                                <option class="font-medium" value="BANK">Bank</option>
+                            </select>
                         </div>
-                        
-                        <div class=" hidden " id="upi-div">
-                            <div class="flex gap-2">
-                                <div class="mb-2">
-                                    <label for="" class="font-bold">Enter UPI ID</label>
-                                    <div class="">
-                                        <input type="text" name="upi-id" class="rounded py-1  px-2" />
-                                    </div>
-                                </div>
-            
-                                <div class="mb-2">
-                                    <label for="" class="font-bold">Re-Enter UPI ID</label>
-                                    <div class="">
-                                        <input type="text" name="confirm-upi-id" class="rounded py-1  px-2" />
-                                    </div>
-                                </div>
-                            </div>
-                            <small ><span class="text-red-600">*Note </span>: Please make sure your UPI id is correct, to prevent payment failure.</small>
+                    </div>
+                </div>
+                <div class="lg:grid lg:grid-cols-12 gap-3 !hidden" data-idUPI="upi">
+                    <div class="lg:col-span-6">
+                        <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Enter UPI ID
+                            <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center">
+                            <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-bookmark"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                name="upi-id"
+                                class="border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2"
+                                required 
+                                placeholder="Enter UPI Id"
+                            />
                         </div>
-
-                        <div class="hidden" id="bank-div">
-                            <label for="" class="font-bold">Select Bank Account</label>
-                            <select name="bank_id" class="w-full py-1 rounded  px-2" id="">
+                    </div>
+                    <div class="lg:col-span-6">
+                        <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Re Enter UPI ID
+                            <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center">
+                            <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-bookmarks"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                name="confirm-upi-id"
+                                class="border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2"
+                                required 
+                                placeholder="Enter UPI Id"
+                            />
+                        </div>
+                    </div>
+                    <div class="lg:col-span-12">
+                        <p class="font-medium text-sm tracking-wide"> 
+                            <span class="font-semibold  text-red-600">*Note </span>: 
+                            <small class="text-gray-600">Please make sure your UPI id is correct, to prevent payment failure.</small>
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:grid lg:grid-cols-12 gap-3 !hidden" data-idBank="bank">
+                    <div class="lg:col-span-12">
+                        <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Select Bank Account
+                            <span class="text-red-500">*</span></label>
+                        <div class="relative flex items-center">
+                            <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                <i class="icon-museum"></i>
+                            </span>
+                            <select name="bank_id" class="border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2">
                                 {% for bank in bank_accounts %}
-                                    <option value="{{bank.id}}">{{bank.bank_name}} : {{bank.account_number}}</option>
+                                <option class="font-medium tracking-wide" value="{{bank.id}}">{{bank.bank_name}} : {{bank.account_number}}</option>
                                 {% empty %}
-                                    <option value="">No bank Available</option>
+                                <option class="font-medium tracking-wide" value="">No bank Available</option>
                                 {% endfor %}
                             </select>
                         </div>
-                        <button class="mt-2 px-4 cursor-pointer rounded bg-blue-500 hover:bg-blue-700 transition-all text-center py-1 font-semibold text-white " type="submit">Proceed Withdrawal</button>
-                        {% if messages %}
-                            {% for message in messages %}
-                            <div class="flex items-center mb-4 mt-2 text-{{message.tags}}">
-                                <i class="icon-{{message.tags}}"></i>
-                                <div class="ml-3 text-sm font-medium">
-                                {{ message }}
-                                </div>
-                            </div>
-                            {% endfor %}
-                        {% endif %}
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="lg:grid lg:grid-cols-12 gap-3">
+                    <div class="lg:col-span-12 text-end">
+                        <button data-cancel-payment="false" type="reset" class="disabled:bg-red-200 disabled:border-red-300 disabled:text-gray-600 inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
+                            <i class="icon-cycle"></i>
+                            <span>Cancel</span>
+                        </button>
+                        <button data-payment="proceed" disabled class="disabled:bg-blue-200 disabled:border-blue-300 disabled:text-gray-600 inline-flex font-medium text-sm text-white bg-blue-500 py-1 px-3 gap-2 rounded border border-blue-700 items-center justify-center " type="submit">
+                            <i class="icon-withdrawal"></i>
+                            <span>Proceed Withdrawal</span>
+                        </button>  
+                    </div>
+                </div>
+            </form>
         </div>
-        
     </div>
-    <script>
-        const handleTransactionType = (e) => {
-            console.log((e));
-            const upiDiv = document.getElementById("upi-div")
-            const bankDiv = document.getElementById("bank-div")
-            const HIDDEN = "hidden"
-            if (e.value === "UPI"){
-                upiDiv.classList.remove(HIDDEN)
-                bankDiv.classList.add(HIDDEN)
-            }
-            if (e.value === "BANK"){
-                bankDiv.classList.remove(HIDDEN)
-                upiDiv.classList.add(HIDDEN)
-            }
 
-
-        }
-    </script>
-    {% endblock content %}
+    <div class="lg:col-span-12 flex flex-col border rounded overflow-hidden border-gray-400">
+        <div class="py-3 px-4 bg-gray-100 lg:flex items-center justify-between">
+            <span class="font-medium text-slate-700 text-lg ">Withdraw History</span>
+        </div>
+        <div class="lg:grid lg:grid-cols-12 gap-2 py-6 px-4 border-t border-gray-400">
+            {% for item in withdrawal_data %}
+            <div class="lg:col-span-6 space-y-6">
+                <div class="bg-gray-50 border border-gray-400 py-2 px-3 rounded">
+                    <div class="flex items-center justify-between">
+                        <div class="flex">
+                            <span class="text-sm text-slate-700 block font-semibold tracking-wider">Date : </span>
+                            <span class="text-sm text-slate-500 font-medium tracking-wider"> {{item.created_at |date:"d/m/y, H:i"}}</span>
+                        </div>
+                        <div class="flex">
+                            <span class="text-sm text-slate-700 block font-semibold tracking-wider">Referance Id : </span>
+                            <span class="text-sm text-slate-500 font-medium tracking-wider"> {{item.payment_ref|default:"None"}}</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex">
+                            <span class="text-sm text-slate-700 block font-semibold tracking-wider">Payment Status : </span>
+                            {% if item.payment_status == "pending" %}
+                                <span class="font-semibold text-blue-500 text-sm tracking-wider">
+                                    Pendinging
+                                </span>
+                            {% elif item.payment_status == "success" %}
+                                <span class="font-semibold text-green-500 text-sm tracking-wider">
+                                    Success
+                                </span>
+                            {% else %}
+                                <span class="font-semibold text-red-500 text-sm tracking-wider">
+                                    Rejected
+                                </span>
+                            {% endif %}
+                        </div>   
+                        <div class="flex">
+                            <span class="text-sm text-slate-700 block font-semibold tracking-wider">Payment Mode : </span>
+                            <span class="text-sm text-slate-500 font-medium tracking-wider"> {{item.payment_channel}}</span>
+                        </div>                           
+                    </div>
+                    <div class="flex justify-between">
+                        <div class="flex">
+                            <span class="text-sm text-slate-700 block font-semibold tracking-wider">Ammount : </span>
+                            <span class="text-sm text-slate-500 font-semibold tracking-wider"> {{item.amount}}</span>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
