@@ -5,7 +5,7 @@ from django.views import generic
 from . import models as main_models
 from . import forms
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 from django.contrib.auth.models import User
 from abc import ABC, abstractmethod
