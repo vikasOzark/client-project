@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l_p_p)&9b0#f@3_3b7@=@)4*k1ws=7(gtlr@o*=cl*v^e=x6a#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["156.54.60.250","*"]
 
 
 # Application definition
@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT =  "root/blackrokinvest/static"
 # STATICFILES_DIRS =  [os.path.join(BASE_DIR,"staticfiles")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
