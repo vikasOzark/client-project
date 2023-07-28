@@ -108,3 +108,41 @@ a:not([href]):not([class]):hover {
 [name="confirm_account"]:focus {
     outline: none;
 }
+
+[data-navlogo="false"] {
+    width: 5rem !important;
+} 
+[data-navlogo="false"] a span {
+    display: none !important;
+} 
+
+[data-aside="false"] {
+    width: 5rem !important;
+} 
+[data-aside="false"] nav {
+    text-align: center;
+}
+
+[data-aside="false"] nav a span {
+    display: none !important;
+}
+[data-aside="false"] nav a {
+    align-items: center;
+    justify-content: center;
+}
+
+[data-aside="false"] nav a i {
+    font-size: 1.4rem;
+}
+
+[data-aside="false"] nav label {
+    display: none !important;
+}
+
+[data-main="false"] {
+    margin-left: 5rem !important;
+} 
+
+[data-footer="false"] {
+    margin-left: 5rem !important;
+} 

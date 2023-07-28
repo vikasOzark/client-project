@@ -36,7 +36,7 @@
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
                         </div>
-                        <div class="flex-1 w-full gap-8 flex items-center justify-center">
+                        <div class="flex-1 w-full gap-6 flex items-center justify-end lg:pr-8 border-r border-white">
                             <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'about' %}">
                                 <i class="icon-about-us"></i>
                                 <span>About Company</span>
@@ -58,35 +58,15 @@
                                 <span>Terms & Conditions</span>
                             </a>
                         </div>
-                        <div class="flex px-3 gap-2">
-                            <button  class="inline-flex text-white w-7 hover:text-black h-7  items-center justify-center rounded text-xl ">
-                                <i class="icon-sun"></i>
-                            </button>                       
-                        </div>
-                        <div class="relative flex items-center border-l pl-3 lg:pr-8 pr-2">
-                            <button class="flex  items-center focus:outline-none" data-admin-toggle="admin">
-                                <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
-                                    <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
-                                </div>
-                            </button>
-                            <div class="absolute overflow-hidden border shadow rounded border-gray-400 right-[35%] bg-white top-[110%] hidden  w-60" data-admin-main="false">
-                                <div class="bg-slate-200 pt-5 pb-7 px-4 flex justify-center">
-                                    <h2 class="text-base font-semibold uppercase text-gray-600 tracking-wider">{{request.user}}</h2>
-                                    <img class="object-cover top-12 shadow-lg w-12 h-12 rounded-full border-2 absolute border-white" src="{% static 'main/image/avtar.avif'%}"/>
-                                </div>
-                                <div class="pt-10">
-                                    <a href="{% url 'profile-setting' %}" class="hover:bg-slate-100 py-2 px-3 rounded flex items-center text-sm font-medium gap-2">
-                                        <i class="icon-dashboard"></i>
-                                        <span>Dashboard</span>
-                                    </a>                                  
-                                </div>
-                                <div class="py-4 text-center">
-                                    <a href="{% url 'logout' %}" class="hover:text-red-800 gap-2 text-red-600 inline-flex items-center focus:outline-none">
-                                        <span class="text-sm tracking-wide">Logout</span>
-                                        <i class="icon-log-out"></i>
-                                    </a>                           
-                                </div>
-                            </div>
+                        <div class="relative flex gap-2 items-center lg:pl-8 lg:pr-8 pr-2">
+                            <a class="inline-flex items-center border-2 py-[2px] px-2 rounded bg-gray-100 border-red-500 gap-2 text-xs font-semibold tracking-wider text-red-600 " href="{% url 'login' %}">
+                                <i class="icon-login"></i>
+                                <span>Login</span>
+                            </a>
+                            <a class="inline-flex items-center border-2 py-[2px] px-2 rounded bg-gray-100 border-red-500 gap-2 text-xs font-semibold tracking-wider text-red-600" href="{% url 'register' %}">
+                                <i class="icon-add-user"></i>
+                                <span>Register</span>
+                            </a>
                         </div>
                     </div>
                 </div>

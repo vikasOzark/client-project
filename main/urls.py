@@ -8,6 +8,7 @@ urlpatterns = [
     path("bank-account/", views.BankData.as_view(), name="add_bank"),
     path("deposit/", views.AmountDeposit.as_view(), name="deposit"),
     path("withdrawal/", views.WithdrawalView.as_view(), name="withdrawl"),
+    path("teamreport/", views.TeamReport.as_view(), name="report"),
 
 
 ]

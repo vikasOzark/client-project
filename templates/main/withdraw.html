@@ -59,14 +59,14 @@ Withdraw
         </div>
         <div class="flex justify-between">
             <div class="flex-auto text-center">
-                <a href="{% url 'deposit' %}"
+                <a href="{% url 'add_bank' %}"
                     class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
                     <i class="icon-museum"></i>
                 </a>
                 <span class="text-white text-sm tracking-wide font-medium">Bank</span>
             </div>
             <div class="flex-auto text-center">
-                <a href="{% url 'withdrawl' %}"
+                <a href="{% url 'deposit' %}"
                     class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
                     <i class="icon-wallet"></i>
                 </a>
@@ -223,7 +223,7 @@ Withdraw
                             <span class="text-sm text-slate-700 block font-semibold tracking-wider">Payment Status : </span>
                             {% if item.payment_status == "pending" %}
                                 <span class="font-semibold text-blue-500 text-sm tracking-wider">
-                                    Pendinging
+                                    Pending
                                 </span>
                             {% elif item.payment_status == "success" %}
                                 <span class="font-semibold text-green-500 text-sm tracking-wider">
