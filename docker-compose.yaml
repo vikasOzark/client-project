@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+    blackrock_gunicorn:
+        build:
+          context: .
+
+        volumes:
+            # - .:/app/
+            - staticfiles:/app/staticfiles
+        
+        container_name: blackrock_gunicorn
+        
+        ports:
+            - "8000:8000"
+        # env_file: 
+        #     - './tsm_auth/.env'
+
+        networks:
+            - blackrock_network
+        restart: always
+
+    nginx:
+        build: ./nginx
+        volumes: 
+            - staticfiles:/app/staticfiles
+        ports: 
+            - "8002:80"
+        networks:
+            - blackrock_network
+        
+        depends_on: 
+            - blackrock_gunicorn
+    
+volumes:
+    staticfiles:
+    blackrock_authservice: 
+
+networks:
+    blackrock_network:
+        driver: bridge
+
