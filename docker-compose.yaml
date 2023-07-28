@@ -25,7 +25,7 @@ services:
         volumes: 
             - staticfiles:/app/staticfiles
         ports: 
-            - "8002:80"
+            - "80:80"
         networks:
             - blackrock_network
         
