@@ -24,8 +24,8 @@ services:
         build: ./nginx
         volumes: 
             - staticfiles:/app/staticfiles
-            - /etc/letsencrypt/csr/0000_csr-certbot.pem:/etc/letsencrypt/csr/0000_csr-certbot.pem
-            - /etc/letsencrypt/keys/0000_key-certbot.pem:/etc/letsencrypt/keys/0000_key-certbot.pem
+            - /etc/letsencrypt/csr/:/etc/letsencrypt/csr/
+            - /etc/letsencrypt/keys/:/etc/letsencrypt/keys/
 
         ports: 
             - "80:80"
