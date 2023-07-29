@@ -5,8 +5,9 @@
     <div class="gap-2 py-6 px-4 border-t border-gray-400">
         <form method="POST">
             {% csrf_token %}
-            <div class="grid grid-cols-12 gap-3">
-                {% comment %} <div class="mb-2 col-span-6">
+            <div class="grid grid-cols-12">
+                {% comment %} 
+                <div class="mb-2 col-span-6">
                     <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Username <span class="text-red-500">*</span></label>
                     <div class="relative flex items-center">
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
@@ -14,8 +15,9 @@
                         </span>
                         <input type="text" name="password" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="New Username">
                     </div>
-                </div> {% endcomment %}
-                <div class="mb-2 col-span-6">
+                </div> 
+                {% endcomment %}
+                <div class="mb-6 col-span-12">
                     <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Full Name<span class="text-red-500">*</span></label>
                     <div class="relative flex items-center">
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
@@ -24,7 +26,7 @@
                         <input type="text" name="full_name" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Full Name">
                     </div>
                 </div>
-                <div class="mb-2 col-span-6">
+                <div class="mb-6 col-span-12">
                     <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Mobile <span class="text-red-500">*</span></label>
                     <div class="relative flex items-center">
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
@@ -33,7 +35,7 @@
                         <input type="tel" name="phone_number" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Change Mobile">
                     </div>
                 </div>
-                <div class="mb-2 col-span-6">
+                <div class="mb-6 col-span-12">
                     <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Email <span class="text-red-500">*</span></label>
                     <div class="relative flex items-center">
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
@@ -42,7 +44,8 @@
                         <input type="email" name="email" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Add New Mail">
                     </div>
                 </div>
-                {% comment %} <div class="mb-3 col-span-12">
+                {% comment %} 
+                <div class="mb-3 col-span-12">
                     <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Avtaar</label>
                     <div class="relative flex items-center">
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
@@ -50,13 +53,14 @@
                         </span>
                         <input type="file" name="password" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Confirm Password">
                     </div>
-                </div> {% endcomment %}
+                </div> 
+                {% endcomment %}
                 <div class="col-span-12 gap-2 flex items-center justify-end">
                     <button type="reset"  class="inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
                         <i class="icon-cycle"></i> 
                         <span>Reset</span>
                     </button>
-                    <button class="inline-flex font-medium text-sm text-white bg-blue-500 py-1 px-3 gap-2 rounded border border-blue-700 items-center justify-center ">
+                    <button type="submit" class="inline-flex font-medium text-sm text-white bg-blue-500 py-1 px-3 gap-2 rounded border border-blue-700 items-center justify-center ">
                         <span>Submit</span>
                         <i class="icon-paper-plane"></i> 
                     </button>
