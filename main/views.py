@@ -23,7 +23,7 @@ class Home(UserOnlyView, generic.TemplateView):
         user = self.request.user
         
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
-        payments = main_models.Payments.get_latest_payments(self.request)
+        payments = main_models.Payments.objects.filter(user=self.request.user)
         userprofile = auth_model.UserProfileDetail.objects.get(user=user)
 
         # Generating the invite link 
@@ -31,7 +31,6 @@ class Home(UserOnlyView, generic.TemplateView):
         BASE_ADDRESS = self.request.META.get("HTTP_HOST")
         invite = reverse("invite")
         invite_link = f"{scheme}://{BASE_ADDRESS}{invite}?user={user}&invite_code={userprofile.invite_code}"
-
 
         context = super().get_context_data(**kwargs)
         context["user_data"] = user_data
