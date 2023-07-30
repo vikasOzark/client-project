@@ -13,6 +13,9 @@ class PaymentAdmin(admin.ModelAdmin):
             readonly_fields.append("payment_status")
 
         return readonly_fields
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(models.Payments, PaymentAdmin)
 
@@ -21,10 +24,16 @@ class BankAdmin(admin.ModelAdmin):
     list_display = fields
     readonly_fields = fields
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 admin.site.register(models.BankDetail, BankAdmin)
 
 class WalletAdmin(admin.ModelAdmin):
     list_display = ["user", "color_amount"]
     readonly_fields = ["user", "amount"]
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(models.Wallet, WalletAdmin)

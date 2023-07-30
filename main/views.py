@@ -94,7 +94,7 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
         amount = form_data.get("amount")
         payment_channel = form_data.get("payment_channel")
         payment_ref_code = form_data.get("payment_ref_code")
-
+    
         payment_create = main_models.Payments(
                 user = request.user,
                 amount = amount,
@@ -103,13 +103,18 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
                 payment_type = main_models.DEPOSIT,
                 payment_status = main_models.PENDING,
             )
-        payment_create.save()
+        if payment_channel == "upi":
+            payment_create.save()
+
+        else:
+            messages.success(request, "Oops !, Bank option is not Available at the moment.")
+            return self.get(request)
         
         if payment_create:
             messages.success(request, "Successfully deposited, we will notify you shortly.")
-            return redirect("home")
+            return self.get(request)
 
-        messages.error(request, "Successfully deposited, we will notify you shortly.")
+        messages.error(request, "Something went wrong , Please try again.")
         return self.get(request)
          
 
@@ -134,7 +139,7 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
     def post(self, request):
         form_data = request.POST
         amount = form_data.get("amount")
-        transaction_type = form_data.get("transaction-type", False)
+        transaction_type = form_data.get("payment_channel", False)
         
         wallet = main_models.Wallet.objects.get(user=request.user)
         if int(amount) > wallet.amount:
@@ -168,7 +173,7 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
             )
             withdrawal_payment.save()
             messages.success(request, "Successfully withdrawal request in generated.")
-            return redirect("home")
+            return self.get(request)
                 
         else:
             bank_obj = main_models.BankDetail.objects.get(
