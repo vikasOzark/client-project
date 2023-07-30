@@ -14,10 +14,10 @@
 </head>
 
 <body>
-    <section class="gradient-form px-12 h-screen flex items-center justify-center bg-neutral-200">
-        <div class="flex flex-wrap w-full">
-          <div class="px-4 lg:rounded-bl-lg  lg:rounded-tl-lg bg-white md:px-0 sm:w-full lg:w-6/12">
-            <div class="p-10">
+    <section class="gradient-form lg:px-12 p-5 lg:h-screen flex items-center justify-center bg-neutral-200">
+        <div class="flex flex-wrap w-full rounded-lg overflow-hidden">
+          <div class="w-full bg-white lg:w-6/12">
+            <div class="lg:p-10 p-6">
               <div class="text-left flex">
                 <h1 class="flex-auto tracking-wide text-3xl mb-4 text-slate-500">Login</h1>
               </div>
@@ -65,7 +65,7 @@
                   </div>
                 </div>      
                 <!-- Submit button -->
-                <div class="flex items-center justify-between mt-10">
+                <div class="lg:flex w-full items-center justify-between lg:mt-10 lg:space-y-0 space-y-3">
                   <span class="text-slate-500 font-medium text-sm">Not registered? <a class="ml-2 text-blue-500" href="{% url 'register' %}">Create account</a></span>
                   <button
                     type="submit"
@@ -79,11 +79,11 @@
           </div>
 
           <!-- Right column container with background and description-->
-          <div class="flex sm:w-full sm:order-first lg:order-2 lg:w-6/12 items-center justify-center lg:rounded-br-lg lg:rounded-tr-lg "
+          <div class="flex lg:p-0 p-10 w-full order-first lg:order-2 lg:w-6/12 items-center justify-center"
             style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">
             <div class="text-center">
               <img class="w-20 sepia invert mb-5 m-auto" src="{% static 'main/image/logo.svg' %}" />
-              <h4 class="mb-6 text-4xl text-white font-light">Welcome Back!</h4>
+              <h4 class="lg:mb-6 text-4xl text-white font-light">Welcome Back!</h4>
             </div>
           </div>
         </div>

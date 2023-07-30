@@ -10,18 +10,35 @@
 
 {% block breadcrumb %}
 <li class="flex items-center gap-3">
-    <span class="text-sm text-gray-500 font-medium tracking-wide">Profile</span>
-    <span class="text-base text-gray-400 font-light">/</span>
-</li>
-<li class="flex items-center gap-3">
-    <span class="text-sm text-red-600 font-medium tracking-wide">Users List</span>
-    <span class="text-3xl text-gray-400 font-light">|</span>
+    <span class="lg:text-sm text-xs text-gray-500 font-medium tracking-wide">Profile</span>
+    <span class="lg:text-3xl text-xl text-gray-400 font-light">|</span>
 </li>
 {% endblock breadcrumb %}
 
 {% block breadcrumbtitle %}
 Users List
 {% endblock breadcrumbtitle %}
+
+{% block message %}
+{% if messages %}
+<div class="w-fit bg-white absolute right-8 top-16" data-alert="notification">
+    {% for message in messages %}
+    <div class="flex">
+        <div
+            class="bg-{{message.tags}} flex px-3 rounded-l text-xl items-center border-{{message.tags}} border text-white">
+            <i class="icon-{{message.tags}}"></i>
+        </div>
+        <div
+            class="border flex gap-3 text-sm tracking-wide font-medium rounded-r border-{{message.tags}} bg-{{message.tags}}_light px-4 py-3 text-{{message.tags}}">
+            <span>{{ message }}</span>
+            <button data-alert-close="close"
+                class="icon-circle-with-cross border-l border-{{message.tags}} pl-3"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock message %}
 
 
 {% block content %}
@@ -34,20 +51,20 @@ Users List
             <div class="gap-2 py-6 px-4 border-t border-gray-400 space-y-6">
                 <form method="GET">
                     <div class="lg:grid lg:grid-cols-12 gap-2 justify-between">
-                        <div class="lg:col-span-12 lg:flex">
+                        <div class="lg:col-span-12 flex">
                             <input type="text" name="search_query"  placeholder="Search ex. username, email, number or search ( all )"
                                 class="border border-r-0 bg-gray-50 rounded-l h-10 border-gray-500 text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full py-1 px-3">
                             <button
                                 class="bg-red-500 border gap-2 items-center tracking-wide border-red-700 rounded-r text-white py-1 px-3 font-medium inline-flex"
                                 type="submit">
                                 <i class="icon-magnifying-glass"></i>
-                                <span>Search</span>
+                                <span class="lg:block hidden">Search</span>
                             </button>
                         </div>
                     </div>
                 </form>
                 <div class="col-span-12">
-                    <div class="relative">
+                    <div class="relative overflow-x-scroll lg:overflow-hidden">
                         <table
                             class="w-full border border-gray-300 font-medium text-sm tracking-wide text-left text-gray-500 ">
                             <thead class="uppercase bg-gray-200 border-b border-gray-300">
@@ -102,37 +119,39 @@ Users List
                     </div>
                 </div>
                 {% if is_paginated %}
-                <div class="lg:grid lg:grid-cols-12 gap-2">
-                    <div class="lg:col-span-4 lg:flex gap-2">
-                        {% if page_obj.has_previous %}
-                            <a href="?page=1" class="inline-flex items-center gap-2 font-medium text-sm text-white border-red-700 border px-2 py-1 rounded bg-red-500">
-                                <i class="icon-arrow"></i>First
-                            </a>
+                    <div class="grid grid-cols-12 gap-2 lg:space-y-0 space-y-3">
+                        <div class="lg:col-span-4 col-span-12 flex gap-2">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1" class="inline-flex items-center gap-2 font-medium text-sm text-white border-red-700 border px-2 py-1 rounded bg-red-500">
+                                    <i class="icon-arrow-right"></i>First
+                                </a>
+                                
+                                <a href="?page={{ page_obj.previous_page_number }}" class="inline-flex items-center gap-2 font-medium text-sm text-white border-red-700 border px-2 py-1 rounded bg-red-500">
+                                    <i class="icon-arrow-left"></i>Previous
+                                </a>
+                            {% endif %}
                             
-                            <a href="?page={{ page_obj.previous_page_number }}" class="inline-flex items-center gap-2 font-medium text-sm text-white border-red-700 border px-2 py-1 rounded bg-red-500">
-                                <i class="icon-arrow-left"></i>previous
-                            </a>
-                        {% endif %}
-                    </div>
-                    <div class="lg:col-span-4 lg:flex items-center justify-center">
-                        <span class="text-sm tracking-wide font-medium  text-gray-500">
-                            Page {{ page_obj.number }} of {{ paginator.num_pages }}
-                        </span>
-                    </div>
+                        </div>
+                        <div class="lg:col-span-4 col-span-12 flex items-center justify-center">
+                            <span class="text-sm tracking-wide font-medium  text-gray-500">
+                                Page {{ page_obj.number }} of {{ paginator.num_pages }}
+                            </span>
+                        </div>
                         
-                    <div class="lg:col-span-4 lg:flex items-center justify-end gap-2">
-                        {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
-                                <span>Next</span>
-                                <i class="icon-arrow-right"></i>
-                            </a>
-                            <a href="?page={{ paginator.num_pages }}" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
-                                <span>Last</span>
-                                <i class="icon-arrow"></i>
-                            </a>
-                        {% endif %}
+                        <div class="lg:col-span-4 col-span-12 flex items-center lg:justify-end justify-center gap-2">
+                            
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
+                                    <span>Next</span>
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                                <a href="?page={{ paginator.num_pages }}" class="inline-flex items-center gap-2 border-gray-400 font-medium text-sm text-gray-500 border px-2 py-1 rounded bg-gray-100">
+                                    <span>Last</span>
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
                 {% endif %}
             </div>
         </div>

@@ -10,12 +10,8 @@
 
 {% block breadcrumb %}
 <li class="flex items-center gap-3">
-    <span class="text-sm text-gray-500 font-medium tracking-wide">Account</span>
-    <span class="text-base text-gray-400 font-light">/</span>
-</li>
-<li class="flex items-center gap-3">
-    <span class="text-sm text-red-600 font-medium tracking-wide">Deposit</span>
-    <span class="text-3xl text-gray-400 font-light">|</span>
+    <span class="lg:text-sm text-xs text-gray-500 font-medium tracking-wide">Account</span>
+    <span class="lg:text-3xl text-xl text-gray-400 font-light">|</span>
 </li>
 {% endblock breadcrumb %}
 
@@ -47,7 +43,7 @@ Deposit
 
 
 {% block content %}
-<div class="md:grid lg:grid-cols-12 md:gap-4 lg:gap-4">
+<div class="lg:grid lg:grid-cols-12 lg:gap-4 space-y-8 lg:space-y-0">
     <div class="lg:col-span-5 flex flex-col space-y-8 rounded py-6 px-8 bg-dep relative overflow-hidden border-gray-400">
         <div class="space-y-1">
             <div
@@ -80,9 +76,9 @@ Deposit
                     <i class="icon-add-user"></i>
                 </a>
                 <span class="text-white text-sm tracking-wide font-medium">Invite</span>
-                <div id="copied"
-                    class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">
-                    Link copied</div>
+                <div id="copied" class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">
+                    Link copied
+                </div>
             </div>
         </div>
     </div>
@@ -160,6 +156,9 @@ Deposit
                             <span data-copyItem="false">7701958803@paytm</span>
                             <span><i class="icon-popup"></i></span>
                         </div>
+                        <div data-copy="false" class="cursor-pointer border border-green-600 rounded gap-2 inline-flex text-green-600 font-medium tracking-wide">
+                            <input type="text" name="upi-transaction-id" class="px-2" placeholder="UPI Payment ID">
+                        </div>
                     </div>
                     <div class="lg:col-span-12 text-center mt-3">
                         <button type="reset" data-back="true" class="inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
@@ -181,11 +180,11 @@ Deposit
         <div class="py-3 px-4 bg-gray-100 lg:flex items-center justify-between">
             <span class="font-medium text-slate-700 text-lg ">Deposit History</span>
         </div>
-        <div class="lg:grid lg:grid-cols-12 gap-2 py-6 px-4 border-t border-gray-400">
+        <div class="lg:grid lg:grid-cols-12 gap-2 py-6 px-4 border-t border-gray-400 space-y-4 lg:space-y-0">
             {% for item in deposit_data %}
             <div class="lg:col-span-6 space-y-6">
                 <div class="bg-gray-50 border border-gray-400 py-2 px-3 rounded">
-                    <div class="flex items-center justify-between">
+                    <div class="lg:flex justify-between">
                         <div class="flex">
                             <span class="text-sm text-slate-700 block font-semibold tracking-wider">Date : </span>
                             <span class="text-sm text-slate-500 font-medium tracking-wider"> {{item.created_at |date:"d/m/y, H:i"}}</span>
@@ -195,12 +194,12 @@ Deposit
                             <span class="text-sm text-slate-500 font-medium tracking-wider"> {{item.payment_ref}}</span>
                         </div>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="lg:flex justify-between">
                         <div class="flex">
                             <span class="text-sm text-slate-700 block font-semibold tracking-wider">Payment Status : </span>
                             {% if item.payment_status == "pending" %}
                                 <span class="font-semibold text-blue-500 text-sm tracking-wider">
-                                    Pendinging
+                                    Pending
                                 </span>
                             {% elif item.payment_status == "success" %}
                                 <span class="font-semibold text-green-500 text-sm tracking-wider">
@@ -217,7 +216,7 @@ Deposit
                             <span class="text-sm text-slate-500 font-medium tracking-wider"> {{item.payment_channel}}</span>
                         </div>                           
                     </div>
-                    <div class="flex justify-between">
+                    <div class="lg:flex justify-between">
                         <div class="flex">
                             <span class="text-sm text-slate-700 block font-semibold tracking-wider">Ammount : </span>
                             <span class="text-sm text-slate-500 font-semibold tracking-wider"> {{item.amount}}</span>

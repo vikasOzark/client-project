@@ -73,19 +73,8 @@ document?.addEventListener("keypress", (event)=> {
 })
 
 cancelButton?.addEventListener("click", ()=>{
-	const cancelButtonValue = cancelButton.getAttribute('data-cancel-payment');
-	switch(cancelButtonValue){
-		case 'true':
-			cancelButton.setAttribute('data-cancel-payment', 'false');
-			classAddRemoveDeposite(mainUPI, ['hidden'], ['block']);
-			classAddRemoveDeposite(mainBANK, ['hidden'], ['block']);
-			proceedButton.setAttribute('disabled', '')
-			break;
-		case 'false':
-			cancelButton.setAttribute('data-cancel-payment', 'true');
-			classAddRemoveDeposite(mainUPI, ['hidden'], ['block']);
-			classAddRemoveDeposite(mainBANK, ['hidden'], ['block']);
-			proceedButton.setAttribute('disabled', '')
-			break;
-	}
+	classAddRemoveWithdraw(mainUPI, ['!hidden'], ['lg:grid']);
+	classAddRemoveWithdraw(mainBANK, ['!hidden'], ['lg:grid']);
+	proceedButton.setAttribute('disabled', '');
+	paymentSelect.setAttribute('disabled', '')
 })

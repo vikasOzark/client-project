@@ -11,10 +11,6 @@
 {% block breadcrumb %}
     <li class="flex items-center gap-3">
         <span class="text-sm text-gray-500 font-medium tracking-wide">Profile</span>
-        <span class="text-base text-gray-400 font-light">/</span>
-    </li>
-    <li class="flex items-center gap-3">
-        <span class="text-sm text-red-600 font-medium tracking-wide">Profile Settings</span>
         <span class="text-3xl text-gray-400 font-light">|</span>
     </li>
 {% endblock breadcrumb %}
@@ -47,7 +43,7 @@ Profile Settings
 
 {% block content %}
 <div class="space-y-7">
-    <div class="lg:grid lg:grid-cols-12 gap-7">
+    <div class="lg:grid lg:grid-cols-12 gap-7 space-y-8 lg:space-y-0">
         <div class="lg:col-span-5 flex flex-col border rounded overflow-hidden border-gray-400">
             <div class="py-3 px-4 bg-gray-100 ">
                 <span class="font-medium text-slate-700 text-lg ">User Details</span>
@@ -60,19 +56,19 @@ Profile Settings
                     </div>
                     <div class="space-y-3 mt-5">
                         <span class="text-base tracking-wide text-gray-700 uppercase">Genral Info</span>
-                        <div class="lg:flex lg:flex-wrap justify-start">
+                        <div class="flex gap-3 flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Full Name </span>
                             <span class="text-sm text-slate-500 block font-medium tracking-wider">{{request.user.first_name}}</span>
                         </div>
-                        <div class="lg:flex lg:flex-wrap justify-start">
+                        <div class="flex gap-3 flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Email </span>
                             <span class="text-sm text-slate-500 block font-medium tracking-wider">{{request.user.email|default:"None"}}</span>
                         </div>
-                        <div class="flex flex-wrap justify-start">
+                        <div class="flex gap-3 flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Mobile </span>
                             <span class="text-sm text-slate-500 block font-medium tracking-wider">{{user_profile.phone_number}} </span>
                         </div>
-                        <div class="flex flex-wrap justify-start">
+                        <div class="flex gap-3 flex-wrap justify-start">
                             <span class="text-sm lg:w-1/4 text-slate-500 block font-semibold tracking-wider">Password </span>
                             <span class="text-sm text-slate-500 block font-medium tracking-wider"> •••••• </span>
                         </div>

@@ -1,3 +1,4 @@
+from typing import Iterable, Optional
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
@@ -72,7 +73,7 @@ class Payments(models.Model):
 
 class Wallet(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,  db_index=True, related_name="user_wallet")
-    amount = models.IntegerField(default=0, null=False, blank=False)
+    amount = models.IntegerField(default=0, null=False, blank=False, validators=[])
     today_profit = models.CharField(max_length=10, default=0)
     yesterday_profit = models.CharField(max_length=10, default=0)
     accumulated_profit = models.CharField(max_length=10, default=0)
@@ -80,6 +81,11 @@ class Wallet(models.Model):
     
     def __str__(self):
         return str(self.user)
+    
+    def save(self, *args, **kwargs) -> None:
+        self.amount
+        print(args, kwargs)
+        super().save(*args, **kwargs)
     
     @admin.display
     def color_amount(self):

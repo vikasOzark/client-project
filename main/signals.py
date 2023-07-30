@@ -26,10 +26,11 @@ def handle_wallet_update(sender, instance, created, **kwargs):
             wallet.save()
 
         if model_obj.payment_type == main_models.WITHDRAWAL:
-            if int(wallet.amount) > int(model_obj.amount):
-                print(int(wallet.amount))
-                print( int(model_obj.amount))
-                wallet.amount = wallet.amoun - int(model_obj.amount)
+            if not int(wallet.amount) > int(model_obj.amount):
+                model_obj.payment_status = main_models.REJECTED
+                model_obj.save()
+            else:
+                wallet.amount = wallet.amount - int(model_obj.amount)
                 wallet.save()
         
         if not model_obj.is_settled:
