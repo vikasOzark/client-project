@@ -93,12 +93,23 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
         amount = form_data.get("amount")
         payment_channel = form_data.get("payment_channel")
         payment_ref_code = form_data.get("payment_ref_code")
+        transaction_id = form_data.get("transaction_id")
+
+        if not transaction_id:
+            messages.error(request, "Please provide the transaction ID !")
+            return self.get(request)
+            
+        is_transaction_id = main_models.Payments.objects.filter(user=request.user, transaction_id=transaction_id)
+        if is_transaction_id.exists():
+            messages.error(request, "Please valid transaction ID!")
+            return self.get(request)
     
         payment_create = main_models.Payments(
                 user = request.user,
                 amount = amount,
                 payment_channel = payment_channel,
                 payment_ref = payment_ref_code,
+                transaction_id = transaction_id,
                 payment_type = main_models.DEPOSIT,
                 payment_status = main_models.PENDING,
             )
