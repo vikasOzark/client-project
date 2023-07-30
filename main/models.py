@@ -36,6 +36,7 @@ class Payments(models.Model):
     payment_ref = models.CharField(max_length=10, default="", blank=True)
     payment_type = models.CharField(max_length=25, choices=PAYMENT_TYPE, )
     amount = models.CharField(max_length=10, null=False, blank=False)
+    transaction_id = models.CharField(max_length=50, default=0)
     payment_channel = models.CharField(max_length=10, choices=PAYMENT_CHANNEL)
     payment_status = models.CharField(max_length=15, choices=PAYMENT_STATUS, default="pending")
     is_settled = models.BooleanField(default=False)
