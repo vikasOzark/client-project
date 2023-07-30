@@ -24,8 +24,12 @@ services:
         build: ./nginx
         volumes: 
             - staticfiles:/app/staticfiles
+            # - /etc/letsencrypt/csr/:/etc/letsencrypt/csr/
+            # - /etc/letsencrypt/keys/:/etc/letsencrypt/keys/
+
         ports: 
             - "80:80"
+            # - "443:443"
         networks:
             - blackrock_network
         
