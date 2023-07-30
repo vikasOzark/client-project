@@ -186,3 +186,6 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
             withdrawal_payment.save()
             messages.success(request, "Successfully withdrawal request in generated.")
             return redirect("home")
+        
+class TeamReport(UserOnlyView, generic.TemplateView):
+    template_name = "main/message_report.html"
