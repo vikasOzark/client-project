@@ -1,26 +1,31 @@
-# The first instruction is what image we want to base our container on
-# We Use an official Python runtime as a parent image
 FROM python:3.10
 
-# The enviroment variable ensures that the python output is set straight
-# to the terminal with out buffering it first
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+RUN apt-get -y update
 
-# create root directory for our project in the container
-RUN mkdir /project
-
-# Set the working directory to /music_service
-WORKDIR usr/src/project
-
-# Copy the current directory contents into the container at /music_service
-ADD . /
-
-# Install any needed packages specified in requirements.txt
-# install dependencies
+# UPGRADING PIP 
 RUN pip install --upgrade pip
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    musl-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    libffi-dev \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libgdk-pixbuf2.0-dev
+
+# Set the working directory in the container
+WORKDIR /app/
+
+# COPY SOURCE CODE INTO APP FOLDER
+COPY . .
+
+# Copy the requirements file into the container
 COPY ./requirements.txt .
+
+# Install the project dependencies
 RUN pip install -r requirements.txt
 
-# copy project
-COPY . .
+ENTRYPOINT [ "sh", "-c", "./entrypoint.sh" ]
