@@ -1,0 +1,46 @@
+{% load static %}
+<div data-toggle-menu-website="website" class="hidden p-4 bg-black bg-opacity-80 w-full fixed z-50 top-0">
+    <div class="w-full text-end">
+        <button data-close-mobile-website="close" class="inline-flex text-white hover:text-red-500 items-center justify-center text-4xl ">
+            <i class="icon-cross"></i>
+        </button>
+    </div>
+    <div class="w-full bg-gray-200 bg-opacity-40 rounded mt-8 p-2">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'home' %}" class="flex gap-2 items-center">
+            <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
+                <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
+            </div>
+            <span class="text-lg text-white">{{request.user |title}}</span>
+        </a>
+        {% else %}
+        <a class="inline-flex bg-opacity-30 items-center border-2 py-2 px-3 rounded bg-gray-100 border-red-500 gap-2 text-sm font-semibold tracking-wider text-red-600 " href="{% url 'login' %}">
+            <i class="icon-login"></i>
+            <span>Login</span>
+        </a>
+        {% endif %}
+    </div>
+    <div class="w-full pt-6">
+        <a class="hover:bg-red-500 py-2 px-3 rounded flex text-white items-center text-sm font-medium gap-2" href="{% url 'about' %}">
+            <i class="icon-about-us"></i>
+            <span>About Company</span>
+        </a>
+        <a class="hover:bg-red-500 py-2 px-3 rounded flex text-white items-center text-sm font-medium gap-2" href="{% url 'investment' %}">
+            <i class="icon-investment"></i>
+            <span>Investment</span>
+        </a>
+        <a class="hover:bg-red-500 py-2 px-3 rounded flex text-white items-center text-sm font-medium gap-2" href="{% url 'company_qualification' %}">
+            <i class="icon-qualifications"></i>
+            <span>Company Qualification</span>
+        </a>
+        <a class="hover:bg-red-500 py-2 px-3 rounded flex text-white items-center text-sm font-medium gap-2" href="{% url 'notice' %}">
+            <i class="icon-notice"></i>
+            <span>Notice</span>
+        </a>
+        <a class="hover:bg-red-500 py-2 px-3 rounded flex text-white items-center text-sm font-medium gap-2" href="{% url 'terms_condition' %}">
+            <i class="icon-edit"></i>
+            <span>Terms & Conditions</span>
+        </a>
+    </div>
+    
+</div>

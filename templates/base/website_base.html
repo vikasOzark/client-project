@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
     <script type="module" src="{% static 'main/js/tailwind.js' %}"></script>
     <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
-    <script type="module" src="{% static 'main/js/alert.js' %}"></script>
     <script type="module" src="{% static 'main/js/loading.js' %}"></script>
-    <script type="module" src="{% static 'main/js/dashboard.js' %}"></script>
+    <script type="module" src="{% static 'main/js/mobilemenu_website.js' %}"></script>
     {% block script %}
     {% endblock script %}
 </head>
@@ -36,7 +35,7 @@
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
                         </div>
-                        <div class="flex-1 w-full gap-6 flex items-center justify-end lg:pr-8 border-r border-white">
+                        <div class="flex-1 w-full gap-6 lg:flex hidden items-center justify-end lg:pr-8 border-r border-white">
                             <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'about' %}">
                                 <i class="icon-about-us"></i>
                                 <span>About Company</span>
@@ -59,7 +58,7 @@
                             </a>
                         </div>
                         {% if request.user.is_authenticated %}
-                        <div class="relative flex items-center pl-3 lg:pr-8 pr-2">
+                        <div class="relative lg:flex hidden items-center pl-3 lg:pr-8 pr-2">
                             <a href="{% url 'home' %}" class="flex gap-2 items-center">
                                 <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
                                     <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
@@ -68,28 +67,36 @@
                             </a>
                         </div>
                         {% else %}
-                        <div class="relative flex gap-2 items-center lg:pl-8 lg:pr-8 pr-2">
+                        <div class="relative lg:flex hidden gap-2 items-center lg:pl-8 lg:pr-8 pr-2">
                             <a class="inline-flex items-center border-2 py-2 px-3 rounded bg-gray-100 border-red-500 gap-2 text-sm font-semibold tracking-wider text-red-600 " href="{% url 'login' %}">
                                 <i class="icon-login"></i>
                                 <span>Login</span>
                             </a>
                         </div>
                         {% endif %}
+                        <div class="pr-8">
+                            <button data-toggle-mobile-website="mobile" class="lg:hidden inline-flex text-white w-7 h-7  hover:text-black items-center justify-center rounded text-2xl ">
+                                <i class="icon-menu"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
+        <div class="lg:hidden">
+            {% include 'base/website_mobile_menu.html' %}
+        </div>
         <div class="w-full">
             {% block background %}
             
             {% endblock background %}
-            <main class="container  mx-auto">
-                <section class="space-y-7 my-16">
+            <main class="container mx-auto">
+                <section class="space-y-7 my-16 lg:px-0 px-8">
                     {% block content %}
                     {% endblock content %}
                 </section>
             </main>
-            <div class="lg:grid lg:grid-cols-12 lg:gap-7 w-full py-3  px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-7 py-3 bg-gray-100  px-8">
                 <div class="col-span-12 text-center">
                     <span class="block font-medium text-sm tracking-wide text-gray-500">Copyright © 2012 <strong>Investment</strong>. All rights reserved.</span>
                 </div>
