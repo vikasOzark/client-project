@@ -31,7 +31,7 @@
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="flex items-center justify-between w-full">
                         <div class="pl-8 py-4">
-                            <a href="/" class="flex items-center gap-2">
+                            <a href="" class="flex items-center gap-2">
                                 <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
@@ -58,16 +58,23 @@
                                 <span>Terms & Conditions</span>
                             </a>
                         </div>
+                        {% if request.user.is_authenticated %}
+                        <div class="relative flex items-center pl-3 lg:pr-8 pr-2">
+                            <a href="{% url 'home' %}" class="flex gap-2 items-center">
+                                <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
+                                    <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
+                                </div>
+                                <span class="text-lg text-white">{{request.user |title}}</span>
+                            </a>
+                        </div>
+                        {% else %}
                         <div class="relative flex gap-2 items-center lg:pl-8 lg:pr-8 pr-2">
-                            <a class="inline-flex items-center border-2 py-[2px] px-2 rounded bg-gray-100 border-red-500 gap-2 text-xs font-semibold tracking-wider text-red-600 " href="{% url 'login' %}">
+                            <a class="inline-flex items-center border-2 py-2 px-3 rounded bg-gray-100 border-red-500 gap-2 text-sm font-semibold tracking-wider text-red-600 " href="{% url 'login' %}">
                                 <i class="icon-login"></i>
                                 <span>Login</span>
                             </a>
-                            <a class="inline-flex items-center border-2 py-[2px] px-2 rounded bg-gray-100 border-red-500 gap-2 text-xs font-semibold tracking-wider text-red-600" href="{% url 'register' %}">
-                                <i class="icon-add-user"></i>
-                                <span>Register</span>
-                            </a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

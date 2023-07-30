@@ -23,7 +23,7 @@ class Home(UserOnlyView, generic.TemplateView):
         user = self.request.user
         
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
-        payments = main_models.Payments.get_latest_payments(self.request)
+        payments = main_models.Payments.objects.filter(user=self.request.user)
         userprofile = auth_model.UserProfileDetail.objects.get(user=user)
 
         # Generating the invite link 
@@ -31,7 +31,6 @@ class Home(UserOnlyView, generic.TemplateView):
         BASE_ADDRESS = self.request.META.get("HTTP_HOST")
         invite = reverse("invite")
         invite_link = f"{scheme}://{BASE_ADDRESS}{invite}?user={user}&invite_code={userprofile.invite_code}"
-
 
         context = super().get_context_data(**kwargs)
         context["user_data"] = user_data
@@ -107,7 +106,7 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
         
         if payment_create:
             messages.success(request, "Successfully deposited, we will notify you shortly.")
-            return redirect("home")
+            return redirect("deposit")
 
         messages.error(request, "Successfully deposited, we will notify you shortly.")
         return self.get(request)
@@ -168,7 +167,7 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
             )
             withdrawal_payment.save()
             messages.success(request, "Successfully withdrawal request in generated.")
-            return redirect("home")
+            return redirect("withdrawl")
                 
         else:
             bank_obj = main_models.BankDetail.objects.get(
