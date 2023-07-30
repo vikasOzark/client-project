@@ -1,0 +1,88 @@
+{% load static%}
+<div data-mobile-menu="menu" class="hidden p-4 bg-black bg-opacity-80 w-full fixed z-50 top-0">
+    <div class="w-full text-end">
+        <button data-close-mobile="close" class="inline-flex text-white hover:text-red-500 items-center justify-center text-4xl ">
+            <i class="icon-cross"></i>
+        </button>
+    </div>
+    <nav class="space-y-2 pt-4">
+        <div class="space-y-1 bg-gray-200 bg-opacity-40 p-2 rounded">
+            <div class="gap-4 flex justify-between">
+                <div class="flex items-center gap-4">
+                    <img class="w-12 h-12 rounded-full border-2  border-white" src="{% static 'main/image/avtar.avif'%}"/>
+                    <h2 class="text-base font-semibold uppercase text-white tracking-wider">{{request.user}}</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{% url 'logout' %}" class="border-2 bg-opacity-30 border-red-500 py-1 px-3 rounded bg-white hover:text-red-800 gap-2 text-red-600 inline-flex items-center focus:outline-none">
+                        <span class="text-sm tracking-wide">Logout</span>
+                        <i class="icon-log-out"></i>
+                    </a> 
+                </div>
+            </div>
+        </div>
+        {% if not request.user.is_superuser %}
+        <div class="space-y-1 ">
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'home' %}">
+                <i class="icon-dashboard"></i>
+                <span class="mx-2 text-sm font-medium">Dashboard</span>
+            </a>
+
+        </div>
+        <div class="space-y-[2px] ">
+            <label class="px-3 -mx-3 text-sm text-white tracking-wide uppercase ">Account
+                Settings</label>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'add_bank' %}">
+                <i class="icon-museum"></i>
+                <span class="mx-2 text-sm font-medium">Bank Account</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'deposit' %}">
+                <i class="icon-wallet"></i>
+                <span class="mx-2 text-sm font-medium">Deposit</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'withdrawl' %}">
+                <i class="icon-withdrawal"></i>
+                <span class="mx-2 text-sm font-medium">Withdraw</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'report' %}">
+                <i class="icon-report"></i>
+                <span class="mx-2 text-sm font-medium">Team Report</span>
+            </a>
+            <label class="px-3 -mx-3 text-sm tracking-wide text-white uppercase">Profile</label>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'profile-setting' %}">
+                <i class="icon-profile-setting"></i>
+                <span class="mx-2 text-sm font-medium">Profile Setting</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'profile-setting' %}">
+                <i class="icon-lock"></i>
+                <span class="mx-2 text-sm font-medium">Change Password</span>
+            </a>
+        </div>
+        {% endif %}
+        <div class="space-y-[2px] ">
+            {% if request.user.is_superuser %}
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'user-list' %}">
+                <i class="icon-users"></i>
+                <span class="mx-2 text-sm font-medium">Users List</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'user-details' %}">
+                <i class="icon-users"></i>
+                <span class="mx-2 text-sm font-medium">User Details</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
+                href="{% url 'profile-setting' %}">
+                <i class="icon-lock"></i>
+                <span class="mx-2 text-sm font-medium">Change Password</span>
+            </a>
+            {% endif %}
+        </div>
+    </nav>
+</div>
