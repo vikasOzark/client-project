@@ -20,6 +20,29 @@ services:
             - blackrock_network
         restart: always
 
+        depends_on:
+            - blackrokinvest_db
+
+    
+    blackrokinvest_db:
+        image: postgres:latest
+        restart: always
+        volumes:
+            - blackrokinvest_vol:/var/lib/postgresql/data
+        networks:
+            - blackrock_network
+        container_name: blackrokinvest_db_container
+        # env_file: 
+        #     - './tsm_auth/.env'
+        ports:
+            - 5433:5432
+        
+        environment:
+            POSTGRES_PASSWORD: "blackrokinvest"
+            POSTGRES_USER: "blackrokinvest"
+            POSTGRES_DB: "blackrok"
+
+
     nginx:
         build: ./nginx
         volumes: 
