@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib.auth.decorators import login_required
 
@@ -9,6 +9,5 @@ urlpatterns = [
     path("deposit/", views.AmountDeposit.as_view(), name="deposit"),
     path("withdrawal/", views.WithdrawalView.as_view(), name="withdrawl"),
     path("teamreport/", views.TeamReport.as_view(), name="report"),
-
-
+    path("profile/", include("userprofile.urls")),
 ]
