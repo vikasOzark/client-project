@@ -137,12 +137,11 @@ STATIC_ROOT =  "root/blackrokinvest/static"
 STATICFILES_DIRS =  [os.path.join(BASE_DIR,"staticfiles")]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-COMPRESS_ROOT = BASE_DIR / 'static'
+# COMPRESS_ROOT = BASE_DIR / 'static'
 
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
 
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
-                        'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+# STATICFILES_FINDERS = ('compressor.finders.CompressorFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
 
 LOGIN_URL = "login"
 
