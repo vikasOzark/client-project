@@ -12,7 +12,6 @@ from uuid import uuid4
 from django.urls import reverse
 from django.http import HttpResponseNotFound
 
-
 class RegisterUser(generic.TemplateView):
     template_name = "authentication/registration.html"
     
