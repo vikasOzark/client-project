@@ -32,15 +32,15 @@ services:
         networks:
             - blackrock_network
         container_name: blackrokinvest_db_container
-        # env_file: 
-        #     - './tsm_auth/.env'
+        env_file: 
+            - './backend/.env'
         ports:
-            - 5433:5432
+            - 5432:5432
         
         environment:
-            POSTGRES_PASSWORD: "blackrokinvest"
-            POSTGRES_USER: "blackrokinvest"
-            POSTGRES_DB: "blackrok"
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_DB: ${DB_NAME}
 
 
     nginx:
@@ -61,6 +61,7 @@ services:
 volumes:
     staticfiles:
     blackrock_authservice: 
+    blackrokinvest_vol: 
 
 networks:
     blackrock_network:
