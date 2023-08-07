@@ -151,5 +151,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
 #                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
-CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "blackrokinvest.in"]
+CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in"]
 LOGIN_URL = "login"
