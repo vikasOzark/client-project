@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+# import environ
+
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +33,7 @@ SECRET_KEY = 'django-insecure-l_p_p)&9b0#f@3_3b7@=@)4*k1ws=7(gtlr@o*=cl*v^e=x6a#
 DEBUG = False
 
 ALLOWED_HOSTS = ["*", "www.blackrokinvest.in", "blackrokinvest.in", "154.56.60.250", "172.20.10.11"]
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+print("PASSWORD: ********************", os.environ.get("POSTGRES_PASSWORD"))
 
 # Application definition
 
@@ -91,25 +94,13 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get("DB_ENGINE"),
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'NAME': os.environ.get("POSTGRES_DB"),
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
         'HOST': os.environ.get("DB_HOST"),
         'PORT': os.environ.get("DB_PORT"),
     }
 }
-
-# DATABASES = {
-#     "default" : {
-#         "ENGINE" : "django.db.backends.postgresql",
-#         "NAME" : "blackrokinvest_db",
-#         "USER" : "blackrokinvest",
-#         "PASSWORD" : "Blackrokinvest@1234##",
-#         "HOST" : "127.0.0.1",              
-#         "PORT" : "5432",
-#         }
-# }
-
 
 
 # Password validation
@@ -147,23 +138,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT =  "root/blackrokinvest/static"
-STATICFILES_DIRS =  [os.path.join(BASE_DIR,"staticfiles")]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
+
+# STATIC_ROOT =  "root/blackrokinvest/static"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-COMPRESS_ROOT = BASE_DIR / 'static'
+# COMPRESS_ROOT = BASE_DIR / 'static'
 
-COMPRESS_ENABLED = True
+# COMPRESS_ENABLED = True
 
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
-                        'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+# STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
+#                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
 
 LOGIN_URL = "login"
-
-# Enable SSL by setting this to True
-USE_SSL = True
-
-# Paths to SSL certificate and private key files
-SSL_CERTIFICATE_PATH = os.path.join(BASE_DIR, "nginx", "letsencrypt", "cert.pem")
-SSL_PRIVATE_KEY_PATH = os.path.join(BASE_DIR, "nginx", "letsencrypt", "key.pem")
-CSRF_TRUSTED_ORIGINS = ["https://blackrokinvest.in", "https://wwww.blackrokinvest.in"]
