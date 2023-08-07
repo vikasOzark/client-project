@@ -20,9 +20,6 @@ services:
             - blackrock_network
         restart: always
 
-        depends_on:
-            - blackrokinvest_db
-
 
     nginx:
         build: ./nginx
