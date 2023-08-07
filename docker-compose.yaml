@@ -31,7 +31,7 @@ services:
             - ./nginx/letsencrypt:/etc/letsencrypt/
 
         ports: 
-            - "81:80"
+            - "80:80"
             - "443:443"
         networks:
             - blackrock_network
