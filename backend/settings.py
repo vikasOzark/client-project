@@ -33,7 +33,6 @@ SECRET_KEY = 'django-insecure-l_p_p)&9b0#f@3_3b7@=@)4*k1ws=7(gtlr@o*=cl*v^e=x6a#
 DEBUG = False
 
 ALLOWED_HOSTS = ["*", "www.blackrokinvest.in", "blackrokinvest.in", "154.56.60.250", "172.20.10.11"]
-print("PASSWORD: ********************", os.environ.get("POSTGRES_PASSWORD"))
 
 # Application definition
 
