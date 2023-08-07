@@ -24,13 +24,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.icon-left-arrow:before {
-  content: "\e926";
-}
-.icon-right-arrow:before {
-  content: "\e927";
-}
 .icon-delete:before {
   content: "\e925";
 }
