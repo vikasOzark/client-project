@@ -39,7 +39,7 @@ services:
 volumes:
     staticfiles:
     blackrock_authservice: 
-    blackrokinvest_vol: 
+    # blackrokinvest_vol: 
 
 networks:
     blackrock_network:
