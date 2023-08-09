@@ -83,12 +83,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -101,16 +101,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': "django.db.backends.postgresql_psycopg2",
-        'NAME': "blackrok",
-        'USER': "blackrokinvest",
-        'PASSWORD': "blackrokinvest",
-        'HOST': "blackrokinvest.in",
-        'PORT': 5432,
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': "django.db.backends.postgresql_psycopg2",
+#         'NAME': "blackrok",
+#         'USER': "blackrokinvest",
+#         'PASSWORD': "blackrokinvest",
+#         'HOST': "blackrokinvest.in",
+#         'PORT': 5432,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -161,5 +161,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
 #                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
-# CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "https://www.blackrokinvest.in"]
+CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "https://www.blackrokinvest.in"]
 LOGIN_URL = "login"
