@@ -26,14 +26,13 @@ services:
 
     blackrokinvest_db:
         image: postgres
-        restart: always
         volumes:
             - blackrokinvest_vol:/var/lib/postgresql/data
         networks:
             - blackrock_network
         container_name: blackrock_container
-        env_file: 
-            - './backend/.env'
+        # env_file: 
+        #     - './backend/.env'
         ports:
             - 5432:5432
         
