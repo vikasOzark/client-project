@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+    blackrock_gunicorn:
+        build:
+          context: .
+
+        volumes:
+            # - .:/app/
+            - staticfiles:/app/staticfiles
+        
+        container_name: blackrock_gunicorn
+        
+        ports:
+            - "8000:8000"
+        env_file: 
+            - './backend/.env'
+
+        networks:
+            - blackrock_network
+
+        restart: always
+
+        depends_on: 
+            - blackrokinvest_db
+
+    blackrokinvest_db:
+        image: postgres
+        volumes:
+            - blackrokinvest_vol:/var/lib/postgresql/data
+        networks:
+            - blackrock_network
+        container_name: blackrock_container
+        # env_file: 
+        #     - './backend/.env'
+        ports:
+            - 5432:5432
+        
+        environment:
+            POSTGRES_PASSWORD: "blackrokinvest" #${POSTGRES_PASSWORD}
+            POSTGRES_USER: "blackrokinvest" #${POSTGRES_USER}
+            POSTGRES_DB: "blackrok" #${POSTGRES_DB}
+
+    nginx:
+        build: ./nginx
+        volumes: 
+            - staticfiles:/app/staticfiles
+            # - ./nginx/letsencrypt:/etc/letsencrypt/
+            - /etc/letsencrypt/:/etc/letsencrypt/
+
+        ports: 
+            - "80:80"
+            - "443:443"
+        networks:
+            - blackrock_network
+        
+        depends_on: 
+            - blackrock_gunicorn
+    
+volumes:
+    staticfiles:
+    blackrock_db: 
+    blackrokinvest_vol: 
+
+networks:
+    blackrock_network:
+        driver: bridge
+

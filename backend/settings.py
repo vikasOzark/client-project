@@ -133,8 +133,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT =  os.path.join(BASE_DIR,"staticfiles")
-# STATICFILES_DIRS =  [os.path.join(BASE_DIR,"staic")]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "staticfiles"),
+)
+STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
+
+# STATIC_ROOT =  "root/blackrokinvest/static"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # COMPRESS_ROOT = BASE_DIR / 'static'
@@ -143,6 +147,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.AppDirectoriesFinder',)
 
+# STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
+#                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "https://www.blackrokinvest.in"]
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 LOGIN_URL = "login"
 
 # Enable SSL by setting this to True
