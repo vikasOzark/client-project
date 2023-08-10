@@ -19,6 +19,19 @@ services:
         networks:
             - blackrock_network
         restart: always
+    db:
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: blackrokinvest_db
+            POSTGRES_USER: blackrokinvest
+            POSTGRES_PASSWORD: Blackrokinvest@1234##
+
+        ports:
+        - "5432:5432"  # Expose the PostgreSQL port to your local machine or change as needed
+        volumes:
+        - pgdata:/var/lib/postgresql/data
+
+
 
     nginx:
         build: ./nginx
