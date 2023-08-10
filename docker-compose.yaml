@@ -18,6 +18,7 @@ services:
 
         networks:
             - blackrock_network
+
         restart: always
 
 
@@ -25,7 +26,8 @@ services:
         build: ./nginx
         volumes: 
             - staticfiles:/app/staticfiles
-            - ./nginx/letsencrypt:/etc/letsencrypt/
+            # - ./nginx/letsencrypt:/etc/letsencrypt/
+            - /etc/letsencrypt/:/etc/letsencrypt/
 
         ports: 
             - "80:80"
@@ -38,8 +40,8 @@ services:
     
 volumes:
     staticfiles:
-    blackrock_authservice: 
-    blackrokinvest_vol: 
+    # blackrock_authservice: 
+    # blackrokinvest_vol: 
 
 networks:
     blackrock_network:
