@@ -35,18 +35,12 @@ services:
         env_file: 
             - './backend/.env'
         ports:
-            - 5432:5432
+            - 5433:5432
         
         environment:
             POSTGRES_PASSWORD: "blackrokinvest" #${POSTGRES_PASSWORD}
             POSTGRES_USER: "blackrokinvest" #${POSTGRES_USER}
             POSTGRES_DB: "blackrok" #${POSTGRES_DB}
-
-# POSTGRES_PASSWORD="blackrokinvest"
-# POSTGRES_USER="blackrokinvest"
-# POSTGRES_DB="blackrok"
-# DB_HOST="blackrokinvest.in"
-# DB_PORT=5432
 
     nginx:
         build: ./nginx
