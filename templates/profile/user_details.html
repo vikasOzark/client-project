@@ -180,7 +180,7 @@ User Details
                                             <span class="font-semibold uppercase text-xs tracking-wide text-green-600">
                                                 {{transaction.payment_type}}
                                             </span>
-                                            {% elif transaction.payment_type == 'WITHDRAW' %}
+                                            {% else transaction.payment_type == 'WITHDRAW' %}
                                             <span class="font-semibold uppercase text-xs tracking-wide text-yellow-600">
                                                 {{transaction.payment_status}}
                                             </span>
