@@ -202,7 +202,7 @@ class TeamReport(UserOnlyView, generic.TemplateView):
     template_name = "main/message_report.html"
 
 
-class TaskView(AdminOnlyView, generic.TemplateView):
+class TaskView(generic.TemplateView):
     template_name = "main/task_view.html"
 
 class TaskDetails(generic.TemplateView):

@@ -2,147 +2,37 @@
 {% load static %}
 
 {% block title %}
-<title>Investment | About Company </title>
+<title>Investment | Abou Company </title>
 {% endblock title %}
 
 {% block background %}
-<div class="w-full grid grid-cols-2 items-center gap-7 px-8 bg-cover bg-center bg-black">
-    <div class="col-span-1 py-28 space-y-7">
-        <h1 class="text-5xl text-white font-bold ">About BlackRock</h1>
-        <p class="text-base font-medium text-white pr-20 tracking-wide">BlackRock is one of the world’s leading providers of investment, advisory and risk management solutions. We are a fiduciary to our clients. We’re investing for the future on behalf of our clients, inspiring our employees, and supporting our local communities. Watch the video to learn more.</p>
-    </div>
-    <div class="col-span-1">
-        <video width="100%" controls>
-            <source src="https://dwu7l6as21h3p.cloudfront.net/BLK_SOSC_Investor_Day-653.720p.wide.mp4" type="video">
-        </video>
+<div class="w-full bg-cover bg-center border-b-4 border-red-700 h-80" style="background-image: url(../../static/main/image/bg/about.jpg);">
+    <div class="flex items-center justify-center h-full w-full bg-gray-900 bg-opacity-50">
+        <div class="text-center">
+            <h1 class="text-white font-medium border-y py-1 px-5 border-white uppercase text-4xl">About</h1>
+        </div>
     </div>
 </div>
 {% endblock background %}
 {% block content %}
-<div class="w-full container mx-auto">
-    <h4 class="font-semibold border-b-2 border-black pb-8 text-black text-2xl">Our purpose is to help more and more people experience financial well-being. Together with our clients, we’re contributing to a more equitable and resilient world – today and for generations to come.</h4>
-</div>
-<div class="space-y-10 !mb-20">
-    <div class="w-full container mx-auto">
-        <h2 class="text-3xl text-black font-bold tracking-wide">Our focus</h2>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-2 gap-7 items-center">
-            <div class="col-span-1">
-                <img src="https://www.blackrock.com/blk-corp-assets/cache-1634321875000/images/media-bin/web/global/banner/financial-security-au.webp">
-            </div>
-            <div class="col-span-1 space-y-7 lg:pl-16">
-                <h2 class="text-black tracking-wide text-4xl font-bold">Financial well-being</h2>
-                <p class="text-black tracking-wide text-base font-medium">We help millions of people invest to build savings that serve them throughout their lives. As it becomes harder to save for goals like retirement, how can we help more people invest for their future?</p>
-            </div>
+<div class="w-full">
+    <h1 class="font-light mb-5 text-red-700 text-2xl">About</h1>
+    <p class="text-sm mb-4 tracking-wide text-gray-800 font-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi sed doloribus laborum neque earum explicabo voluptatibus exercitationem sint laboriosam aspernatur, velit ullam ipsa voluptatum a cupiditate vero maxime magnam architecto iusto. Nisi obcaecati alias cum officia ducimus dolore ea magnam nemo maiores. Officiis temporibus saepe maiores debitis possimus hic quis voluptas ex, ad distinctio a labore provident. Rerum ipsam temporibus quas voluptatum similique aut saepe pariatur autem odio officia, impedit libero corporis in optio neque, harum eaque ea, dicta itaque! Atque nisi voluptatum cum maxime vitae nihil maiores ducimus distinctio iure, soluta natus, nesciunt, exercitationem corporis quae dignissimos ab tempore ad. Animi autem vel quia neque harum doloremque illo fuga, ex placeat cumque veniam fugit odit voluptas perferendis debitis nam pariatur, veritatis accusantium temporibus assumenda velit porro dignissimos! A, autem? Velit voluptas autem exercitationem repellat quia omnis, fugit officia facilis voluptates impedit expedita ad dicta accusamus labore illum odio tenetur commodi culpa debitis qui molestias voluptatem error laborum praesentium. Velit quasi qui corporis amet doloribus non modi maiores nostrum voluptatum nulla quod earum quibusdam error alias veritatis sit explicabo ut at, nam aut. Ducimus velit quae earum, iure officiis adipisci consequatur ab dignissimos, incidunt eum eius alias optio! Consectetur pariatur dolores tenetur quidem repellendus libero nemo perferendis. Molestias porro ex ducimus magni, repudiandae quod culpa laboriosam? Et nemo at laboriosam alias cum harum ex aliquam accusantium impedit! Id, doloremque ipsum. Quasi laboriosam, debitis libero ipsum quam ad voluptas officiis aut autem voluptatibus cum? Maiores nihil repellat quae aperiam non vero exercitationem fuga nam, sint deserunt atque laborum quo animi perspiciatis consequatur numquam deleniti? Sint incidunt expedita fuga nulla eaque laudantium pariatur laboriosam eos officiis, soluta iure! Perferendis ipsam dicta dolorum dolore. Deleniti ipsum omnis fuga minus molestias sint aut sunt rerum, dolorum commodi quis reiciendis dignissimos incidunt quam ut ab.</p>
+    <div class="lg:grid lg:grid-cols-4 gap-7 mt-8 lg:space-y-0 space-y-8">
+        <div class="col-span-4">
+            <h1 class="font-light mb-5 text-red-700 text-2xl">Teams</h1>
         </div>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-2 gap-7 items-center">
-            <div class="col-span-1 space-y-7 lg:pr-16">
-                <h2 class="text-black tracking-wide text-4xl font-bold">Investment access</h2>
-                <p class="text-black tracking-wide text-base font-medium">We make investing easier and more affordable. How can we use our expertise to help more and more people invest?</p>
-            </div>
-            <div class="col-span-1">
-                <img src="https://www.blackrock.com/blk-corp-assets/cache-1634321875000/images/media-bin/web/global/banner/investment-access-au.webp">
-            </div>
+        <div class="col-span- border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/gp1.jpeg'%}">
         </div>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-2 gap-7 items-center">
-            <div class="col-span-1">
-                <img src="https://www.blackrock.com/blk-corp-assets/cache-1634321875000/images/media-bin/web/global/banner/sustainable-outcomes-au.webp">
-            </div>
-            <div class="col-span-1 space-y-7 lg:pl-16">
-                <h2 class="text-black tracking-wide text-4xl font-bold">Acting as a fiduciary</h2>
-                <p class="text-black tracking-wide text-base font-medium">Our investment approach is informed by three principles: we start by understanding the client’s investment objectives; we seek the best risk-adjusted returns within the scope of the mandate they give us; and we underpin our work with research, data, and analytics. We apply those same principles to sustainability and the low-carbon transition.</p>
-            </div>
+        <div class="col-span-1 border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/gp2.jpeg'%}">
         </div>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-2 gap-7 items-center">
-            <div class="col-span-1 space-y-7 lg:pr-16">
-                <h2 class="text-black tracking-wide text-4xl font-bold">Resilient economies</h2>
-                <p class="text-black tracking-wide text-base font-medium">Our purpose is to help more and more people experience financial well-being. In addition to offering our clients choice to meet their investment goals, we also work to bring economic opportunities to more people through the BlackRock Foundation and our employee engagement programs.</p>
-            </div>
-            <div class="col-span-1">
-                <img src="https://www.blackrock.com/blk-corp-assets/cache-1634321875000/images/media-bin/web/global/banner/inclusive-economies-au.webp">
-            </div>
+        <div class="col-span-1 border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/gp3.jpeg'%}">
         </div>
-    </div>
-</div>
-<div class="space-y-10 !mb-20">
-    <div class="w-full container mx-auto">
-        <h2 class="text-3xl text-black font-bold tracking-wide">Who we are</h2>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-3 gap-7 items-center">
-            <div class="col-span-1 space-y-7 lg:pr-20">
-                <img class="w-1/4" src="https://www.blackrock.com/blk-corp-assets/cache-1580293686000/images/media-bin/web/global/svg/icons/BLK_icn_people_rgb.webp">
-                <h2 class="text-black tracking-wide text-xl font-bold">19,000+ people</h2>
-                <p class="text-black tracking-wide text-base font-medium">of different backgrounds, races, and nationalities</p>
-            </div>
-            <div class="col-span-1 space-y-7 lg:pr-20">
-                <img class="w-1/4" src="https://www.blackrock.com/blk-corp-assets/cache-1580293686000/images/media-bin/web/global/svg/icons/BLK_icn_convo_bubbles_rgb.webp">
-                <h2 class="text-black tracking-wide text-xl font-bold">135 languages</h2>
-                <p class="text-black tracking-wide text-base font-medium"> addressing the needs of a multilingual client base</p>
-            </div>
-            <div class="col-span-1 space-y-7 lg:pr-20">
-                <img class="w-1/4" src="https://www.blackrock.com/blk-corp-assets/cache-1580293686000/images/media-bin/web/global/svg/icons/BLK_icn_global_globe_rgb.svg">
-                <h2 class="text-black tracking-wide text-xl font-bold">36 countries</h2>
-                <p class="text-black tracking-wide text-base font-medium">enabling us to help more and more people</p>
-            </div>
-        </div>
-    </div>
-    <div class="w-full container mx-auto !mt-20">
-        <div class="grid grid-cols-2 gap-7 items-center">
-            <div class="col-span-1">
-                <video width="100%" controls>
-                    <source src="https://dwu7l6as21h3p.cloudfront.net/BLK_SOSC_Investor_Day-653.720p.wide.mp4" type="video">
-                </video>
-            </div>
-            <div class="col-span-1 space-y-7 lg:pl-16">
-                <p class="text-gray-800 tracking-wide text-base font-medium">BlackRock is one of the world’s leading providers of investment, advisory and risk management solutions. We are a fiduciary to our clients. We’re investing for the future on behalf of our clients, inspiring our employees, and supporting our local communities. Watch the video to learn more.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="space-y-10">
-    <div class="w-full container mx-auto">
-        <h2 class="text-3xl text-black font-bold tracking-wide">Who we serve</h2>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-3 gap-7 items-center">
-            <div class="col-span-1 space-y-4">
-                <h2 class="text-black tracking-wide text-xl font-bold">Individuals and families</h2>
-                <p class="text-black tracking-wide text-base font-medium">Providing choice for those investing for retirement, a new home or a child’s education.</p>
-            </div>
-            <div class="col-span-1 space-y-4">
-                <h2 class="text-black tracking-wide text-xl font-bold">Financial advisors</h2>
-                <p class="text-black tracking-wide text-base font-medium">Helping people at all income levels invest for their futures.</p>
-            </div>
-            <div class="col-span-1 space-y-4">
-                <h2 class="text-black tracking-wide text-xl font-bold">Educational and nonprofit organizations</h2>
-                <p class="text-black tracking-wide text-base font-medium">Working to educate more students and solve social challenges.</p>
-            </div>
-        </div>
-    </div>
-    <div class="w-full container mx-auto">
-        <div class="grid grid-cols-3 gap-7 items-center">
-            <div class="col-span-1 space-y-4">
-                <h2 class="text-black tracking-wide text-xl font-bold">Pension plans</h2>
-                <p class="text-black tracking-wide text-base font-medium">Managing the retirement savings of teachers, doctors, workers, and small business owners.</p>
-            </div>
-            <div class="col-span-1 space-y-4">
-                <h2 class="text-black tracking-wide text-xl font-bold">Insurance companies</h2>
-                <p class="text-black tracking-wide text-base font-medium">Supporting people during life’s most difficult moments.</p>
-            </div>
-            <div class="col-span-1 space-y-4">
-                <h2 class="text-black tracking-wide text-xl font-bold">Governments</h2>
-                <p class="text-black tracking-wide text-base font-medium">Financing new hospitals, schools, roads and other projects helping to drive economic growth.</p>
-            </div>
+        <div class="col-span-1 border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/gp3.jpeg'%}">
         </div>
     </div>
 </div>

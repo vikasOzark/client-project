@@ -133,12 +133,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "staticfiles"),
 )
 STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
 
 # STATIC_ROOT =  "root/blackrokinvest/static"
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # COMPRESS_ROOT = BASE_DIR / 'static'

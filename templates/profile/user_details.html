@@ -180,7 +180,11 @@ User Details
                                             <span class="font-semibold uppercase text-xs tracking-wide text-green-600">
                                                 {{transaction.payment_type}}
                                             </span>
+<<<<<<< HEAD
                                             {% else %}
+=======
+                                            {% elif transaction.payment_type == 'WITHDRAW' %}
+>>>>>>> parent of f5d6892 (design)
                                             <span class="font-semibold uppercase text-xs tracking-wide text-yellow-600">
                                                 {{transaction.payment_status}}
                                             </span>

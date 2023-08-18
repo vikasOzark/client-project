@@ -1,5 +1,5 @@
-
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +9,7 @@
     {% block title %}
     <title></title>
     {% endblock title %}
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/image/logonew.svg' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/image/logo.svg' %}">
     <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
     <script type="module" src="{% static 'main/js/tailwind.js' %}"></script>
     <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
@@ -24,38 +24,34 @@
         <img src="{% static 'main/image/loading.gif' %}">
     </div>
     <section class="">
-        <nav class="relative after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  w-full"
+        <nav class="fixed z-50 border-b after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  w-full border-gray-400"
             style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
             <div class="mx-auto relative z-50">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="flex items-center justify-between w-full">
-                        <div class="pl-8 py-3">
-                            <a href="{% url 'webhome' %}" class="flex items-center gap-2">
-                                <span class="text-black text-3xl tracking-wider font-bold">Investment</span>
-                                <!-- <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo-new.svg' %}" alt=""> -->
+                        <div class="pl-8 py-4">
+                            <a href="{% url 'home' %}" class="flex items-center gap-2">
+                                <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
+                                <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
                         </div>
                         <div class="flex-1 w-full gap-6 lg:flex hidden items-center justify-end lg:pr-8 border-r border-white">
-                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'webhome' %}">
-                                <i class="icon-home"></i>
-                                <span>Home</span>
-                            </a>
                             <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'about' %}">
                                 <i class="icon-about-us"></i>
                                 <span>About Company</span>
                             </a>
-                            <!-- <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'investment' %}">
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'investment' %}">
                                 <i class="icon-investment"></i>
                                 <span>Investment</span>
-                            </a> -->
+                            </a>
                             <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'company_qualification' %}">
                                 <i class="icon-qualifications"></i>
-                                <span>Work From Home</span>
+                                <span>Company Qualification</span>
                             </a>
-                            <!-- <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'notice' %}">
+                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'notice' %}">
                                 <i class="icon-notice"></i>
                                 <span>Notice</span>
-                            </a> -->
+                            </a>
                             <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'terms_condition' %}">
                                 <i class="icon-edit"></i>
                                 <span>Terms & Conditions</span>
@@ -94,51 +90,15 @@
             {% block background %}
             
             {% endblock background %}
-            <main class="mx-auto">
+            <main class="container mx-auto">
                 <section class="space-y-7 my-16 lg:px-0 px-8">
                     {% block content %}
                     {% endblock content %}
                 </section>
             </main>
-            <div class="lg:grid lg:grid-cols-12 py-12 bg-black lg:gap-7 px-8 ">
-                <div class="col-span-5 space-y-7 border-r border-white">
-                    <span class="text-white text-4xl tracking-wider font-bold">Investment</span>
-                    <p class="text-base font-medium text-white pr-20 tracking-wide">As a global investment manager and fiduciary to our clients, our purpose at BlackRock is to help everyone experience financial well-being. Since 1999, we've been a leading provider of financial technology, and our clients turn to us for the solutions they need when planning for their most important goals.</p>
-                </div>
-                <div class="col-span-2 border-r border-white">
-                    <h4 class="tracking-wide font-semibold text-xl text-white">Quick Links</h4>
-                    <div class="flex flex-wrap space-y-3 mt-6">
-                        <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'webhome' %}">
-                            <i class="icon-home"></i>
-                            <span>Home</span>
-                        </a>
-                        <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'about' %}">
-                            <i class="icon-about-us"></i>
-                            <span>About Company</span>
-                        </a>
-                        <!-- <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'investment' %}">
-                            <i class="icon-investment"></i>
-                            <span>Investment</span>
-                        </a> -->
-                        <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'company_qualification' %}">
-                            <i class="icon-qualifications"></i>
-                            <span>Work From Home</span>
-                        </a>
-                        <!-- <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'notice' %}">
-                            <i class="icon-notice"></i>
-                            <span>Notice</span>
-                        </a> -->
-                        <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'terms_condition' %}">
-                            <i class="icon-edit"></i>
-                            <span>Terms & Conditions</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-span-5">
-                    <h4 class="tracking-wide font-semibold text-xl text-white">Subscribe</h4>
-                    <div class="flex relative mt-6">
-                        <input  class="flex-1 h-12 focus:outline p-2 text-base font-medium tracking-wide" type="text"><button class="p-2 px-5 h-12 inline-flex items-center justify-center gap-1 bg-red-500 text-white tracking-wide" type="submit">Subscribe <i class="icon-chevron-right"></i></button>
-                    </div>
+            <div class="lg:grid lg:grid-cols-12 lg:gap-7 py-3 bg-gray-100  px-8">
+                <div class="col-span-12 text-center">
+                    <span class="block font-medium text-sm tracking-wide text-gray-500">Copyright © 2012 <strong>Investment</strong>. All rights reserved.</span>
                 </div>
             </div>
         </div>
