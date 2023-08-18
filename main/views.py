@@ -204,3 +204,10 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
         
 class TeamReport(UserOnlyView, generic.TemplateView):
     template_name = "main/message_report.html"
+
+
+class TaskView(AdminOnlyView, generic.TemplateView):
+    template_name = "main/task_view.html"
+
+class TaskDetails(generic.TemplateView):
+    template_name = "main/task_details.html"
