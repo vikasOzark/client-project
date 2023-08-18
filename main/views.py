@@ -1,21 +1,26 @@
 from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.shortcuts import redirect
 from django.views import generic
-from main import models as main_models
-from main import forms
+from . import models as main_models
+from . import forms
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from django.contrib import messages
+from django.contrib.auth.models import User
+from abc import ABC, abstractmethod
 from uuid import uuid4
 from authentication import models as auth_model
 from django.urls import reverse
-from utils import UserOnlyView
-from userprofile.views import profit_loss_details
+from django.contrib.auth.mixins import LoginRequiredMixin
+from utils import AdminOnlyView, UserOnlyView, check_is_superuser
+
 
 class Home(UserOnlyView, generic.TemplateView):
     template_name = "main/home.html"
     
     def get_context_data(self, **kwargs):
         user = self.request.user
-        total_accumulated = profit_loss_details(self.request)
         
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
         payments = main_models.Payments.objects.filter(user=self.request.user)
@@ -31,7 +36,6 @@ class Home(UserOnlyView, generic.TemplateView):
         context["user_data"] = user_data
         context['payments'] = payments
         context["invite_link"] = invite_link 
-        context['accumulated'] = total_accumulated
         return context
      
 

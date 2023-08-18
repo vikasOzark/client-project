@@ -1,20 +1,19 @@
-from django.shortcuts import redirect
+from typing import Any, Dict
+from django.shortcuts import render, redirect
 from django.views import generic
 from main import models as main_model
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate
 from authentication.models import UserProfileDetail
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import user_passes_test
 from utils import AdminOnlyView, UserOnlyView, check_is_superuser
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
-from django.db.models import Sum, Case, When, F
-from django.db.models import DecimalField
-from . import models as user_profile_model
-from datetime import datetime, timedelta
+from django.db.models import Q
 
 class UserList(AdminOnlyView, generic.ListView):
     model = main_model.User
@@ -161,69 +160,3 @@ def update_payment_status(request, pk):
         messages.success(request, f"Payment status is already updated of, {transaction.user.first_name}")
         return redirect("user-details")
     
-def task_details(request):
-    user = request.user
-    return user_profile_model.Task.objects.filter(created_at__date = datetime.now().date(), user = user)
-    
-    
-def profit_loss_details(request):
-    user = request.user
-    previous_date = datetime.today() - timedelta(days=1)
-    
-    result = user_profile_model.ProfitAndLoss.objects.filter(user=user)
-    
-    total_pnl = result.aggregate(
-        total_profit=Sum(Case(When(amount_type='profit', then=F('amount')), default=0)),
-        total_loss=Sum(Case(When(amount_type='loss', then=F('amount')), default=0)),
-        today = Sum(Case(When(created_at__date = datetime.now().date(), amount_type='profit', then=F('amount')), default=0)),
-        yesterday = Sum(Case(When(created_at__date = previous_date, amount_type='profit', then=F('amount')), default=0))
-    )
-
-    return total_pnl
-
-
-
-class HandleTask(AdminOnlyView, generic.TemplateView):
-    template_name = "main/message_report.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query_params = self.request.GET
-        
-        all_user = main_model.User.objects.filter(
-            is_superuser=False, is_staff = False, is_active=False
-        )
-        context["all_user"] = all_user
-
-        if user_pk := kwargs.get("user_pk", False):
-            user_task = user_profile_model.Task.objects.filter(
-                user__pk = user_pk,
-                created_at__date = datetime.now().date()
-            )
-            context["user_task"] = user_task 
-
-        if query_date := query_params.get("date"):
-            user_task = user_profile_model.Task.objects.filter(
-                user__pk = user_pk,
-                created_at__date = query_date
-            )
-            context["user_task"] = user_task
-        return context
-    
-    
-    def post(self, request):
-        form_data = request.POST
-        task_user = main_model.User.objects.filter(pk=form_data.user_pk).first()
-
-        if task_user:
-            user_profile_model.Task.objects.create(
-                user=task_user,
-                task=form_data.get("task")
-            )
-        
-            messages.success(request, f"Task is created successfully for the {task_user}")
-            return self.get(request, user_pk=task_user)
-
-def handle_task_user(request):
-    form_data = request.POST
-    user_obj = main_model.User.objects.get(form_data.get(""))
