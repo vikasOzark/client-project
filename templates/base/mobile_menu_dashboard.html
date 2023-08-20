@@ -47,11 +47,6 @@
                 <i class="icon-withdrawal"></i>
                 <span class="mx-2 text-sm font-medium">Withdraw</span>
             </a>
-            <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
-                href="{% url 'report' %}">
-                <i class="icon-report"></i>
-                <span class="mx-2 text-sm font-medium">Team Report</span>
-            </a>
             <label class="px-3 -mx-3 text-sm tracking-wide text-white uppercase">Profile</label>
             <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
                 href="{% url 'profile-setting' %}">
@@ -75,7 +70,12 @@
             <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
                 href="{% url 'user-details' %}">
                 <i class="icon-users"></i>
-                <span class="mx-2 text-sm font-medium">User Details</span>
+                <span class="mx-2 text-sm font-medium">Transactions</span>
+            </a>
+            <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                href="{% url 'task-details' request.user.pk %}">
+                <i class="icon-withdrawal"></i>
+                <span class="mx-2 text-sm font-medium">My Tasks</span>
             </a>
             <a class="flex items-center px-3 py-2 text-white transition-colors duration-300 transform rounded hover:bg-gray-100 hover:bg-opacity-40 hover:text-red-500"
                 href="{% url 'profile-setting' %}">

@@ -9,7 +9,7 @@
     {% block title %}
     <title></title>
     {% endblock title %}
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/image/logo.svg' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/image/logo-new.svg' %}">
     <link rel="stylesheet" href="{% static 'main/css/mainStyle.css' %}">
     <script type="module" src="{% static 'main/js/tailwind.js' %}"></script>
     <script type="module" src="{% static 'main/js/tailwind.config.js' %}"></script>
@@ -18,8 +18,7 @@
     <script type="module" src="{% static 'main/js/dashboard.js' %}"></script>
     <script type="module" src="{% static 'main/js/mobilemenu_dash.js' %}"></script>
 
-    {% block script %}
-    {% endblock script %}
+
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -41,7 +40,7 @@
                     <div class="flex items-center justify-between w-full">
                         <div data-navlogo="true" class="md:w-60 lg:w-60 lg:pl-8 pl-2 lg:border-r md:border-r border-gray-400 py-4">
                             <a href="{% url 'home' %}" class="flex items-center gap-2">
-                                <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo.svg' %}" alt="">
+                                <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo-new.svg' %}" alt="">
                                 <span class="text-white text-base uppercase tracking-wider font-bold">Investment</span>
                             </a>
                         </div>
@@ -132,9 +131,9 @@
                                     <span class="mx-2 text-sm font-medium">Withdraw</span>
                                 </a>
                                 <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                                    href="{% url 'report' %}">
-                                    <i class="icon-report"></i>
-                                    <span class="mx-2 text-sm font-medium">Team Report</span>
+                                    href="{% url 'task-details' request.user.pk %}">
+                                    <i class="icon-withdrawal"></i>
+                                    <span class="mx-2 text-sm font-medium">My Tasks</span>
                                 </a>
                                 <label class="px-3 -mx-3 text-sm tracking-wide text-gray-700 uppercase dark:text-gray-400">Profile</label>
                                 <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
@@ -154,7 +153,12 @@
                                 <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                                     href="{% url 'user-details' %}">
                                     <i class="icon-users"></i>
-                                    <span class="mx-2 text-sm font-medium">User Details</span>
+                                    <span class="mx-2 text-sm font-medium">Transactions</span>
+                                </a>
+                                <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                                    href="{% url 'task-view' %}">
+                                    <i class="icon-text-document-inverted"></i>
+                                    <span class="mx-2 text-sm font-medium">Task View</span>
                                 </a>
                                 {% endif %}
                             </div>
@@ -187,6 +191,8 @@
                                     {% block breadcrumbtitle %}
                                     {% endblock breadcrumbtitle %}
                                 </h2>
+                                {% block breadcrumbbutton %}
+                                {% endblock breadcrumbbutton %}
                             </div>
                         </nav>
                         <div class="section-main">
@@ -213,5 +219,6 @@
         </div>
     </section>
 </body>
-
+{% block script %}
+{% endblock script %}
 </html>

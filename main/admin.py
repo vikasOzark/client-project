@@ -39,3 +39,13 @@ class WalletAdmin(admin.ModelAdmin):
         return False
 
 admin.site.register(models.Wallet, WalletAdmin)
+
+class UPIAdmin(admin.ModelAdmin):
+    list_display = ["upi_id", "active"]
+
+admin.site.register(models.AcceptPaymentUPI, UPIAdmin)
+
+class BankAdmin(admin.ModelAdmin):
+    list_display = ["bank_name", "account_number", "ifsc_code", "active"]
+
+admin.site.register(models.AcceptPaymentBank, BankAdmin)

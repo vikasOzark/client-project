@@ -10,5 +10,8 @@ urlpatterns = [
     path("transactions/", views.Transactions.as_view(), name="user-details"),
     path("userlist/accout-operation/", views.user_active_inactive, name="active-inactive"),
     path("transaction/<int:pk>/", views.payment_admin_view, name="admin-panel" ),
-    path("update-payment-status/<int:pk>", views.update_payment_status, name="update_payment_status")
+    path("update-payment-status/<int:pk>", views.update_payment_status, name="update_payment_status"),
+    path("task-view/", views.HandleTask.as_view(), name="task-view"),
+    path("task-details/<int:pk>/", views.TaskDetails.as_view(), name="task-details"),
+    path("task_status_update/", views.task_status_uodate, name="task_status_update")
 ]   

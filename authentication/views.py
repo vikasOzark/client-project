@@ -76,7 +76,7 @@ class RegisterUser(generic.TemplateView):
             profile_obj = models.UserProfileDetail(
                 user = new_user,
                 phone_number=phone_number,
-                invite_code=uuid[:6].upper()
+                invite_code=uuid[:5].upper()
             )
             profile_obj.save()
             
