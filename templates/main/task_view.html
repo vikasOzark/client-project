@@ -62,7 +62,7 @@ Assign Task
                 <thead class="uppercase bg-gray-200 border-b border-gray-300">
                     <tr>
                         <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
-                            Date & Time
+                            Full name
                         </th>
                         <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
                             Username
@@ -73,19 +73,20 @@ Assign Task
                     </tr>
                 </thead>
                 <tbody>
+                    {% for user in all_user %}
                     <tr class="bg-gray-100 border-b border-gray-300 last:border-b-0">
                         <td scope="col" class=" px-3 py-2 border-r border-gray-300">
                             <span class="font-medium">
-                                sajan
+                                {{user.first_name}}
                             </span>
                         </td>
                         <td scope="col" class=" px-3 py-2 border-r border-gray-300">
                             <span class="font-medium">
-                                sajan
+                                {{user.username}}
                             </span>
                         </td>
                         <td scope="col" class="w-64 px-3 py-2 border-r border-gray-300">
-                            <button data-toggle-button="false" class="font-medium tracking-wider  text-white text-xs border border-blue-800 py-1 px-1 inline-flex items-center justify-center gap-1 rounded-sm bg-blue-600" type="button">
+                            <button data-toggle-button="false" data-user-id="{{user.pk}}" class="font-medium   text-white text-xs border border-blue-800 py-1 px-1 inline-flex items-center justify-center gap-1 rounded-sm bg-blue-600" type="button">
                                 <i class="icon-text-document-inverted"></i>
                                 <span>Assign Task</span>
                             </button>
@@ -95,6 +96,7 @@ Assign Task
                             </a>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -106,7 +108,7 @@ Assign Task
     <div class="fixed bg-black w-full h-full opacity-30 blur"></div>
     <div class="bg-white w-1/2 relative z-50 border border-gray-400 rounded overflow-hidden">
         <div class="flex justify-between bg-gray-200 p-3 border-b border-gray-400">
-            <h2 class="text-lg text-slate-700 tracking-wide font-medium">Assign Task for (username)</h2>
+            <h2 class="text-lg text-slate-700 tracking-wide font-medium">Assign Task</h2>
             <span data-close-button="false" class="icon-cross text-2xl cursor-pointer"></span>
         </div>
         <form class="p-6 space-y-6">
@@ -121,6 +123,7 @@ Assign Task
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
                         <i class="icon-report"></i>
                         </span>
+                        <input type="hidden" name="user_pk" value="">
                         <input type="text" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Task Name">
                     </div>
                 </div>
@@ -147,9 +150,13 @@ Assign Task
         const buttonModal = document.querySelector("[data-toggle-button]");
         const closeButton = document.querySelector("[data-close-button]");
         const resetButton = document.querySelector("[data-reset-button]");
+        const userInput = document.getElementById("user_pk");
+
 
         const toggleModal = () => {
             const buttonModalAttr =  buttonModal.getAttribute("data-toggle-button");
+            const userPk = buttonModal.getAttribute("data-user-id")
+            console.log(userPk);
             const closeButtonAttr =  closeButton.getAttribute("data-close-button");
             const resetButtonAttr =  resetButton.getAttribute("data-reset-button");
             const modalMainlAttr =  modalMain.getAttribute("data-modal");

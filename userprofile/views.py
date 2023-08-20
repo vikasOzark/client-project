@@ -11,7 +11,7 @@ from utils import AdminOnlyView, UserOnlyView, check_is_superuser
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
-from django.db.models import Sum, Case, When, F
+from django.db.models import Sum, Case, When, F, Q
 from django.db.models import DecimalField
 from . import models as user_profile_model
 from datetime import datetime, timedelta
@@ -184,7 +184,7 @@ def profit_loss_details(request):
 
 
 class HandleTask(AdminOnlyView, generic.TemplateView):
-    template_name = "main/message_report.html"
+    template_name = "main/task_view.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
