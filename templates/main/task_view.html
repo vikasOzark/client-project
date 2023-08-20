@@ -111,7 +111,8 @@ Assign Task
             <h2 class="text-lg text-slate-700 tracking-wide font-medium">Assign Task</h2>
             <span data-close-button="false" class="icon-cross text-2xl cursor-pointer"></span>
         </div>
-        <form class="p-6 space-y-6">
+        <form class="p-6 space-y-6" method="POST">
+            {% csrf_token %}
             <div class="grid grid-cols-12">
                 <div class="col-span-12 mb-3 flex gap-2 items-center">
                     <label class="text-sm inline-flex text-slate-500 mb-2 font-medium tracking-wide">Today's Date </label>
@@ -123,7 +124,7 @@ Assign Task
                         <span class="absolute text-gray-500 border-r border-gray-500 px-3">
                         <i class="icon-report"></i>
                         </span>
-                        <input type="hidden" name="user_pk" value="">
+                        <input type="hidden" id="userId" name="user_pk" value="">
                         <input type="text" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Task Name">
                     </div>
                 </div>
@@ -145,43 +146,27 @@ Assign Task
 
 {% endblock content %}
 {% block script %}
-    <script type="module">
-        const modalMain = document.querySelector("[data-modal]");
-        const buttonModal = document.querySelector("[data-toggle-button]");
-        const closeButton = document.querySelector("[data-close-button]");
-        const resetButton = document.querySelector("[data-reset-button]");
-        const userInput = document.getElementById("user_pk");
-
-
-        const toggleModal = () => {
-            const buttonModalAttr =  buttonModal.getAttribute("data-toggle-button");
-            const userPk = buttonModal.getAttribute("data-user-id")
-            console.log(userPk);
-            const closeButtonAttr =  closeButton.getAttribute("data-close-button");
-            const resetButtonAttr =  resetButton.getAttribute("data-reset-button");
-            const modalMainlAttr =  modalMain.getAttribute("data-modal");
-            switch(buttonModalAttr){
-                case 'false':
-                    buttonModal.setAttribute('data-toggle-button', 'true');
-                    modalMain.setAttribute('data-modal', 'true');
-                    closeButton.setAttribute('data-close-button', 'true');
-                    resetButton.setAttribute('data-reset-button', 'true');
-                    modalMain.classList.add("block")
-                    modalMain.classList.remove("hidden")
-                    break
-                case 'true':
-                    buttonModal.setAttribute('data-toggle-button', 'false');
-                    modalMain.setAttribute('data-modal', 'false');
-                    closeButton.setAttribute('data-close-button', 'false');
-                    resetButton.setAttribute('data-reset-button', 'false');
-                    modalMain.classList.remove("block")                    
-                    modalMain.classList.add("hidden")
-                    break;
-            }
+<script type="module">
+    const buttonModal = Array.from(document.querySelectorAll("[data-toggle-button]"));
+    const modalMain = document.querySelector("[data-modal]");
+    const closeButton = document.querySelector("[data-close-button]");
+    const resetButton = document.querySelector("[data-reset-button]");
+    const toggleModal = (userId) =>{
+        document.getElementById("userId").value = userId
+        modalMain.classList.remove("hidden")
+    }
+    
+    buttonModal.map((buttonModalEle) => {
+        buttonModalEle.addEventListener("click", (event) => {
+        const currentElement = event.currentTarget;
+        toggleModal(currentElement.dataset.userId)
+        })
+    });
+    const closeModal = (userId) =>{
+            modalMain.classList.add("hidden")
         }
-        buttonModal.addEventListener("click", toggleModal);
-        closeButton.addEventListener("click",  toggleModal);
-        resetButton.addEventListener("click",  toggleModal);
-        
-    </script>
+    closeButton.addEventListener("click",  closeModal);
+    resetButton.addEventListener("click",  closeModal);
+
+</script>
 {% endblock script %}

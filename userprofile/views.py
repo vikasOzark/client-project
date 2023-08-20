@@ -191,7 +191,7 @@ class HandleTask(AdminOnlyView, generic.TemplateView):
         query_params = self.request.GET
         
         all_user = main_model.User.objects.filter(
-            is_superuser=False, is_staff = False, is_active=False
+            is_superuser=False, is_staff = False, is_active=True
         )
         context["all_user"] = all_user
 
