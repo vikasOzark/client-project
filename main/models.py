@@ -108,4 +108,12 @@ class BankDetail(models.Model):
     def __str__(self) -> str:
         return str(self.user)
     
+class AcceptPaymentUPI(models.Model):
+    upi_id = models.CharField(max_length=50)
+    active = models.BooleanField(default=False)
 
+class AcceptPaymentBank(models.Model):
+    bank_name = models.CharField(max_length=50)
+    account_number = models.CharField(max_length=50)
+    ifsc_code = models.CharField(max_length=50)
+    active = models.BooleanField(default=False)
