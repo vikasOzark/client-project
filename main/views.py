@@ -1,26 +1,22 @@
 from typing import Any, Dict
-from django.db.models.query import QuerySet
 from django.shortcuts import redirect
 from django.views import generic
-from . import models as main_models
-from . import forms
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
+from main import models as main_models
+from main import forms
 from django.contrib import messages
-from django.contrib.auth.models import User
-from abc import ABC, abstractmethod
 from uuid import uuid4
 from authentication import models as auth_model
 from django.urls import reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from utils import AdminOnlyView, UserOnlyView, check_is_superuser
 
+from userprofile.views import profit_loss_details
 
 class Home(UserOnlyView, generic.TemplateView):
     template_name = "main/home.html"
     
     def get_context_data(self, **kwargs):
         user = self.request.user
+        total_accumulated = profit_loss_details(self.request)
         
         user_data = main_models.Wallet.objects.select_related("user").filter(user__username=user).first()
         payments = main_models.Payments.objects.filter(user=self.request.user)
@@ -36,6 +32,7 @@ class Home(UserOnlyView, generic.TemplateView):
         context["user_data"] = user_data
         context['payments'] = payments
         context["invite_link"] = invite_link 
+        context['accumulated'] = total_accumulated
         return context
      
 
@@ -81,11 +78,15 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
             payment_type = main_models.DEPOSIT
         )
         wallet = main_models.Wallet.objects.get(user = self.request.user)
+        accept_payment_bank = main_models.AcceptPaymentBank.objects.filter(active=True).first()
+        accept_payment_upi = main_models.AcceptPaymentUPI.objects.filter(active=True).first()
 
         context = super().get_context_data(**kwargs)
         context["payment_ref_code"] = code[:10]
         context["deposit_data"] = deposit_data
         context["wallet"] = wallet
+        context["accept_payment_bank"] = accept_payment_bank
+        context["accept_payment_upi"] = accept_payment_upi
         return context
 
     def post(self, request):
@@ -201,6 +202,4 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
             withdrawal_payment.save()
             messages.success(request, "Successfully withdrawal request in generated.")
             return redirect("home")
-        
-class TeamReport(UserOnlyView, generic.TemplateView):
-    template_name = "main/message_report.html"
+    
