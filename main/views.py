@@ -78,11 +78,15 @@ class AmountDeposit(UserOnlyView, generic.TemplateView):
             payment_type = main_models.DEPOSIT
         )
         wallet = main_models.Wallet.objects.get(user = self.request.user)
+        accept_payment_bank = main_models.AcceptPaymentBank.objects.filter(active=True).first()
+        accept_payment_upi = main_models.AcceptPaymentUPI.objects.filter(active=True).first()
 
         context = super().get_context_data(**kwargs)
         context["payment_ref_code"] = code[:10]
         context["deposit_data"] = deposit_data
         context["wallet"] = wallet
+        context["accept_payment_bank"] = accept_payment_bank
+        context["accept_payment_upi"] = accept_payment_upi
         return context
 
     def post(self, request):
@@ -198,10 +202,4 @@ class WithdrawalView(UserOnlyView, generic.TemplateView):
             withdrawal_payment.save()
             messages.success(request, "Successfully withdrawal request in generated.")
             return redirect("home")
-        
-class TeamReport(UserOnlyView, generic.TemplateView):
-    template_name = "main/message_report.html"
-
-
-class TaskDetails(generic.TemplateView):
-    template_name = "main/task_details.html"
+    

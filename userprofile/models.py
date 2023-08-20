@@ -22,10 +22,12 @@ class ProfitAndLoss(models.Model):
     
 COMPLETE = "complete"
 PENDING = "pending"
+Failed = "failed"
 
 TASK_STATUS = (
     (COMPLETE, _("complete")),
-    (PENDING, _("pending"))
+    (PENDING, _("pending")),
+    (Failed, _("failed"))
 )
 
 class Task(models.Model):

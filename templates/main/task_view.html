@@ -90,7 +90,7 @@ Assign Task
                                 <i class="icon-text-document-inverted"></i>
                                 <span>Assign Task</span>
                             </button>
-                            <a href="" class="font-medium tracking-wider  text-white text-xs border border-orange-800 py-1 px-1 inline-flex items-center justify-center gap-1 rounded-sm bg-orange-600" type="button">
+                            <a href="{% url 'task-details' user.pk %}" class="font-medium tracking-wider  text-white text-xs border border-orange-800 py-1 px-1 inline-flex items-center justify-center gap-1 rounded-sm bg-orange-600" type="button">
                                 <i class="icon-eye"></i>
                                 <span>View Task</span>
                             </a>
@@ -125,7 +125,7 @@ Assign Task
                         <i class="icon-report"></i>
                         </span>
                         <input type="hidden" id="userId" name="user_pk" value="">
-                        <input type="text" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Task Name">
+                        <input type="text" name="task" class="border pl-12 h-12 border-gray-500 rounded text-slate-500 font-medium tracking-wide text-sm focus:outline-none block w-full p-2" placeholder="Task Name">
                     </div>
                 </div>
             </div>

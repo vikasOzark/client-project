@@ -12,7 +12,6 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.db.models import Sum, Case, When, F, Q
-from django.db.models import DecimalField
 from . import models as user_profile_model
 from datetime import datetime, timedelta
 
@@ -183,37 +182,34 @@ def profit_loss_details(request):
 
 
 
-class HandleTask(AdminOnlyView, generic.TemplateView):
+class HandleTask(AdminOnlyView, generic.ListView):
     template_name = "main/task_view.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query_params = self.request.GET
-        
-        all_user = main_model.User.objects.filter(
+    model = main_model.User
+    queryset = main_model.User.objects.filter(
             is_superuser=False, is_staff = False, is_active=True
         )
-        context["all_user"] = all_user
-
-        if user_pk := kwargs.get("user_pk", False):
-            user_task = user_profile_model.Task.objects.filter(
-                user__pk = user_pk,
-                created_at__date = datetime.now().date()
-            )
-            context["user_task"] = user_task 
-
-        if query_date := query_params.get("date"):
-            user_task = user_profile_model.Task.objects.filter(
-                user__pk = user_pk,
-                created_at__date = query_date
-            )
-            context["user_task"] = user_task
-        return context
     
+    context_object_name = "all_user"
+
+    def get_queryset(self):
+        query_params = self.request.GET.get("search_query")
+        query_set =  super().get_queryset()
+
+        if not query_params:
+            return query_set
+        
+        if query_params.lower() == "all":
+            return query_set
+
+        return query_set.filter(
+            Q(username__icontains = query_params) |
+            Q(first_name__icontains = query_params) |
+            Q(email__icontains = query_params)
+        ) 
     
     def post(self, request):
         form_data = request.POST
-        task_user = main_model.User.objects.filter(pk=form_data.user_pk).first()
+        task_user = main_model.User.objects.filter(pk=int(form_data.get("user_pk"))).first()
 
         if task_user:
             user_profile_model.Task.objects.create(
@@ -221,9 +217,54 @@ class HandleTask(AdminOnlyView, generic.TemplateView):
                 task=form_data.get("task")
             )
         
-            messages.success(request, f"Task is created successfully for the {task_user}")
-            return self.get(request, user_pk=task_user)
+            messages.success(request, f"Task is created successfully for the | {task_user}")
+            return self.get(request, user_pk=task_user.pk)
 
 def handle_task_user(request):
     form_data = request.POST
     user_obj = main_model.User.objects.get(form_data.get(""))
+
+
+class TaskDetails(generic.TemplateView):
+    template_name = "main/task_details.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query_date = self.request.GET.get("date")
+        user = main_model.User.objects.get(pk=kwargs.get("pk"))
+
+        context["date"] = query_date
+        context["user_data"] = user
+
+        if query_date := query_date:
+            user_task = user_profile_model.Task.objects.filter(
+                user__pk = kwargs.get('pk'),
+                created_at__date = query_date
+            )
+
+            context["user_task"] = user_task
+        else :
+            user_task = user_profile_model.Task.objects.filter(
+            user__pk = kwargs.get('pk'),
+            created_at__date = datetime.now().date()
+            )
+
+            context["user_task"] = user_task
+        return context
+    
+    
+@login_required(login_url="login")
+@user_passes_test(check_is_superuser, login_url="login")
+def task_status_uodate(request):
+    if request.method == "POST":
+        form_data = request.POST
+        task_status = form_data.get("task_status")
+        task_pk = form_data.get("task_pk")
+
+        task = user_profile_model.Task.objects.get(pk=int(task_pk))
+        task.task_status = task_status
+        task.save()
+
+        return redirect("task-details", pk=form_data.get("user_pk"))
+
+    return JsonResponse({"status": "deleted"})
