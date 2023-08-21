@@ -8,17 +8,13 @@ services:
         volumes:
             # - .:/app/
             - staticfiles:/app/staticfiles
-        
         container_name: blackrock_gunicorn
-        
         ports:
             - "8000:8000"
         env_file: 
             - './backend/.env'
-
         networks:
             - blackrock_network
-
         restart: always
 
           #depends_on: 
