@@ -21,25 +21,25 @@ services:
 
         restart: always
 
-        depends_on: 
-            - blackrokinvest_db
+          #depends_on: 
+          # - blackrokinvest_db
 
-    blackrokinvest_db:
-        image: postgres
-        volumes:
-            - blackrokinvest_vol:/var/lib/postgresql/data
-        networks:
-            - blackrock_network
-        container_name: blackrock_container
+              # blackrokinvest_db:
+              #image: postgres
+              #volumes:
+              #- blackrokinvest_vol:/var/lib/postgresql/data
+              #networks:
+              #- blackrock_network
+              # container_name: blackrock_container
         # env_file: 
         #     - './backend/.env'
-        ports:
-            - 5432:5432
+        # ports:
+        #   - 5432:5432
         
-        environment:
-            POSTGRES_PASSWORD: "blackrokinvest" #${POSTGRES_PASSWORD}
-            POSTGRES_USER: "blackrokinvest" #${POSTGRES_USER}
-            POSTGRES_DB: "blackrok" #${POSTGRES_DB}
+              #environment:
+              #POSTGRES_PASSWORD: "blackrokinvest" #${POSTGRES_PASSWORD}
+              #POSTGRES_USER: "blackrokinvest" #${POSTGRES_USER}
+              #POSTGRES_DB: "blackrok" #${POSTGRES_DB}
 
     nginx:
         build: ./nginx

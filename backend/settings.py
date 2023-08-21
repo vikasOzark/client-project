@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-l_p_p)&9b0#f@3_3b7@=@)4*k1ws=7(gtlr@o*=cl*v^e=x6a#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*", "www.blackrokinvest.in", "blackrokinvest.in", "154.56.60.250", "172.20.10.11"]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -75,26 +75,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
+# ( FOR DEVELOPMENT )
 # DATABASES = {
-#     "default" : {
-#         "ENGINE" : "django.db.backends.postgresql",
-#         "NAME" : "blackrokinvest_db",
-#         "USER" : "blackrokinvest",
-#         "PASSWORD" : "Blackrokinvest@1234##",
-#         "HOST" : "127.0.0.1",              
-#         "PORT" : "5432",
-#         }
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+# Don't change this secton of code ( FOR PRODUCTION )
+DATABASES = {
+    "default" : {
+        "ENGINE" : "django.db.backends.postgresql",
+        "NAME" : "blackrokinvest_db",
+        "USER" : "blackrokinvest",
+        "PASSWORD" : "Blackrokinvest@1234##",
+        "HOST" : "154.56.60.250",              
+        "PORT" : "5432",
+        }
+}
 
 
 
