@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# import environ
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,8 +32,7 @@ SECRET_KEY = 'django-insecure-l_p_p)&9b0#f@3_3b7@=@)4*k1ws=7(gtlr@o*=cl*v^e=x6a#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*", "www.blackrokinvest.in", "blackrokinvest.in", "154.56.60.250", "172.20.10.11"]
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+ALLOWED_HOSTS = ["*", "www.blackrokinvest.in", "blackrokinvest.in", "154.56.60.250"]
 
 # Application definition
 
@@ -41,7 +46,7 @@ INSTALLED_APPS = [
     'main',
     'authentication',
     'userprofile',
-    # 'compressor'
+    'compressor'
 ]
 
 MIDDLEWARE = [
@@ -80,23 +85,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get("DB_ENGINE"),
+        'NAME': os.environ.get("POSTGRES_DB"),
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
     }
 }
 
 # DATABASES = {
-#     "default" : {
-#         "ENGINE" : "django.db.backends.postgresql",
-#         "NAME" : "blackrokinvest_db",
-#         "USER" : "blackrokinvest",
-#         "PASSWORD" : "Blackrokinvest@1234##",
-#         "HOST" : "127.0.0.1",              
-#         "PORT" : "5432",
-#         }
+#     'default': {
+#         'ENGINE': "django.db.backends.postgresql_psycopg2",
+#         'NAME': "blackrok",
+#         'USER': "blackrokinvest",
+#         'PASSWORD': "blackrokinvest",
+#         'HOST': "0.0.0.0",
+#         'PORT': 5432,
+#     }
 # }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -145,8 +152,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # COMPRESS_ENABLED = True
 
-# STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.AppDirectoriesFinder',)
-
 # STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
 #                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
 # CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "https://www.blackrokinvest.in"]
@@ -161,4 +166,4 @@ USE_SSL = True
 # Paths to SSL certificate and private key files
 SSL_CERTIFICATE_PATH = os.path.join(BASE_DIR, "nginx", "letsencrypt", "cert.pem")
 SSL_PRIVATE_KEY_PATH = os.path.join(BASE_DIR, "nginx", "letsencrypt", "key.pem")
-# CSRF_TRUSTED_ORIGINS = ["https://blackrokinvest.in", "https://wwww.blackrokinvest.in"]
+CSRF_TRUSTED_ORIGINS = ["https://blackrokinvest.in", "https://wwww.blackrokinvest.in"]
