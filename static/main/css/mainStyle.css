@@ -85,6 +85,4 @@ a:not([href]):not([class]):hover {
 .slide > img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
-    object-position: center;
 }
