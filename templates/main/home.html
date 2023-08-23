@@ -35,7 +35,7 @@
 <div class="space-y-6 mb-6">
     <div class="lg:grid lg:grid-cols-12">
         <div class="lg:col-span-8 lg:col-start-3">
-            <div class="relative h-64 overflow-hidden rounded-xl">
+            <div class="relative lg:h-64 h-40 overflow-hidden rounded-xl">
                 <div class="slide">
                     <img src="{% static 'main/image/wall1.jpg' %}"/>
                 </div>
@@ -66,22 +66,22 @@
     <div class="lg:grid lg:grid-cols-12 !mt-12">
         <div class="lg:col-span-12 flex justify-between">
             <div class="flex-auto text-center">
-                <a href="{% url 'deposit' %}" class="bg-gray-800 m-auto text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center">
+                <a href="{% url 'deposit' %}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-8 w-8 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-wallet"></i>
                 </a>
-                <span class="text-gray-700 text-sm tracking-wide font-medium">Deposite</span>
+                <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium">Deposite</span>
             </div>
             <div class="flex-auto text-center">
-                <a href="{% url 'withdrawl' %}" class="bg-gray-800 m-auto text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center">
+                <a href="{% url 'withdrawl' %}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-8 w-8 rounded-full lg:text-2xl text-lgtext-2xl flex items-center justify-center">
                     <i class="icon-withdrawal"></i>
                 </a>
-                <span class="text-gray-700 text-sm tracking-wide font-medium">Withdraw</span>
+                <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium">Withdraw</span>
             </div>
             <div class="flex-auto text-center relative">
-                <a onclick="copyText('{{invite_link}}')" class="bg-gray-800 m-auto text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center">
+                <a onclick="copyText('{{invite_link}}')" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-8 w-8 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-add-user"></i>
                 </a>
-                <span class="text-gray-700 text-sm tracking-wide font-medium" >Invite</span>
+                <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium" >Invite</span>
                 <div id="copied" class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">Link copied</div>
             </div>
         </div>
@@ -126,7 +126,7 @@
 </div>
 <div class="space-y-10">
     <div class="lg:grid lg:grid-cols-12">
-        <div class="lg:col-span-12 space-y-8 rounded-xl py-6 px-8 bg-dep relative overflow-hidden border-gray-400">
+        <div class="lg:col-span-12 space-y-8 rounded-xl py-6 lg:px-8 px-4 bg-dep relative overflow-hidden border-gray-400">
             <div class="space-y-1">
                 <div class="w-full text-center">
                     <span class="font-medium tracking-wide text-white text-2xl">Balance(Rs)</span>
@@ -136,18 +136,18 @@
                     <span>{{user_data.amount}}.00</span>
                 </div>
             </div>
-            <div class="space-y-2 flex justify-between">
+            <div class="flex justify-between">
                 <div class="text-center">
-                    <span class="text-white text-base tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.today_profit}}.00</span>
-                    <span class="block tracking-wide font-medium text-white text-sm">Today,s Profit</span>
+                    <span class="text-white lg:text-sm text-xs tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.today_profit}}.00</span>
+                    <span class="block tracking-wide font-medium text-white lg:text-sm text-xs">Today,s Profit</span>
                 </div>
                 <div class="text-center">
-                    <span class="text-white text-base tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.yesterday_profit}}.00</span>
-                    <span class="block tracking-wide font-medium text-white text-sm">Yesterday's Profit</span>
+                    <span class="text-white lg:text-sm text-xs tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.yesterday_profit}}.00</span>
+                    <span class="block tracking-wide font-medium text-white lg:text-sm text-xs">Yesterday's Profit</span>
                 </div>
                 <div class="text-center">
-                    <span class="text-white text-base tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.accumulated_profit}}.00</span>
-                    <span class="block tracking-wide font-medium text-white text-sm">Accumulated Profit</span>
+                    <span class="text-white lg:text-sm text-xs tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.accumulated_profit}}.00</span>
+                    <span class="block tracking-wide font-medium text-white lg:text-sm text-xs">Accumulated Profit</span>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
     <div class="lg:grid lg:grid-cols-12">
         <div class="lg:col-span-12 overflow-hidden space-y-7">
             <div class="">
-                <span class="font-medium text-slate-700 text-2xl tracking-wide ">Historical User Deposits</span>
+                <span class="font-medium text-slate-700 lg:text-2xl text-xl tracking-wide ">Historical User Deposits</span>
             </div>
             <div class="p-4 bg-gray-200 rounded-xl">
                 <div class="marquee-top-bottom space-y-2 overflow-hidden h-64">
@@ -209,43 +209,43 @@
             </div>
         </div>
     </div>
-    <div class="lg:grid lg:grid-cols-12">
+    <div class="lg:grid lg:grid-cols-12 space-y-3 lg:space-y-0">
         <div class="col-span-4">
             <div class="flex text-gray-700 gap-2 items-center">
-                <i class="icon-about-us text-3xl"></i>
-                <span class="text-sm tracking-wide font-medium">About Company</span>
+                <i class="icon-about-us lg:text-3xl text-xl"></i>
+                <span class="lg:text-sm text-xs tracking-wide font-medium">About Company</span>
             </div>
         </div>
         <div class="col-span-4">
             <div class="flex text-gray-700 gap-2 items-center">
-                <i class="icon-qualifications text-3xl"></i>
-                <span class="text-sm tracking-wide font-medium">Work From Home</span>
+                <i class="icon-qualifications lg:text-3xl text-xl"></i>
+                <span class="lg:text-sm text-xs tracking-wide font-medium">Work From Home</span>
             </div>
         </div>
         <div class="col-span-4">
             <div class="flex text-gray-700 gap-2 items-center">
-                <i class="icon-edit text-3xl"></i>
-                <span class="text-sm tracking-wide font-medium">Terms & Conditions</span>
+                <i class="icon-edit lg:text-3xl text-xl"></i>
+                <span class="lg:text-sm text-xs tracking-wide font-medium">Terms & Conditions</span>
             </div>
         </div>
     </div>
     <div class="lg:grid lg:grid-cols-12">
         <div class="lg:col-span-12 space-y-7">
             <div class="">
-                <span class="font-medium text-slate-700 text-2xl tracking-wide ">Cooperative Partner </span>
+                <span class="font-medium text-slate-700 lg:text-2xl text-xl tracking-wide ">Cooperative Partner </span>
             </div>
-            <div class="grid grid-cols-4 gap-2 border-gray-400 space-y-6">
-                <div class="col-span-2">
-                    <img class="w-40 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo1.png'%}" />
+            <div class="grid grid-cols-4 gap-2 border-gray-400">
+                <div class="col-span-2 mb-8">
+                    <img class="lg:w-40 w-28 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo1.png'%}" />
+                </div>
+                <div class="col-span-2 mb-8">
+                    <img class="lg:w-40 w-28 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo2.png'%}" />
+                </div>
+                <div class="col-span-2 mb-8">
+                    <img class="lg:w-40 w-28 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo3.png'%}" />
                 </div>
                 <div class="col-span-2">
-                    <img class="w-40 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo2.png'%}" />
-                </div>
-                <div class="col-span-2">
-                    <img class="w-40 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo3.png'%}" />
-                </div>
-                <div class="col-span-2">
-                    <img class="w-40 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo4.png'%}" />
+                    <img class="lg:w-40 w-28 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/logo4.png'%}" />
                 </div>
             </div>
         </div>
