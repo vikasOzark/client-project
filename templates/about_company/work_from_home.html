@@ -1,0 +1,35 @@
+{% extends 'base/website_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Investment | Abou Company </title>
+{% endblock title %}
+
+{% block background %}
+<div class="w-full grid grid-cols-2 py-28 bg-cover px-8 bg-center bg-black">
+    <div class="col-span-1 space-y-8">
+        <h1 class="text-5xl  text-white font-bold ">Work From Home</h1>
+    </div>
+</div>
+{% endblock background %}
+{% block content %}
+
+<div class="w-full">
+    <h1 class="font-light mb-5 text-red-700 text-2xl">Qualifications</h1>
+    <p class="text-sm mb-4 tracking-wide text-gray-800 font-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus possimus fugiat dolor! Expedita molestias iste molestiae a! Non, quaerat commodi ipsa debitis animi totam ipsam, tempora officiis quasi iste eius eos quod, aut voluptatum harum? Vitae facere, dicta animi in totam laudantium repellendus voluptatibus nulla vero, incidunt saepe. Veniam, sunt fugiat. Animi quam dolorum ratione, possimus qui, modi harum repellat error cum, ipsam nisi perferendis quibusdam voluptas nulla corporis! Temporibus nobis corporis, fugit iusto excepturi, veniam, quia et voluptatem quam ea magnam voluptates explicabo voluptatum nemo. Voluptate in quod ullam neque! Et fugit error dolor nulla facere nostrum, vel quaerat ullam. Nemo totam corporis ut id! Repudiandae numquam porro illo, molestias fugiat repellat iusto error eum modi veniam adipisci voluptatem labore, illum non temporibus at expedita ipsam debitis reprehenderit fugit maxime! Autem vero ab dolores perspiciatis adipisci possimus dolor assumenda labore. Ex deleniti dolore, itaque hic ducimus voluptate aliquam explicabo!</p>
+    <div class="lg:grid lg:grid-cols-3 gap-7 mt-8 lg:space-y-0 space-y-8">
+        <div class="col-span-3">
+            <h1 class="font-light mb-5 text-red-700 text-2xl">Certificate</h1>
+        </div>
+        <div class="col-span-1 border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/certi.jpg'%}">
+        </div>
+        <div class="col-span-1 border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/certi.jpg'%}">
+        </div>
+        <div class="col-span-1 border border-red-700  rounded-lg overflow-hidden">
+            <img class="object-cover w-full h-full" src="{% static 'main/image/bg/certi.jpg'%}">
+        </div>
+    </div>
+</div>
+{% endblock content %}

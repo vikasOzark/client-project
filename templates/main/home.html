@@ -9,17 +9,6 @@
 <script type="module" src="{% static 'main/js/marquee.js' %}"></script>
 {% endblock script %}
 
-{% block breadcrumb %}
-<li class="flex items-center gap-3">
-    <span class="text-sm text-red-600 font-medium tracking-wide">Dashboard</span>
-    <span class="text-3xl text-gray-400 font-light">|</span>
-</li>
-{% endblock breadcrumb %}
-
-{% block breadcrumbtitle %}
-Dashboard
-{% endblock breadcrumbtitle %}
-
 {% block message %}
 {% if messages %}
 <div class="w-fit bg-white absolute right-8 top-16" data-alert="notification">
@@ -42,74 +31,110 @@ Dashboard
 {% endblock message %}
 
 {% block content %}
-<div class="space-y-7">
-    <!-- <div class="grid grid-cols-12">
-        <div class="border col-span-1 text-yellow-600 bg-gray-200 border-r-0 border-gray-400 rounded-l px-5 py-3">
-            <div class="flex justify-center items-center gap-2 ">
+
+<div class="space-y-6 mb-6">
+    <div class="lg:grid lg:grid-cols-12">
+        <div class="lg:col-span-8 lg:col-start-3">
+            <div class="relative h-64 overflow-hidden rounded-xl">
+                <div class="slide">
+                    <img src="{% static 'main/image/wall1.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall2.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall3.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall4.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall5.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall6.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall7.jpg' %}"/>
+                </div>
+                <div class="slide">
+                    <img src="{% static 'main/image/wall8.jpg' %}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lg:grid lg:grid-cols-12 !mt-12">
+        <div class="lg:col-span-12 flex justify-between">
+            <div class="flex-auto text-center">
+                <a href="{% url 'deposit' %}" class="bg-gray-800 m-auto text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center">
+                    <i class="icon-wallet"></i>
+                </a>
+                <span class="text-gray-700 text-sm tracking-wide font-medium">Deposite</span>
+            </div>
+            <div class="flex-auto text-center">
+                <a href="{% url 'withdrawl' %}" class="bg-gray-800 m-auto text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center">
+                    <i class="icon-withdrawal"></i>
+                </a>
+                <span class="text-gray-700 text-sm tracking-wide font-medium">Withdraw</span>
+            </div>
+            <div class="flex-auto text-center relative">
+                <a onclick="copyText('{{invite_link}}')" class="bg-gray-800 m-auto text-white w-12 h-12 rounded-full text-2xl flex items-center justify-center">
+                    <i class="icon-add-user"></i>
+                </a>
+                <span class="text-gray-700 text-sm tracking-wide font-medium" >Invite</span>
+                <div id="copied" class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">Link copied</div>
+            </div>
+        </div>
+    </div>
+    <div class="flex gap-6 p-3">
+        <div class="text-gray-700 ">
+            <div class="flex justify-start items-center gap-2 ">
                 <i class="text-xl icon-bell"></i>
             </div>
         </div>
-        <div class="col-span-11 items-center flex border bg-gray-100  border-gray-400 rounded-r px-5 py-3">
-            <div class="marquee-left-right overflow-hidden flex  text-slate-600 tracking-wide text-base font-medium ">
+        <div class="items-center flex">
+            <div class="marquee-left-right gap-2 overflow-hidden flex  text-slate-600 tracking-wide text-base font-medium ">
                 <span class="whitespace-nowrap">
-                    
+                    sajan
                 </span>
             </div>
         </div>
-    </div> -->
-    <div class="lg:grid lg:grid-cols-12 lg:gap-7 space-y-8 lg:space-y-0">
-        <div class="lg:col-span-5 flex flex-col space-y-8 rounded py-6 px-8 bg-dep relative overflow-hidden border-gray-400">
+    </div>
+</div>
+<div class="space-y-10">
+    <div class="lg:grid lg:grid-cols-12">
+        <div class="lg:col-span-12 space-y-8 rounded-xl py-6 px-8 bg-dep relative overflow-hidden border-gray-400">
             <div class="space-y-1">
-                <div
-                    class="w-full text-center font-semibold flex justify-center items-center tracking-wide text-yellow-500 text-3xl">
-                    <i class="icon-credit text-yellow-500"></i>
-                    <span>{{user_data.amount}}</span>
-                </div>
                 <div class="w-full text-center">
-                    <span class="font-semibold tracking-wide text-white text-2xl">Total Balance</span>
+                    <span class="font-medium tracking-wide text-white text-2xl">Balance(Rs)</span>
+                </div>
+                <div class="w-full text-center font-semibold gap-2 flex justify-center items-center tracking-wide text-white text-3xl">
+                    <span class="text-white">Rs</span>
+                    <span>{{user_data.amount}}.00</span>
                 </div>
             </div>
-            <div class="space-y-2">
-                <div class="text-white justify-between flex text-center px-2 text-base tracking-wide font-medium">
-                    <span class="block">Today,s Profit</span>
-                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>{{user_data.today_profit}}.00</span>
+            <div class="space-y-2 flex justify-between">
+                <div class="text-center">
+                    <span class="text-white text-base tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.today_profit}}.00</span>
+                    <span class="block tracking-wide font-medium text-white text-sm">Today,s Profit</span>
                 </div>
-                <div class="text-white flex justify-between text-center px-2 text-base tracking-wide font-medium">
-                    <span class="block">Yesterday's Profit</span>
-                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>{{user_data.yesterday_profit}}.00</span>
+                <div class="text-center">
+                    <span class="text-white text-base tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.yesterday_profit}}.00</span>
+                    <span class="block tracking-wide font-medium text-white text-sm">Yesterday's Profit</span>
                 </div>
-                <div class="text-white flex justify-between text-center px-2 text-base tracking-wide font-medium">
-                    <span class="block">Accumulated Profit</span>
-                    <span class="text-yellow-500 font-bold"><i class="icon-credit"></i>{{user_data.accumulated_profit}}.00</span>
-                </div>
-            </div>
-            <div class="flex justify-between">
-                <div class="flex-auto text-center">
-                    <a href="{% url 'deposit' %}" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
-                        <i class="icon-wallet"></i>
-                    </a>
-                    <span class="text-white text-sm tracking-wide font-medium">Deposite</span>
-                </div>
-                <div class="flex-auto text-center">
-                    <a href="{% url 'withdrawl' %}" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
-                        <i class="icon-withdrawal"></i>
-                    </a>
-                    <span class="text-white text-sm tracking-wide font-medium">Withdraw</span>
-                </div>
-                <div class="flex-auto text-center relative">
-                    <a onclick="copyText('{{invite_link}}')" class="bg-gred border-2 m-auto text-white border-red-700 w-14 h-14 shadow rounded-full text-2xl flex items-center justify-center">
-                        <i class="icon-add-user"></i>
-                    </a>
-                    <span class="text-white text-sm tracking-wide font-medium" >Invite</span>
-                    <div id="copied" class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">Link copied</div>
+                <div class="text-center">
+                    <span class="text-white text-base tracking-wide font-bold"><i class="icon-credit"></i>{{user_data.accumulated_profit}}.00</span>
+                    <span class="block tracking-wide font-medium text-white text-sm">Accumulated Profit</span>
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-7 flex flex-col border rounded overflow-hidden border-gray-400">
-            <div class="py-3 px-4">
-                <span class="font-medium text-slate-700 text-lg ">Historical User Deposits</span>
+    </div>
+    <div class="lg:grid lg:grid-cols-12">
+        <div class="lg:col-span-12 overflow-hidden space-y-7">
+            <div class="">
+                <span class="font-medium text-slate-700 text-2xl tracking-wide ">Historical User Deposits</span>
             </div>
-            <div class="border-t p-4 border-gray-400">
+            <div class="p-4 bg-gray-200 rounded-xl">
                 <div class="marquee-top-bottom space-y-2 overflow-hidden h-64">
                     {% for item in payments  %}
                     <div class="lg:col-span-6 space-y-6">
@@ -162,28 +187,48 @@ Dashboard
         </div>
     </div>
     <div class="lg:grid lg:grid-cols-12">
-        <div class="lg:col-span-12">
-            <div class="border rounded-t py-3 px-4 border-b-0 bg-gray-100 border-gray-400">
-                <span class="font-medium text-slate-700 text-lg ">Cooperative Partner </span>
+        <div class="col-span-4">
+            <div class="flex text-gray-700 gap-2 items-center">
+                <i class="icon-about-us text-3xl"></i>
+                <span class="text-sm tracking-wide font-medium">About Company</span>
             </div>
-            <div class="border lg:grid lg:grid-cols-6 lg:gap-2 py-6 px-4 border-gray-400 rounded-b lg:space-y-0 space-y-3">
-                <div class="lg:col-span-1 shadow overflow-hidden p-1 rounded border border-gray-400">
-                    <img style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/first.png'%}" />
+        </div>
+        <div class="col-span-4">
+            <div class="flex text-gray-700 gap-2 items-center">
+                <i class="icon-qualifications text-3xl"></i>
+                <span class="text-sm tracking-wide font-medium">Work From Home</span>
+            </div>
+        </div>
+        <div class="col-span-4">
+            <div class="flex text-gray-700 gap-2 items-center">
+                <i class="icon-edit text-3xl"></i>
+                <span class="text-sm tracking-wide font-medium">Terms & Conditions</span>
+            </div>
+        </div>
+    </div>
+    <div class="lg:grid lg:grid-cols-12">
+        <div class="lg:col-span-12 space-y-7">
+            <div class="">
+                <span class="font-medium text-slate-700 text-2xl tracking-wide ">Cooperative Partner </span>
+            </div>
+            <div class="grid grid-cols-6 gap-2 border-gray-400 lg:space-y-0 space-y-3">
+                <div class="col-span-2">
+                    <img class="w-20 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/first.png'%}" />
                 </div>
-                <div class="lg:col-span-1 shadow overflow-hidden p-1 rounded border border-gray-400">
-                    <img style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/flipkart.png'%}" />
+                <div class="col-span-2">
+                    <img class="w-20 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/flipkart.png'%}" />
                 </div>
-                <div class="lg:col-span-1 shadow overflow-hidden p-1 rounded border border-gray-400">
-                    <img style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/amazon.png'%}" />
+                <div class="col-span-2">
+                    <img class="w-20 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/amazon.png'%}" />
                 </div>
-                <div class="lg:col-span-1 shadow overflow-hidden p-1 rounded border border-gray-400">
-                    <img style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/bookmyshow.png'%}" />
+                <div class="col-span-2">
+                    <img class="w-20 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/bookmyshow.png'%}" />
                 </div>
-                <div class="lg:col-span-1 shadow overflow-hidden p-1 rounded border border-gray-400">
-                    <img style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/myntra.png'%}" />
+                <div class="col-span-2">
+                    <img class="w-20 mx-auto"  style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/myntra.png'%}" />
                 </div>
-                <div class="lg:col-span-1 shadow overflow-hidden p-1 rounded border border-gray-400">
-                    <img style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/snapdeal.png'%}" />
+                <div class="col-span-2">
+                    <img class="w-20 mx-auto" style="mix-blend-mode: multiply;" src="{% static 'main/image/cop/snapdeal.png'%}" />
                 </div>
             </div>
         </div>

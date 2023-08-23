@@ -24,39 +24,29 @@
         <img src="{% static 'main/image/loading.gif' %}">
     </div>
     <section class="">
-        <nav class="relative after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  w-full"
-            style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
+        <nav class="relative after:content-[''] after:bg-pattern after:absolute after:left-0 after:right-0 after:top-0 after:bottom-0  w-full">
             <div class="mx-auto relative z-50">
                 <div class="lg:flex lg:items-center lg:justify-between">
                     <div class="flex items-center justify-between w-full">
-                        <div class="pl-8 py-3">
+                        <div class="pl-8 py-6">
                             <a href="{% url 'webhome' %}" class="flex items-center gap-2">
-                                <span class="text-black text-3xl tracking-wider font-bold">Investment</span>
-                                <!-- <img class="lg:w-7 md:w-7 w-[1rem] aspect-auto invert" src="{% static 'main/image/logo-new.svg' %}" alt=""> -->
+                                <span class="text-black text-3xl tracking-wider font-bold">BlackRock</span>
                             </a>
                         </div>
                         <div class="flex-1 w-full gap-6 lg:flex hidden items-center justify-end lg:pr-8 border-r border-white">
-                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'webhome' %}">
+                            <a class="inline-flex gap-1 items-center text-sm text-gray-600 font-medium" href="{% url 'webhome' %}">
                                 <i class="icon-home"></i>
                                 <span>Home</span>
                             </a>
-                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'about' %}">
+                            <a class="inline-flex gap-1 items-center text-sm text-gray-600 font-medium" href="{% url 'about' %}">
                                 <i class="icon-about-us"></i>
                                 <span>About Company</span>
                             </a>
-                            <!-- <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'investment' %}">
-                                <i class="icon-investment"></i>
-                                <span>Investment</span>
-                            </a> -->
-                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'company_qualification' %}">
+                            <a class="inline-flex gap-1 items-center text-sm text-gray-600 font-medium" href="{% url 'work_from_home' %}">
                                 <i class="icon-qualifications"></i>
                                 <span>Work From Home</span>
                             </a>
-                            <!-- <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'notice' %}">
-                                <i class="icon-notice"></i>
-                                <span>Notice</span>
-                            </a> -->
-                            <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'terms_condition' %}">
+                            <a class="inline-flex gap-1 items-center text-sm text-gray-600 font-medium" href="{% url 'terms_condition' %}">
                                 <i class="icon-edit"></i>
                                 <span>Terms & Conditions</span>
                             </a>
@@ -64,10 +54,9 @@
                         {% if request.user.is_authenticated %}
                         <div class="relative lg:flex hidden items-center pl-3 lg:pr-8 pr-2">
                             <a href="{% url 'home' %}" class="flex gap-2 items-center">
-                                <div class="shadow-md w-9 h-9 overflow-hidden border-2 rounded-full">
+                                <div class="w-9 h-9 overflow-hidden border-2 border-gray-500 rounded-full">
                                     <img src="{% static 'main/image/avtar.avif'%}" class="object-cover w-full h-full" alt="avatar">
                                 </div>
-                                <span class="text-lg text-white">{{request.user |title}}</span>
                             </a>
                         </div>
                         {% else %}
@@ -79,7 +68,7 @@
                         </div>
                         {% endif %}
                         <div class="pr-8">
-                            <button data-toggle-mobile-website="mobile" class="lg:hidden inline-flex text-white w-7 h-7  hover:text-black items-center justify-center rounded text-2xl ">
+                            <button data-toggle-mobile-website="mobile" class="lg:hidden inline-flex text-gray-600 w-7 h-7  hover:text-black items-center justify-center rounded text-2xl ">
                                 <i class="icon-menu"></i>
                             </button>
                         </div>
@@ -95,17 +84,17 @@
             
             {% endblock background %}
             <main class="mx-auto">
-                <section class="space-y-7 my-16 lg:px-0 px-8">
+                <section class="space-y-7 my-16">
                     {% block content %}
                     {% endblock content %}
                 </section>
             </main>
-            <div class="lg:grid lg:grid-cols-12 py-12 bg-black lg:gap-7 px-8 ">
-                <div class="col-span-5 space-y-7 border-r border-white">
-                    <span class="text-white text-4xl tracking-wider font-bold">Investment</span>
+            <div class="lg:grid lg:space-y-0 space-y-10 lg:grid-cols-12 py-12 bg-black lg:gap-7 px-8 ">
+                <div class="col-span-5 space-y-7 lg:border-r lg:border-white">
+                    <span class="text-white text-4xl tracking-wider font-bold">BlackRock</span>
                     <p class="text-base font-medium text-white pr-20 tracking-wide">As a global investment manager and fiduciary to our clients, our purpose at BlackRock is to help everyone experience financial well-being. Since 1999, we've been a leading provider of financial technology, and our clients turn to us for the solutions they need when planning for their most important goals.</p>
                 </div>
-                <div class="col-span-2 border-r border-white">
+                <div class="col-span-2 lg:border-r lg:border-white">
                     <h4 class="tracking-wide font-semibold text-xl text-white">Quick Links</h4>
                     <div class="flex flex-wrap space-y-3 mt-6">
                         <a class="inline-flex gap-1 items-center text-sm text-white font-medium" href="{% url 'webhome' %}">
@@ -116,18 +105,10 @@
                             <i class="icon-about-us"></i>
                             <span>About Company</span>
                         </a>
-                        <!-- <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'investment' %}">
-                            <i class="icon-investment"></i>
-                            <span>Investment</span>
-                        </a> -->
-                        <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'company_qualification' %}">
+                        <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'work_from_home' %}">
                             <i class="icon-qualifications"></i>
                             <span>Work From Home</span>
                         </a>
-                        <!-- <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'notice' %}">
-                            <i class="icon-notice"></i>
-                            <span>Notice</span>
-                        </a> -->
                         <a class="inline-flex w-full gap-1 items-center text-sm text-white font-medium" href="{% url 'terms_condition' %}">
                             <i class="icon-edit"></i>
                             <span>Terms & Conditions</span>
@@ -137,7 +118,11 @@
                 <div class="col-span-5">
                     <h4 class="tracking-wide font-semibold text-xl text-white">Subscribe</h4>
                     <div class="flex relative mt-6">
-                        <input  class="flex-1 h-12 focus:outline p-2 text-base font-medium tracking-wide" type="text"><button class="p-2 px-5 h-12 inline-flex items-center justify-center gap-1 bg-red-500 text-white tracking-wide" type="submit">Subscribe <i class="icon-chevron-right"></i></button>
+                        <input  class="flex-1 h-12 focus:outline p-2 text-base font-medium tracking-wide" type="text">
+                        <button class="p-2 px-5 h-12 inline-flex items-center justify-center gap-1 bg-red-500 text-white tracking-wide" type="submit"> 
+                            <span class="hidden lg:inline-flex">Subscribe</span>
+                            <i class="icon-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>
