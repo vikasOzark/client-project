@@ -34,22 +34,22 @@
     </div>
     <section class="">
         <nav class="fixed w-full bg-white shadow z-[99999]">
-            <div class="flex items-center justify-between w-full py-4 px-8">
+            <div class="flex items-center justify-between w-full py-4 lg:px-8 px-4">
                 <div class="">
                     <a href="{% url 'home' %}" class="flex items-center gap-2">
-                        <span class="text-black text-3xl tracking-wider font-bold">BlackRock</span>
+                        <span class="text-black lg:text-3xl text-xl tracking-wider font-bold">BlackRock</span>
                     </a>
                 </div>
                 <div class="flex-1 flex items-center pl-3">
                     <h1 class="lg:text-2xl md:text-2xl hidden md:flex text-black font-light tracking-wide">Welcome Back, {{request.user}}</h1>
                 </div>
                 <div class="flex px-3 gap-4">
-                    <button  class="flex gap-2 border border-gray-400 py-1 px-3 rounded bg-gray-200 text-gray-600 hover:text-black items-center justify-center rounded text-sm ">
+                    <button  class="flex gap-2 border border-gray-400 py-1 lg:px-3 px-1 rounded bg-gray-200 text-gray-600 hover:text-black items-center justify-center rounded text-sm ">
                         <i class="icon-sun"></i>
-                        <span class="text-sm tracking-wide">Light</span>
+                        <span class="lg:text-sm text-xs tracking-wide">Light</span>
                     </button>
-                    <a href="{% url 'logout' %}" class="hover:text-white border border-red-800 rounded bg-red-500 py-1 px-3 gap-2 text-gray-50 inline-flex items-center text-sm focus:outline-none">
-                        <span class="text-sm tracking-wide">Logout</span>
+                    <a href="{% url 'logout' %}" class="hover:text-white border border-red-800 rounded bg-red-500 py-1 lg:px-3 px-1 gap-2 text-gray-50 inline-flex items-center text-sm focus:outline-none">
+                        <span class="lg:text-sm text-xs tracking-wide">Logout</span>
                         <i class="icon-log-out"></i>
                     </a>
                     <!-- <span class="font-light text-xl text-gray-600">|</span>
