@@ -66,19 +66,19 @@
     <div class="lg:grid lg:grid-cols-12 !mt-12">
         <div class="lg:col-span-12 flex justify-between">
             <div class="flex-auto text-center">
-                <a href="{% url 'deposit' %}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-8 w-8 rounded-full lg:text-2xl text-lg flex items-center justify-center">
+                <a href="{% url 'deposit' %}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-wallet"></i>
                 </a>
                 <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium">Deposite</span>
             </div>
             <div class="flex-auto text-center">
-                <a href="{% url 'withdrawl' %}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-8 w-8 rounded-full lg:text-2xl text-lgtext-2xl flex items-center justify-center">
+                <a href="{% url 'withdrawl' %}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lgtext-2xl flex items-center justify-center">
                     <i class="icon-withdrawal"></i>
                 </a>
                 <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium">Withdraw</span>
             </div>
             <div class="flex-auto text-center relative">
-                <a onclick="copyText('{{invite_link}}')" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-8 w-8 rounded-full lg:text-2xl text-lg flex items-center justify-center">
+                <a onclick="copyText('{{invite_link}}')" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-add-user"></i>
                 </a>
                 <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium" >Invite</span>
@@ -129,9 +129,9 @@
         <div class="lg:col-span-12 space-y-8 rounded-xl py-6 lg:px-8 px-4 bg-dep relative overflow-hidden border-gray-400">
             <div class="space-y-1">
                 <div class="w-full text-center">
-                    <span class="font-medium tracking-wide text-white text-2xl">Balance(Rs)</span>
+                    <span class="font-medium tracking-wide text-white lg:text-2xl text-xl">Balance(Rs)</span>
                 </div>
-                <div class="w-full text-center font-semibold gap-2 flex justify-center items-center tracking-wide text-white text-3xl">
+                <div class="w-full text-center font-semibold gap-2 flex justify-center items-center tracking-wide text-white lg:text-3xl text-2xl">
                     <span class="text-white">Rs</span>
                     <span>{{user_data.amount}}.00</span>
                 </div>
