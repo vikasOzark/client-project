@@ -94,6 +94,7 @@
         </div>
         <div class="items-center flex">
             <div class="marquee-left-right gap-2 overflow-hidden flex  text-slate-600 tracking-wide text-base font-medium ">
+                {% for item in payments  %}
                 <span class="whitespace-nowrap flex gap-3">
                     <span>{{item.created_at |date:"d/m/y"}}</span>
                     <span>
@@ -120,6 +121,7 @@
                     </span>
                     <span> {{item.amount}}</span>
                 </span>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -211,22 +213,22 @@
     </div>
     <div class="lg:grid lg:grid-cols-12 space-y-3 lg:space-y-0">
         <div class="col-span-4">
-            <div class="flex text-gray-700 gap-2 items-center">
+            <a href="" class="flex text-gray-700 gap-2 items-center">
                 <i class="icon-about-us lg:text-3xl text-xl"></i>
                 <span class="lg:text-sm text-xs tracking-wide font-medium">About Company</span>
-            </div>
+            </a>
         </div>
         <div class="col-span-4">
-            <div class="flex text-gray-700 gap-2 items-center">
+            <a href="" class="flex text-gray-700 gap-2 items-center">
                 <i class="icon-qualifications lg:text-3xl text-xl"></i>
                 <span class="lg:text-sm text-xs tracking-wide font-medium">Work From Home</span>
-            </div>
+            </a>
         </div>
         <div class="col-span-4">
-            <div class="flex text-gray-700 gap-2 items-center">
+            <a  href="" class="flex text-gray-700 gap-2 items-center">
                 <i class="icon-edit lg:text-3xl text-xl"></i>
                 <span class="lg:text-sm text-xs tracking-wide font-medium">Terms & Conditions</span>
-            </div>
+            </a>
         </div>
     </div>
     <div class="lg:grid lg:grid-cols-12">
