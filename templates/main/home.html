@@ -77,12 +77,12 @@
                 </a>
                 <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium">Withdraw</span>
             </div>
-            <div class="flex-auto text-center relative">
-                <a onclick="copyText('{{invite_link}}')" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lg flex items-center justify-center">
+            <div class="flex-auto text-center relative cursor-pointer">
+                <a data-invitation="{{invite_link}}" class="bg-gray-800 m-auto text-white lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-add-user"></i>
                 </a>
                 <span class="text-gray-700 lg:text-sm text-xs tracking-wide font-medium" >Invite</span>
-                <div id="copied" class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">Link copied</div>
+                <span data-text="copied" class="border border-green-400 hidden rounded-sm bg-green-100 tracking-wide text-green-800 absolute z-30 text-center px-2 p-1 left-0 w-28 m-auto right-0 -top-8 text-sm">Link copied</span>
             </div>
         </div>
     </div>
@@ -94,6 +94,7 @@
         </div>
         <div class="items-center flex">
             <div class="marquee-left-right gap-2 overflow-hidden flex  text-slate-600 tracking-wide text-base font-medium ">
+                {% for item in payments  %}
                 <span class="whitespace-nowrap flex gap-3">
                     <span>{{item.created_at |date:"d/m/y"}}</span>
                     <span>
@@ -120,6 +121,7 @@
                     </span>
                     <span> {{item.amount}}</span>
                 </span>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -210,23 +212,29 @@
         </div>
     </div>
     <div class="lg:grid lg:grid-cols-12 space-y-3 lg:space-y-0">
-        <div class="col-span-4">
-            <div class="flex text-gray-700 gap-2 items-center">
+        <div class="col-span-3">
+            <a href="{% url 'about' %}" class="flex text-gray-700 gap-2 items-center hover:text-blue-600 transition-all">
                 <i class="icon-about-us lg:text-3xl text-xl"></i>
                 <span class="lg:text-sm text-xs tracking-wide font-medium">About Company</span>
-            </div>
+            </a>
         </div>
-        <div class="col-span-4">
-            <div class="flex text-gray-700 gap-2 items-center">
+        <div class="col-span-3">
+            <a  href="{% url 'our_products' %}" class="flex text-gray-700 gap-2 items-center hover:text-blue-600 transition-all">
+                <i class="icon-gift lg:text-3xl text-xl"></i>
+                <span class="lg:text-sm text-xs tracking-wide font-medium">Our Company Products</span>
+            </a>
+        </div>
+        <div class="col-span-3">
+            <a href="{% url 'work_from_home' %}" class="flex text-gray-700 gap-2 items-center hover:text-blue-600 transition-all">
                 <i class="icon-qualifications lg:text-3xl text-xl"></i>
                 <span class="lg:text-sm text-xs tracking-wide font-medium">Work From Home</span>
-            </div>
+            </a>
         </div>
-        <div class="col-span-4">
-            <div class="flex text-gray-700 gap-2 items-center">
+        <div class="col-span-3">
+            <a  href="{% url 'terms_condition' %}" class="flex text-gray-700 gap-2 items-center hover:text-blue-600 transition-all">
                 <i class="icon-edit lg:text-3xl text-xl"></i>
                 <span class="lg:text-sm text-xs tracking-wide font-medium">Terms & Conditions</span>
-            </div>
+            </a>
         </div>
     </div>
     <div class="lg:grid lg:grid-cols-12">
@@ -252,17 +260,5 @@
     </div>
 </div>
 
-<script>
-    function copyText(text) {
-        /* Copy text into clipboard */
-        const copied = document.getElementById("copied")
-        navigator.clipboard.writeText(text);
-        copied.classList.remove("hidden")
-        setTimeout(() => {
-            copied.classList.add("hidden")
-        }, 2000)
-        
-    }
-</script>
 
 {% endblock content %}
