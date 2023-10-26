@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'main',
     'authentication',
     'userprofile',
-    'compressor'
+    # 'compressor'
 ]
 
 MIDDLEWARE = [
