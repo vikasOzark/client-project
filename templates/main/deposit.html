@@ -71,14 +71,12 @@ Deposit
                 </a>
                 <span class="text-white  g:text-sm text-xs tracking-wide font-medium">Withdraw</span>
             </div>
-            <div class="flex-auto text-center relative">
-                <a onclick="copyText('{{invite_link}}')" class="bg-gray-50 m-auto text-gray-700 lg:w-12 lg:h-12 h-9 w-9 shadow rounded-full lg:text-2xl text-lg flex items-center justify-center">
+            <div class="flex-auto text-center relative cursor-pointer">
+                <a data-invitation="{{invite_link}}" class="bg-gray-50 m-auto text-gray-700 lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-add-user"></i>
                 </a>
-                <span class="text-white lg:text-sm text-xs tracking-wide font-medium">Invite</span>
-                <div id="copied"
-                    class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">
-                    Link copied</div>
+                <span class="text-white lg:text-sm text-xs tracking-wide font-medium" >Invite</span>
+                <span data-text="copied" class="border border-green-400 hidden rounded-sm bg-green-100 tracking-wide text-green-800 absolute z-30 text-center px-2 p-1 left-0 w-28 m-auto right-0 -top-8 text-sm">Link copied</span>
             </div>
         </div>
     </div>
@@ -117,7 +115,7 @@ Deposit
                                 type="text" 
                                 name="amount"
                                 data-ammount="amount" 
-                                class="border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2"
+                                class="border p-2 pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full"
                                 required 
                                 placeholder="Enter Ammount"
                             />
@@ -132,7 +130,7 @@ Deposit
                             <span class="absolute text-gray-500 border-r border-gray-500 px-3">
                                 <i class="icon-price-tag"></i>
                             </span>
-                            <select disabled id="payment_channel" required name="payment_channel" class="disabled:bg-gray-300 border pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full p-2">
+                            <select disabled id="payment_channel" required name="payment_channel" class="disabled:bg-gray-300 border p-2 pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
                                 <option class="font-medium" selected>Select Payment</option>
                                 <option class="font-medium" value="upi">UPI</option>
                                 <option class="font-medium" value="bank">Bank</option>
@@ -141,29 +139,116 @@ Deposit
                     </div>
                 </div>
                 <div data-stepTwo="stepTwo" class="lg:grid lg:grid-cols-12 gap-3 !hidden">
-                    <div data-bank="bank"  class="space-y-4 text-center lg:col-span-12 hidden">
-                        <div class="text-5xl text-yellow-600">
-                            <i class="icon-warning1"></i>
+                    <div data-bank="bank"  class="space-y-3 text-left lg:col-span-12 hidden">
+                        <div class="lg:grid lg:grid-cols-12">
+                            <div class="text-center lg:col-span-12">
+                                <div class="text-2xl text-gray-600 font-medium">
+                                    <span>Bank Details</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="block text-sm text-yellow-600 tracking-wide">This payment method is not available please choose another payment method..</div>
+                        <div class="lg:grid lg:grid-cols-12 gap-3">
+                            <div class="text-left lg:col-span-6">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Account Holder Name</label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                        <i class="icon-star"></i>
+                                    </span>
+                                    <input  data-copyItem="false" type="text" readonly value="{{accept_payment_upi.upi_id}}" class="border cursor-not-allowed bg-gray-300 p-2 pl-12 h-12 border-gray-500 rounded-l text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
+                                    <button type="button" data-copy="false"  class="bg-red-500 gap-2 py-1 px-3 h-12 inline-flex items-center justify-center text-white rounded-r" >
+                                        <i class="icon-popup"></i>
+                                        <span class="text-xs lg:text-sm lg:inline-flex hidden">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-left lg:col-span-6">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Bank Name</label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                        <i class="icon-star"></i>
+                                    </span>
+                                    <input  data-copyItem="false" type="text" readonly value="{{accept_payment_upi.upi_id}}" class="border cursor-not-allowed bg-gray-300 p-2 pl-12 h-12 border-gray-500 rounded-l text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
+                                    <button type="button" data-copy="false"  class="bg-red-500 gap-2 py-1 px-3 h-12 inline-flex items-center justify-center text-white rounded-r" >
+                                        <i class="icon-popup"></i>
+                                        <span class="text-xs lg:text-sm lg:inline-flex hidden">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:grid lg:grid-cols-12 gap-3">
+                            <div class="text-left lg:col-span-6">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">Account Number</label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                        <i class="icon-star"></i>
+                                    </span>
+                                    <input  data-copyItem="false" type="text" readonly value="{{accept_payment_upi.upi_id}}" class="border cursor-not-allowed bg-gray-300 p-2 pl-12 h-12 border-gray-500 rounded-l text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
+                                    <button type="button" data-copy="false"  class="bg-red-500 gap-2 py-1 px-3 h-12 inline-flex items-center justify-center text-white rounded-r" >
+                                        <i class="icon-popup"></i>
+                                        <span class="text-xs lg:text-sm lg:inline-flex hidden">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-left lg:col-span-6">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">IFSC Code</label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                        <i class="icon-star"></i>
+                                    </span>
+                                    <input  data-copyItem="false" type="text" readonly value="{{accept_payment_upi.upi_id}}" class="border cursor-not-allowed bg-gray-300 p-2 pl-12 h-12 border-gray-500 rounded-l text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
+                                    <button type="button" data-copy="false"  class="bg-red-500 gap-2 py-1 px-3 h-12 inline-flex items-center justify-center text-white rounded-r" >
+                                        <i class="icon-popup"></i>
+                                        <span class="text-xs lg:text-sm lg:inline-flex hidden">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <div data-upi="upi"  class="relative lg:col-span-12 text-center space-y-2 hidden">
-                        <div class="text-2xl text-gray-600 font-medium">
-                            <span>UPI ID</span>
-                        </div>
+                    <div data-upi="upi" class="relative space-y-3 lg:col-span-12 text-left space-y-2 hidden">
                         <span class="hidden absolute border border-green-500 rounded text-green-600 left-0 right-0 w-60 m-auto top-0 text-xs bg-green-200 p-1" id="text_copied"></span>
-                        <div data-copy="false" class="cursor-pointer border border-green-600 bg-green-200 rounded gap-2 inline-flex py-1 px-3 text-green-600 font-medium tracking-wide">
-                            <span data-copyItem="false">{{accept_payment_upi.upi_id}}</span>
-                            <span><i class="icon-popup"></i></span>
+                        <div class="lg:grid lg:grid-cols-12">
+                            <div class="text-center lg:col-span-12">
+                                <div class="text-2xl text-gray-600 font-medium">
+                                    <span>UPI Details</span>
+                                </div>
+                            </div>
                         </div>
-                        <div data-copy="false" class="cursor-pointer border border-green-600  py-1 px-3 rounded gap-2 inline-flex text-green-600 font-medium tracking-wide">
-                            <input type="text" name="transaction_id" class="border-transparent focus:outline-none" placeholder="UPI Transaction ID">
+                        <div class="lg:grid lg:grid-cols-12">
+                            <div class="text-left lg:col-span-6 lg:col-start-4">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">UPI ID</label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                        <i class="icon-star"></i>
+                                    </span>
+                                    <input  data-copyItem="false" type="text" readonly value="{{accept_payment_upi.upi_id}}" class="border cursor-not-allowed bg-gray-300 p-2 pl-12 h-12 border-gray-500 rounded-l text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
+                                    <button type="button" data-copy="false"  class="bg-red-500 gap-2 py-1 px-3 h-12 inline-flex items-center justify-center text-white rounded-r" >
+                                        <i class="icon-popup"></i>
+                                        <span class="text-xs lg:text-sm lg:inline-flex hidden">Copy</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+                        <div class="lg:grid lg:grid-cols-12">
+                            <div class="text-left lg:col-span-6 lg:col-start-4">
+                                <label class="text-sm block text-slate-500 mb-2 font-medium tracking-wide">UPI Transaction ID
+                                    <span class="text-red-500">*</span></label>
+                                <div class="relative flex items-center">
+                                    <span class="absolute text-gray-500 border-r border-gray-500 px-3">
+                                        <i class="icon-typing"></i>
+                                    </span>
+                                    <input type="text" name="transaction_id" class="border p-2 pl-12 h-12 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full" placeholder="UPI Transaction ID">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:grid lg:grid-cols-12">
+                            <div class="text-center lg:col-span-12">
+                                <small>Please enter UPI transaction id after payment complete then submit.</small>
+                            </div>
+                        </div> 
                     </div>
                     <div class="lg:col-span-12 text-center mt-3">
-                        <div class="">
-                            <small>Please enter UPI transaction id after payment complete then submit.</small>
-                        </div>
+
                         <button type="reset" data-back="true" class="inline-flex font-medium text-sm text-white bg-red-500 py-1 px-3 gap-2 rounded border border-red-700 items-center justify-center ">
                             <i class="icon-arrow-left"></i> 
                             <span>Back</span>
