@@ -22,7 +22,7 @@ const selectStepBank = document.querySelector('[data-bank]');
 const selectStepUPI = document.querySelector('[data-upi]');
 
 /** @type {?HTMLDivElement} */
-const copyUPI = document.querySelector('[data-copy]');
+const copyUPI = Array.from(document.querySelectorAll('[data-copy]'));
 
 /** @type {?HTMLSpanElement} */
 const copyUPIItem = document.querySelector('[data-copyItem]');
@@ -108,7 +108,7 @@ paymentBack.addEventListener("click", ()=>{
 const copyContent = async () => {
 	const textCopied = document.querySelector('#text_copied');
     try {
-		await navigator.clipboard.writeText(copyUPIItem.textContent);
+		await navigator.clipboard.writeText(copyUPIItem.value);
 		classAddRemoveDeposite(textCopied, ['block'], ['hidden']);
       	textCopied.textContent = 'Content copied to clipboard!';
     } catch (err) {
@@ -120,6 +120,10 @@ const copyContent = async () => {
 	},1000)
 }
 
-copyUPI.addEventListener("click", ()=>{
-	copyContent()
+
+copyUPI.map((item)=>{
+	item.addEventListener("click", ()=>{
+		copyContent()
+		console.log('sajan')
+	})
 })

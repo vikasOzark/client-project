@@ -15,3 +15,6 @@ class CompanyQualifications(generic.TemplateView):
 
 class TermsConditions(generic.TemplateView):
     template_name = "about_company/terms_condition.html"
+
+class OurProducts(generic.TemplateView):
+    template_name = "about_company/product.html"

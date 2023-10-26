@@ -65,14 +65,12 @@ Withdraw
                 </a>
                 <span class="text-white text-sm tracking-wide font-medium">Deposite</span>
             </div>
-            <div class="flex-auto text-center relative">
-                <a onclick="copyText('{{invite_link}}')" class="bg-gray-50 m-auto text-gray-700 lg:w-12 lg:h-12 h-9 w-9 shadow rounded-full lg:text-2xl text-lg flex items-center justify-center">
+            <div class="flex-auto text-center relative cursor-pointer">
+                <a data-invitation="{{invite_link}}" class="bg-gray-50 m-auto text-gray-700 lg:w-12 lg:h-12 h-9 w-9 rounded-full lg:text-2xl text-lg flex items-center justify-center">
                     <i class="icon-add-user"></i>
                 </a>
-                <span class="text-white text-sm tracking-wide font-medium">Invite</span>
-                <div id="copied"
-                    class="border hidden rounded bg-gray-100 shadow absolute z-30 text-center transition-all px-3 right-4 -top-8">
-                    Link copied</div>
+                <span class="text-white lg:text-sm text-xs tracking-wide font-medium" >Invite</span>
+                <span data-text="copied" class="border border-green-400 hidden rounded-sm bg-green-100 tracking-wide text-green-800 absolute z-30 text-center px-2 p-1 left-0 w-28 m-auto right-0 -top-8 text-sm">Link copied</span>
             </div>
         </div>
     </div>

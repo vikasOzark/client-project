@@ -17,6 +17,8 @@
     <script type="module" src="{% static 'main/js/loading.js' %}"></script>
     <script type="module" src="{% static 'main/js/dashboard.js' %}"></script>
     <script type="module" src="{% static 'main/js/mobilemenu_dash.js' %}"></script>
+    <script type="module" src="{% static 'main/js/activemenu.js' %}"></script>
+    <script type="module" src="{% static 'main/js/invitationcopied.js' %}"></script>
 
 
     <style>
@@ -36,7 +38,7 @@
         <nav class="fixed w-full bg-white shadow z-[99999]">
             <div class="flex items-center justify-between w-full py-4 lg:px-8 px-4">
                 <div class="">
-                    <a href="{% url 'home' %}" class="flex items-center gap-2">
+                    <a data-logo="logo" href="{% url 'home' %}" class="flex items-center gap-2">
                         <span class="text-black lg:text-3xl text-xl tracking-wider font-bold">BlackRock</span>
                     </a>
                 </div>
@@ -48,7 +50,7 @@
                         <i class="icon-sun"></i>
                         <span class="lg:text-sm text-xs tracking-wide">Light</span>
                     </button>
-                    <a href="{% url 'logout' %}" class="hover:text-white border border-red-800 rounded bg-red-500 py-1 lg:px-3 px-1 gap-2 text-gray-50 inline-flex items-center text-sm focus:outline-none">
+                    <a data-logout="logout" href="{% url 'logout' %}" class="hover:text-white border border-red-800 rounded bg-red-500 py-1 lg:px-3 px-1 gap-2 text-gray-50 inline-flex items-center text-sm focus:outline-none">
                         <span class="lg:text-sm text-xs tracking-wide">Logout</span>
                         <i class="icon-log-out"></i>
                     </a>
@@ -63,9 +65,9 @@
                 </div>
             </div>
         </nav>
-        <div class="lg:hidden block">
+        <!-- <div class="lg:hidden block">
             {% include 'base/mobile_menu_dashboard.html' %}
-        </div>
+        </div> -->
         <div class="flex flex-wrap ">
             <main class="relative pt-24 w-full p-8">
                 {% block message %}
@@ -93,41 +95,42 @@
             <nav class="relative">
                 {% if not request.user.is_superuser %}
                 <div class="flex justify-between">
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="dashboard" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'home' %}">
-                        <span class="text-white lg:text-2xl text-md block lg:w-14 lg:h-14 w-9 h-9 lg:border-4 border-2 border-gray-900 rounded-full bg-gray-700 inline-flex items-center justify-center">
+                        <span class="text-gray-600 lg:text-2xl text-md block lg:w-14 lg:h-14 w-9 h-9 lg:border-4 border-2 border-gray-900 rounded-full bg-gray-700 inline-flex items-center justify-center">
                             <i class="icon-dashboard"></i>
                         </span>
+                        <span class="text-gray-600 block lg:text-sm text-xs text-gray-600 font-medium hidden">Dashboard</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="bank" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'add_bank' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-museum block"></i>
                         </span>
                         <span class="text-gray-600 block lg:text-sm text-xs text-gray-600 font-medium">Bank</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="deposite" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'deposit' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-wallet block"></i>
                         </span>
                         <span class="text-gray-600 block lg:text-sm text-xs font-medium">Deposit</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="withdraw" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'withdrawl' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-withdrawal block"></i>
                         </span>
                         <span class="text-gray-600 block lg:text-sm text-xs font-medium">Withdraw</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="tasks" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'task-details' request.user.pk %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
-                            <i class="icon-withdrawal block"></i>
+                            <i class="icon-report block"></i>
                         </span>
                         <span class="text-gray-600 block lg:text-sm text-xs font-medium">Tasks</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="profile" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'profile-setting' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-profile-setting block"></i>
@@ -138,21 +141,21 @@
                 {% endif %}
                 <div class="flex justify-center gap-8">
                     {% if request.user.is_superuser %}
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="userlist" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'user-list' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-users block"></i>
                         </span>
                         <span class="text-gray-600 block lg:text-sm text-xs font-medium">Users List</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="userdetails" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'user-details' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-users block"></i>
                         </span>
                         <span class="text-gray-600 block lg:text-sm text-xs font-medium">Transactions</span>
                     </a>
-                    <a class="text-center space-y-2 transition-colors duration-300 transform"
+                    <a data-option="tasksview" class="text-center space-y-2 transition-colors duration-300 transform"
                         href="{% url 'task-view' %}">
                         <span class="text-gray-600 lg:text-2xl text-md block">
                             <i class="icon-text-document-inverted block"></i>

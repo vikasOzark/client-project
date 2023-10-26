@@ -48,7 +48,7 @@ Assign Task
                 <div class="lg:grid lg:grid-cols-12 gap-2">
                     <div class="lg:col-span-12 flex gap-2 justify-end">
                         <input type="date" value="{{date}}" name="date" class="border bg-gray-50 rounded h-10 border-gray-500 text-slate-500 font-medium tracking-wide text-sm focus:outline-none block py-1 px-3">
-                        <button type="submit" class="bg-gray-500 px-4 hover:bg-gray-700 text-white  py-1">Search</button>
+                        <button type="submit" class="bg-gray-500 rounded-sm px-4 hover:bg-gray-700 text-white  py-1">Search</button>
                     </div>
                 </div>
             </form>
@@ -106,12 +106,12 @@ Assign Task
                                     <div class=" flex gap-2">
                                         <input type="hidden" name="task_pk" value="{{task.pk}}">
                                         <input type="hidden" name="user_pk" value="{{user_data.pk}}">
-                                        <select name="task_status" class="border text-lg">
-                                            <option value="">--- Update status ---</option>
-                                            <option value="complete">Complete</option>
-                                            <option value="failed">Failed</option>
+                                        <select name="task_status" class="border py-1 px-2 border-gray-500 rounded text-gray-500 font-medium  tracking-wide text-sm focus:outline-none block w-full">
+                                            <option class="font-medium" value="">--- Update status ---</option>
+                                            <option class="font-medium text-green-600" value="complete">Complete</option>
+                                            <option class="font-medium text-red-600" value="failed">Failed</option>
                                         </select>
-                                        <button type="submit" class="bg-gray-500 px-5 hover:bg-gray-700 text-white  py-1">Save</button>
+                                        <button type="submit" class="bg-gray-500 rounded-sm px-5 hover:bg-gray-700 text-white  py-1">Save</button>
                                     </div>
                                 </form>
                             </td>
