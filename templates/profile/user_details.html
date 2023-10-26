@@ -148,10 +148,16 @@ User Details
                                         Date & Time
                                     </th>
                                     <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Username
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
                                         Trans. Type
                                     </th>
                                     <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
                                         Withdraw Amt
+                                    </th>
+                                    <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
+                                        Trans ref
                                     </th>
                                     <th scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
                                         Trans. ID
@@ -175,6 +181,11 @@ User Details
                                                 {{transaction.created_at |date:"d/m/y,H:i"}}
                                             </span>
                                         </td>
+                                        <td scope="col" class=" px-3 py-2 border-r border-gray-300">
+                                            <span class="font-medium">
+                                                {{transaction.user}}  {% if transaction.user.first_name %} ( {{transaction.user.first_name}} ) {% endif %}
+                                            </span>
+                                        </td>
                                         <td scope="col" class="font-medium px-3 py-2 border-r border-gray-300">
                                             {% if transaction.payment_type == 'DEPOSIT' %}
                                             <span class="font-semibold uppercase text-xs tracking-wide text-green-600">
@@ -182,7 +193,7 @@ User Details
                                             </span>
                                             {% else %}
                                             <span class="font-semibold uppercase text-xs tracking-wide text-yellow-600">
-                                                {{transaction.payment_status}}
+                                                {{transaction.payment_type}}
                                             </span>
                                             {% endif %}
                                         </td>
@@ -198,12 +209,12 @@ User Details
                                         </td>
                                         <td scope="col" class="px-3 py-2 border-r border-gray-300">
                                             <span class="font-medium">
-                                                {{transaction.payment_channel}}
+                                                {{transaction.transaction_id}}
                                             </span>
                                         </td>
                                         <td scope="col" class="px-3 py-2 border-r border-gray-300">
                                             <span class="font-medium">
-                                                {{transaction.transaction_id}}
+                                                {{transaction.payment_channel}}
                                             </span>
                                         </td>
                                         <td scope="col" class="px-3 py-2 border-r border-gray-300">

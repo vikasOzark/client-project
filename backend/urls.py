@@ -8,4 +8,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("auth/", include("authentication.urls")),
     path("invite/", views.invite, name="invite"),
+    # path("__debug__/", include("debug_toolbar.urls")),
 ]

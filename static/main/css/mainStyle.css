@@ -86,3 +86,21 @@ a:not([href]):not([class]):hover {
     height: 100%;
     width: 100%;
 }
+input#id_confirm_account:focus{
+    outline: none;
+}
+input#id_confirm_account{
+    color: rgb(100 116 139);
+    letter-spacing: 0.025em;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem;
+    padding-left: 3rem;
+    border-color: rgb(107 114 128);
+    border-width: 1px;
+    border-radius: 0.25rem;
+    width: 100%;
+    height: 3rem;
+    display: block;
+}

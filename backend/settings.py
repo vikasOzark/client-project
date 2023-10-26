@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-l_p_p)&9b0#f@3_3b7@=@)4*k1ws=7(gtlr@o*=cl*v^e=x6a#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*", "www.blackrokinvest.in", "blackrokinvest.in", "154.56.60.250"]
 
@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     # 'compressor'
 ]
 
+# INTERNAL_IPS = [
+#     "127.0.0.1"
+# ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -154,16 +159,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',
 #                         'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
-# CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "https://www.blackrokinvest.in"]
+CSRF_TRUSTED_ORIGINS=["http://blackrokinvest.in", "https://blackrokinvest.in", "https://www.blackrokinvest.in"]
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 LOGIN_URL = "login"
-
-# Enable SSL by setting this to True
-USE_SSL = True
-
-# Paths to SSL certificate and private key files
-SSL_CERTIFICATE_PATH = os.path.join(BASE_DIR, "nginx", "letsencrypt", "cert.pem")
-SSL_PRIVATE_KEY_PATH = os.path.join(BASE_DIR, "nginx", "letsencrypt", "key.pem")
-CSRF_TRUSTED_ORIGINS = ["https://blackrokinvest.in", "https://wwww.blackrokinvest.in"]
