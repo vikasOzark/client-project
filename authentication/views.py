@@ -21,7 +21,6 @@ class RegisterUser(generic.TemplateView):
         
         invite_username = invite_query_param.get("user")
         invite_code = invite_query_param.get("invite_code")
-        print(invite_code, invite_username)
 
         if all([invite_username, invite_code]):
             context["invite_username"] = invite_username
@@ -67,7 +66,6 @@ class RegisterUser(generic.TemplateView):
             password=form_data.get("password"),
             first_name=form_data.get("first_name"),
             last_name=form_data.get("last_name" ,""),
-            is_active=False,
         )
         new_user.save()
 
@@ -123,7 +121,7 @@ class Login(generic.TemplateView):
 
 def logout_view(request):
     logout(request)
-    messages.success(request, "Logged out successfuly!")
+    messages.success(request, "Logged out successfully!")
     return redirect("login")
 
 def invite(request):

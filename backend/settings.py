@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'main',
     'authentication',
     'userprofile',
-    # 'debug_toolbar',
     # 'compressor'
 ]
 
