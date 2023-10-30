@@ -92,8 +92,8 @@
                 <i class="text-xl icon-bell"></i>
             </div>
         </div>
-        <div class="items-center flex">
-            <div class="marquee-left-right gap-2 overflow-hidden flex  text-slate-600 tracking-wide text-base font-medium ">
+        <div class="items-center overflow-x-hidden flex">
+            <div class="marquee-left-right gap-2 flex  text-slate-600 tracking-wide text-base font-medium ">
                 {% for item in payments  %}
                 <span class="whitespace-nowrap flex gap-3">
                     <span>{{item.created_at |date:"d/m/y"}}</span>
